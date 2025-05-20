@@ -80,31 +80,4 @@ public class MainMenuView implements Screen {
         return playButton;
     }
 
-    public Stage getStage() {
-        return stage;
-    }
-
-    public void setStage(Stage stage) {
-        this.stage = stage;
-    }
-
-    public Label getGameTitle() {
-        return gameTitle;
-    }
-
-    public TextField getField() {
-        return field;
-    }
-
-    public Table getTable() {
-        return table;
-    }
-
-    public void setTable(Table table) {
-        this.table = table;
-    }
-
-    public MainMenuController getController() {
-        return controller;
-    }
 }

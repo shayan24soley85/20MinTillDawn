@@ -10,9 +10,11 @@ import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.utils.ScreenUtils;
 import com.tildawn.Controller.MainMenuController;
 import com.tildawn.Controller.PreGameMenuController;
+import com.tildawn.Controller.SignupMenuController;
 import com.tildawn.Model.GameAssetManager;
 import com.tildawn.View.MainMenuView;
 import com.tildawn.View.PreGameMenuView;
+import com.tildawn.View.SignupMenuView;
 
 /** {@link com.badlogic.gdx.ApplicationListener} implementation shared by all platforms. */
 public class Main extends Game {
@@ -25,7 +27,7 @@ public class Main extends Game {
         main=this;
         batch = new SpriteBatch();
         image = new Texture("libgdx.png");
-        Main.getMain().setScreen(new MainMenuView(new MainMenuController(), GameAssetManager.getGameAssetManager().getSkin()));
+        Main.getMain().setScreen(new SignupMenuView(new SignupMenuController(), GameAssetManager.getGameAssetManager().getSkin()));
     }
 
     @Override
