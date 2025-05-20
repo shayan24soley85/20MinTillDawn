@@ -11,6 +11,7 @@ import com.badlogic.gdx.utils.ScreenUtils;
 import com.tildawn.Controller.MainMenuController;
 import com.tildawn.Controller.PreGameMenuController;
 import com.tildawn.Controller.SignupMenuController;
+import com.tildawn.Model.App;
 import com.tildawn.Model.GameAssetManager;
 import com.tildawn.View.MainMenuView;
 import com.tildawn.View.PreGameMenuView;
@@ -21,12 +22,15 @@ public class Main extends Game {
     private static Main main;
     private static SpriteBatch batch;
     private Texture image;
+    private  App app;
 
     @Override
     public void create() {
         main=this;
         batch = new SpriteBatch();
         image = new Texture("libgdx.png");
+        app = new App();
+        app.run();
         Main.getMain().setScreen(new SignupMenuView(new SignupMenuController(), GameAssetManager.getGameAssetManager().getSkin()));
     }
 
@@ -63,5 +67,13 @@ public class Main extends Game {
 
     public void setImage(Texture image) {
         this.image = image;
+    }
+
+    public App getApp() {
+        return app;
+    }
+
+    public void setApp(App app) {
+        this.app = app;
     }
 }

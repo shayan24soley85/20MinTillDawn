@@ -2,11 +2,9 @@ package com.tildawn.Controller;
 
 import com.tildawn.Main;
 import com.tildawn.Model.GameAssetManager;
+import com.tildawn.Model.User;
 import com.tildawn.View.PreGameMenuView;
 import com.tildawn.View.SignupMenuView;
-
-import java.util.regex.Matcher;
-
 public class SignupMenuController {
     private SignupMenuView view;
 
@@ -17,7 +15,6 @@ public class SignupMenuController {
         if (password == null || password.length() < 8) {
             return false;
         }
-
         boolean hasSpecial = false;
         boolean hasDigit = false;
         boolean hasUpper = false;
@@ -36,7 +33,14 @@ public class SignupMenuController {
 
         return hasSpecial && hasDigit && hasUpper;
     }
-
+    public Boolean userIsValid(String username) {
+        return !Main.getMain().getApp().getAllUsers().containsKey(username);
+    }
+    public void signup(String username, String password,String securityQuestion, String securityAnswer) {
+        User user=new User(username,password,securityQuestion,securityAnswer);
+        Main.getMain().getApp().getAllUsers().put(user.getUsername(), user);
+        Main.getMain().getApp().getSaving().saveUserToJson(user);
+    }
     public void handleSignupMenuButtonClicked() {
         if (view != null) {
             String password=view.getPassword().getText();
@@ -59,9 +63,17 @@ public class SignupMenuController {
                     view.setErrorMessage("you must enter a strong password!");
                     view.getSignupButton().setChecked(false);
                     return;
+                } if (!userIsValid(username)) {
+                    view.setErrorMessage("this username is already in use!");
+                    view.getSignupButton().setChecked(false);
+                    return;
+
+                }else {
+                    signup(username,password,securityQuestion,answer);
+                    Main.getMain().getScreen().dispose();
+                    //Main.getMain().setScreen(new PreGameMenuView(new PreGameMenuController(), GameAssetManager.getGameAssetManager().getSkin()));
                 }
-                Main.getMain().getScreen().dispose();
-                Main.getMain().setScreen(new PreGameMenuView(new PreGameMenuController(), GameAssetManager.getGameAssetManager().getSkin()));
+                return;
             }
         }
     }
