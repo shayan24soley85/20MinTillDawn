@@ -28,7 +28,6 @@ public class Main extends Game {
     public void create() {
         main=this;
         batch = new SpriteBatch();
-        image = new Texture("libgdx.png");
         app = new App();
         app.run();
         Main.getMain().setScreen(new SignupMenuView(new SignupMenuController(), GameAssetManager.getGameAssetManager().getSkin()));

@@ -3,6 +3,7 @@ package com.tildawn.View;
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.Screen;
 import com.badlogic.gdx.graphics.Color;
+import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.scenes.scene2d.*;
 import com.badlogic.gdx.scenes.scene2d.ui.*;
 import com.badlogic.gdx.scenes.scene2d.utils.FocusListener;
@@ -16,6 +17,8 @@ import com.badlogic.gdx.scenes.scene2d.ui.TextButton;
 public class SignupMenuView implements Screen {
     private Stage stage;
     private final TextButton signupButton;
+    private final TextButton playAsGuessButton;
+    private final TextButton loginButton;
     private final Label gameTitle;
     private final TextField username;
     private final TextField password;
@@ -35,7 +38,9 @@ public class SignupMenuView implements Screen {
         controller.setView(this);
         this.skin = skin;
 
-        this.signupButton = new TextButton("SignUp!", skin);
+        this.signupButton = new TextButton("SignUp", skin);
+        this.playAsGuessButton = new TextButton("Guest", skin);
+        this.loginButton = new TextButton("Login", skin);
         this.gameTitle = new Label("SIGNUP MENU", skin);
         this.gameTitle.setColor(Color.GOLD);
         this.username = new TextField("", skin);
@@ -44,18 +49,11 @@ public class SignupMenuView implements Screen {
         this.securityQuestion = new TextField("", skin);
         this.securityAnswer = new TextField("", skin);
 
+
         password.setPasswordCharacter('*');
         password.setPasswordMode(true);
         confirmPassword.setPasswordCharacter('*');
         confirmPassword.setPasswordMode(true);
-
-        addPlaceholderHandler(username, "");
-        addPlaceholderHandler(password, "");
-        addPlaceholderHandler(confirmPassword, "");
-        addPlaceholderHandler(securityQuestion, "");
-        addPlaceholderHandler(securityAnswer, "");
-
-
         errorLabel = new Label("", skin);
         errorLabel.setColor(Color.RED);
         errorLabel.setWrap(true);
@@ -63,28 +61,17 @@ public class SignupMenuView implements Screen {
         this.table = new Table();
     }
 
-    private void addPlaceholderHandler(final TextField field, final String placeholder) {
-        field.setText(placeholder);
-
-        field.addListener(new FocusListener() {
-            @Override
-            public void keyboardFocusChanged(FocusEvent event, Actor actor, boolean focused) {
-                if (focused) {
-                    if (field.getText().equals(placeholder)) {
-                        field.setText("");
-                    }
-                } else {
-                    if (field.getText().isEmpty()) {
-                        field.setText(placeholder);
-                    }
-                }
-            }
-        });
-    }
 
     @Override
     public void show() {
         stage = new Stage(new ScreenViewport());
+        Texture backgroundTexture = new Texture(Gdx.files.internal("backgrounds/1.png"));
+        Image backgroundImage = new Image(backgroundTexture);
+
+        backgroundImage.setFillParent(true);
+
+        stage.addActor(backgroundImage);
+        stage.addActor(table);
         Gdx.input.setInputProcessor(stage);
 
         table.setFillParent(true);
@@ -114,8 +101,13 @@ public class SignupMenuView implements Screen {
         table.row().pad(20, 0, 0, 0);
 
         table.add(new Label("", skin));
-        table.add(signupButton).width(200);
+        Table buttonRow = new Table();
+        buttonRow.add(signupButton).width(150).padRight(10);
+        buttonRow.add(loginButton).width(150).padRight(10);
+        buttonRow.add(playAsGuessButton).width(150);
 
+        table.row().pad(0, 350, 30, 0);
+        table.add(buttonRow).colspan(2).center();
         table.row().pad(10, 370, 0, 0);
         table.add(errorLabel).colspan(2).left().width(600);
 
