@@ -6,13 +6,11 @@ import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.scenes.scene2d.*;
 import com.badlogic.gdx.scenes.scene2d.ui.*;
-import com.badlogic.gdx.scenes.scene2d.utils.FocusListener;
 import com.badlogic.gdx.utils.ScreenUtils;
 import com.badlogic.gdx.utils.Timer;
 import com.badlogic.gdx.utils.viewport.ScreenViewport;
 import com.tildawn.Controller.SignupMenuController;
 import com.tildawn.Main;
-import com.badlogic.gdx.scenes.scene2d.ui.TextButton;
 
 public class SignupMenuView implements Screen {
     private Stage stage;
@@ -23,12 +21,11 @@ public class SignupMenuView implements Screen {
     private final TextField username;
     private final TextField password;
     private final TextField confirmPassword;
-    private final TextField securityQuestion;
+    private final SelectBox<String> securityQuestion;
     private final TextField securityAnswer;
     private final SignupMenuController controller;
     public Table table;
     private final Skin skin;
-
 
     private final Label errorLabel;
     private Timer.Task clearErrorTask;
@@ -46,14 +43,17 @@ public class SignupMenuView implements Screen {
         this.username = new TextField("", skin);
         this.password = new TextField("", skin);
         this.confirmPassword = new TextField("", skin);
-        this.securityQuestion = new TextField("", skin);
-        this.securityAnswer = new TextField("", skin);
 
+        this.securityQuestion = new SelectBox<>(skin);
+        securityQuestion.setItems("whats your favorite food?", "whats your best friend's name?","whats your father's name?","whats your favorite color?");
+
+        this.securityAnswer = new TextField("", skin);
 
         password.setPasswordCharacter('*');
         password.setPasswordMode(true);
         confirmPassword.setPasswordCharacter('*');
         confirmPassword.setPasswordMode(true);
+
         errorLabel = new Label("", skin);
         errorLabel.setColor(Color.RED);
         errorLabel.setWrap(true);
@@ -61,11 +61,10 @@ public class SignupMenuView implements Screen {
         this.table = new Table();
     }
 
-
     @Override
     public void show() {
         stage = new Stage(new ScreenViewport());
-        Texture backgroundTexture = new Texture(Gdx.files.internal("backgrounds/1.png"));
+        Texture backgroundTexture = new Texture(Gdx.files.internal("backgrounds/25.png"));
         Image backgroundImage = new Image(backgroundTexture);
 
         backgroundImage.setFillParent(true);
@@ -100,7 +99,6 @@ public class SignupMenuView implements Screen {
         table.add(securityAnswer).width(600);
         table.row().pad(20, 0, 0, 0);
 
-        table.add(new Label("", skin));
         Table buttonRow = new Table();
         buttonRow.add(signupButton).width(150).padRight(10);
         buttonRow.add(loginButton).width(150).padRight(10);
@@ -153,16 +151,79 @@ public class SignupMenuView implements Screen {
     }
 
 
-    public Stage getStage() { return stage; }
-    public void setStage(Stage stage) { this.stage = stage; }
-    public TextButton getSignupButton() { return signupButton; }
-    public Label getGameTitle() { return gameTitle; }
-    public TextField getUsername() { return username; }
-    public TextField getPassword() { return password; }
-    public TextField getConfirmPassword() { return confirmPassword; }
-    public TextField getSecurityQuestion() { return securityQuestion; }
-    public TextField getSecurityAnswer() { return securityAnswer; }
-    public Table getTable() { return table; }
-    public void setTable(Table table) { this.table = table; }
-    public SignupMenuController getController() { return controller; }
+    public String getSelectedSecurityQuestion() {
+        return securityQuestion.getSelected();
+    }
+
+    public String getSecurityAnswer() {
+        return securityAnswer.getText();
+    }
+
+    public Stage getStage() {
+        return stage;
+    }
+
+    public void setStage(Stage stage) {
+        this.stage = stage;
+    }
+
+    public TextButton getSignupButton() {
+        return signupButton;
+    }
+
+    public TextButton getPlayAsGuessButton() {
+        return playAsGuessButton;
+    }
+
+    public TextButton getLoginButton() {
+        return loginButton;
+    }
+
+    public Label getGameTitle() {
+        return gameTitle;
+    }
+
+    public TextField getUsername() {
+        return username;
+    }
+
+    public TextField getPassword() {
+        return password;
+    }
+
+    public TextField getConfirmPassword() {
+        return confirmPassword;
+    }
+
+    public SelectBox<String> getSecurityQuestion() {
+        return securityQuestion;
+    }
+
+    public SignupMenuController getController() {
+        return controller;
+    }
+
+    public Table getTable() {
+        return table;
+    }
+
+    public void setTable(Table table) {
+        this.table = table;
+    }
+
+    public Skin getSkin() {
+        return skin;
+    }
+
+    public Label getErrorLabel() {
+        return errorLabel;
+    }
+
+    public Timer.Task getClearErrorTask() {
+        return clearErrorTask;
+    }
+
+    public void setClearErrorTask(Timer.Task clearErrorTask) {
+        this.clearErrorTask = clearErrorTask;
+    }
 }

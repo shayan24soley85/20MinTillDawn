@@ -3,6 +3,7 @@ package com.tildawn.Controller;
 import com.tildawn.Main;
 import com.tildawn.Model.GameAssetManager;
 import com.tildawn.Model.User;
+import com.tildawn.View.MainMenuView;
 import com.tildawn.View.PreGameMenuView;
 import com.tildawn.View.SignupMenuView;
 public class SignupMenuController {
@@ -46,11 +47,11 @@ public class SignupMenuController {
             String password=view.getPassword().getText();
             String username=view.getUsername().getText();
             String confirmPassword=view.getConfirmPassword().getText();
-            String securityQuestion=view.getSecurityQuestion().getText();
-            String answer=view.getSecurityAnswer().getText();
+            String securityQuestion=view.getSecurityQuestion().getSelected();
+            String answer=view.getSecurityAnswer();
             if (view.getSignupButton().isChecked()) {
                 if(password.isEmpty() ||username.isEmpty()||confirmPassword.isEmpty()
-                    ||securityQuestion.isEmpty()||answer.isEmpty()) {
+                    ||answer.isEmpty()) {
                     view.getSignupButton().setChecked(false);
                     view.setErrorMessage("Please fill all the fields");
                     return;
@@ -71,9 +72,16 @@ public class SignupMenuController {
                 }else {
                     signup(username,password,securityQuestion,answer);
                     Main.getMain().getScreen().dispose();
+                    //todo random avatar for user
                     //Main.getMain().setScreen(new PreGameMenuView(new PreGameMenuController(), GameAssetManager.getGameAssetManager().getSkin()));
                 }
                 return;
+            } else if (view.getLoginButton().isChecked()) {
+               // Main.getMain().setScreen(new LoginMenuView(new LoginMenuController(), GameAssetManager.getGameAssetManager().getSkin()));
+            } else if (view.getPlayAsGuessButton().isChecked()) {
+                //todo user beshe guest
+                //todo random avatar for user
+                Main.getMain().setScreen(new MainMenuView(new MainMenuController(), GameAssetManager.getGameAssetManager().getSkin()));
             }
         }
     }
