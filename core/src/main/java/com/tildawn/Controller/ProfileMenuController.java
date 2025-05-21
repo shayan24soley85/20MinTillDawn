@@ -4,10 +4,7 @@ import com.badlogic.gdx.utils.Timer;
 import com.tildawn.Main;
 import com.tildawn.Model.GameAssetManager;
 import com.tildawn.Model.User;
-import com.tildawn.View.LoginMenuView;
-import com.tildawn.View.MainMenuView;
-import com.tildawn.View.ProfileMenuView;
-import com.tildawn.View.SettingMenuView;
+import com.tildawn.View.*;
 
 public class ProfileMenuController {
     private ProfileMenuView view;
@@ -66,6 +63,10 @@ public class ProfileMenuController {
                         Main.getMain().setScreen(new LoginMenuView(new LoginMenuController(), GameAssetManager.getGameAssetManager().getSkin()));
                     }
                 }, 5);
+            } else if (view.getChangeProfileButton().isChecked()) {
+                view.getChangeProfileButton().setChecked(false);
+                Main.getMain().setScreen(new ChangeAvatarMenuView(new changeAvatarMenuController(), GameAssetManager.getGameAssetManager().getSkin()));
+
             }
         }
     }
