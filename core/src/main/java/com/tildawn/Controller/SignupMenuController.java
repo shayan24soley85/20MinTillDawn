@@ -3,8 +3,8 @@ package com.tildawn.Controller;
 import com.tildawn.Main;
 import com.tildawn.Model.GameAssetManager;
 import com.tildawn.Model.User;
+import com.tildawn.View.LoginMenuView;
 import com.tildawn.View.MainMenuView;
-import com.tildawn.View.PreGameMenuView;
 import com.tildawn.View.SignupMenuView;
 public class SignupMenuController {
     private SignupMenuView view;
@@ -50,23 +50,20 @@ public class SignupMenuController {
             String securityQuestion=view.getSecurityQuestion().getSelected();
             String answer=view.getSecurityAnswer();
             if (view.getSignupButton().isChecked()) {
+                view.getSignupButton().setChecked(false);
                 if(password.isEmpty() ||username.isEmpty()||confirmPassword.isEmpty()
                     ||answer.isEmpty()) {
-                    view.getSignupButton().setChecked(false);
                     view.setErrorMessage("Please fill all the fields");
                     return;
                 }
                 else if (!password.equals(confirmPassword)) {
                     view.setErrorMessage("Passwords do not match!");
-                    view.getSignupButton().setChecked(false);
                     return;
                 } else if (!isStrongPassword(password)) {
                     view.setErrorMessage("you must enter a strong password!");
-                    view.getSignupButton().setChecked(false);
                     return;
                 } if (!userIsValid(username)) {
                     view.setErrorMessage("this username is already in use!");
-                    view.getSignupButton().setChecked(false);
                     return;
 
                 }else {
@@ -77,7 +74,7 @@ public class SignupMenuController {
                 }
                 return;
             } else if (view.getLoginButton().isChecked()) {
-               // Main.getMain().setScreen(new LoginMenuView(new LoginMenuController(), GameAssetManager.getGameAssetManager().getSkin()));
+                Main.getMain().setScreen(new LoginMenuView(new LoginMenuController(), GameAssetManager.getGameAssetManager().getSkin()));
             } else if (view.getPlayAsGuessButton().isChecked()) {
                 //todo user beshe guest
                 //todo random avatar for user
