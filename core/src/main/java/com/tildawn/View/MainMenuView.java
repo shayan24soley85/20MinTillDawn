@@ -16,9 +16,6 @@ import com.tildawn.Model.User;
 
 public class MainMenuView implements Screen {
     private Stage stage;
-    private final TextButton playButton;
-    private final Label gameTitle;
-    private final TextField field;
     public Table table;
     private final MainMenuController controller;
     private final User user=Main.getMain().getApp().getCurrentUser();
@@ -33,11 +30,9 @@ public class MainMenuView implements Screen {
     private Label nameLabel ;
     private Label scoreLabel ;
     public MainMenuView(MainMenuController controller, Skin skin) {
-        this.playButton = new TextButton("Play", skin);
-        this.gameTitle = new Label("this is a title", skin);
-        this.field = new TextField("this is a field", skin);
         this.controller = controller;
         this.table = new Table();
+        this.controller.setView(this);
 
          nameLabel = new Label("Username: " +user.getUsername(), skin);
         scoreLabel = new Label("Score: " + user.getScore(), skin);
@@ -47,7 +42,7 @@ public class MainMenuView implements Screen {
          profileButton = new TextButton("Profile", skin);
          preGameButton = new TextButton("Pre-Game Menu", skin);
          scoreboardButton = new TextButton("Scoreboard", skin);
-         talentButton = new TextButton("Talent Menu", skin);
+         talentButton = new TextButton("Hint Menu", skin);
          logoutButton = new TextButton("Logout", skin);
     }
 
@@ -73,7 +68,7 @@ public class MainMenuView implements Screen {
 
         Texture avatarTexture = new Texture(Gdx.files.internal(Main.getMain().getApp().getCurrentUser().getAvatarPath()));
         Image avatarImage = new Image(new TextureRegionDrawable(new TextureRegion(avatarTexture)));
-        avatarImage.setSize(64, 64); // سایز دلخواه
+        avatarImage.setSize(64, 64);
         avatarImage.setScaling(Scaling.fit);
 
 
@@ -136,10 +131,6 @@ public class MainMenuView implements Screen {
         stage.dispose();
     }
 
-    public TextButton getPlayButton() {
-        return playButton;
-    }
-
     public Stage getStage() {
         return stage;
     }
@@ -148,13 +139,6 @@ public class MainMenuView implements Screen {
         this.stage = stage;
     }
 
-    public Label getGameTitle() {
-        return gameTitle;
-    }
-
-    public TextField getField() {
-        return field;
-    }
 
     public Table getTable() {
         return table;

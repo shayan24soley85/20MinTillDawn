@@ -76,8 +76,10 @@ public class SignupMenuController {
                 }
                 return;
             } else if (view.getLoginButton().isChecked()) {
+                view.getLoginButton().setChecked(false);
                 Main.getMain().setScreen(new LoginMenuView(new LoginMenuController(), GameAssetManager.getGameAssetManager().getSkin()));
             } else if (view.getPlayAsGuessButton().isChecked()) {
+                view.getPlayAsGuessButton().setChecked(false);
                 Avatar avatar=Avatar.getRandomAvatar();
                 User user=new User("GUEST",null,null,null, avatar.getPath());
                 Main.getMain().getApp().setCurrentUser(user);

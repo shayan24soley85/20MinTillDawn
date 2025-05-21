@@ -2,8 +2,8 @@ package com.tildawn.Controller;
 
 import com.tildawn.Main;
 import com.tildawn.Model.GameAssetManager;
+import com.tildawn.View.LoginMenuView;
 import com.tildawn.View.MainMenuView;
-import com.tildawn.View.PreGameMenuView;
 
 public class MainMenuController {
     private MainMenuView view;
@@ -14,10 +14,12 @@ public class MainMenuController {
 
     public void handleMainMenuButtons() {
         if (view != null) {
-            if (view.getPlayButton().isChecked()) {
-                Main.getMain().getScreen().dispose();
-                Main.getMain().setScreen(new PreGameMenuView(new PreGameMenuController(), GameAssetManager.getGameAssetManager().getSkin()));
-            }
+           if(view.getLogoutButton().isChecked()){
+               Main.getMain().getApp().setCurrentUser(null);
+               view.getLogoutButton().setChecked(false);
+               Main.getMain().setScreen(new LoginMenuView
+                   (new LoginMenuController(), GameAssetManager.getGameAssetManager().getSkin()));
+           }
         }
     }
 }
