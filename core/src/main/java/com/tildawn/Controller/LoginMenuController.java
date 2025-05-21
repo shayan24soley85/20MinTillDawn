@@ -18,7 +18,7 @@ public class LoginMenuController {
     public LoginMenuView getView() {
         return view;
     }
-    public User findUserByUsername(String username){
+    public static User findUserByUsername(String username){
         if(Main.getMain().getApp().getAllUsers().containsKey(username)) {
             return Main.getMain().getApp().getAllUsers().get(username);
         }
@@ -38,19 +38,23 @@ public class LoginMenuController {
                     return;
                 }
                 User user = findUserByUsername(username);
+                assert user != null;
                 if (!user.getPassword().equals(password)) {
                     view.setErrorMessage("Wrong password");
                     return;
                 }
                 Main.getMain().getApp().setCurrentUser(user);
                 Main.getMain().setScreen(new MainMenuView(new MainMenuController(), GameAssetManager.getGameAssetManager().getSkin()));
-                //todo login successfully
             } else if (view.getSignupButton().isChecked()) {
                 view.getSignupButton().setChecked(false);
                 Main.getMain().setScreen(new SignupMenuView(new SignupMenuController(), GameAssetManager.getGameAssetManager().getSkin()));
             } else if (view.getRecoveryPasswordButton().isChecked()) {
                 view.getRecoveryPasswordButton().setChecked(false);
-                //Main.getMain().setScreen(new RecoveryPasswordMenu(new RecoveryPasswordMenuController(), GameAssetManager.getGameAssetManager().getSkin()));
+                if (!Main.getMain().getApp().getAllUsers().containsKey(username)) {
+                    view.setErrorMessage("User not found");
+                    return;
+                }
+                Main.getMain().setScreen(new RecoveryPasswordMenu(new RecoveryPasswordMenuController(), GameAssetManager.getGameAssetManager().getSkin(),findUserByUsername(username)));
             }
         }
     }
