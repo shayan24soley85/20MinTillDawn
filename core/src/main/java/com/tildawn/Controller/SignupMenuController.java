@@ -35,7 +35,7 @@ public class SignupMenuController {
 
         return hasSpecial && hasDigit && hasUpper;
     }
-    public Boolean userIsValid(String username) {
+    public static Boolean userIsValid(String username) {
         return !Main.getMain().getApp().getAllUsers().containsKey(username);
     }
     public void signup(String username, String password,String securityQuestion, String securityAnswer,Avatar avatar) {

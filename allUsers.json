@@ -1,9 +1,8 @@
-[
-  {
-    "username": "shayan24soley",
-    "password": "shayan24S\u0026",
-    "securityQuestion": "whats your favorite color?",
-    "securityAnswer": "blue",
-    "avatarPath": "avatars/vibrent_2.png"
-  }
-]
+[{
+  "score": 0,
+  "password": "shayan24S@",
+  "securityQuestion": "whats your favorite color?",
+  "securityAnswer": "blue",
+  "avatarPath": "avatars/vibrent_2.png",
+  "username": "shayan24soley"
+}]

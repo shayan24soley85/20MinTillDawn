@@ -4,6 +4,8 @@ import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
 import com.google.gson.reflect.TypeToken;
 import com.tildawn.Main;
+import org.json.JSONArray;
+import org.json.JSONObject;
 
 import java.io.*;
 import java.lang.reflect.Type;
@@ -54,5 +56,35 @@ public class Saving {
             e.printStackTrace();
         }
 
+    }
+    public  void removeUserFromJSON(String usernameToRemove) {
+        try {
+
+            FileReader reader = new FileReader("allUsers.json");
+            StringBuilder content = new StringBuilder();
+            int ch;
+            while ((ch = reader.read()) != -1) {
+                content.append((char) ch);
+            }
+            reader.close();
+
+
+            JSONArray usersArray = new JSONArray(content.toString());
+
+
+            JSONArray updatedUsers = new JSONArray();
+            for (int i = 0; i < usersArray.length(); i++) {
+                JSONObject user = usersArray.getJSONObject(i);
+                if (!user.getString("username").equals(usernameToRemove)) {
+                    updatedUsers.put(user);
+                }
+            }
+            FileWriter writer = new FileWriter("allUsers.json");
+            writer.write(updatedUsers.toString(2));
+            writer.close();
+
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
     }
 }
