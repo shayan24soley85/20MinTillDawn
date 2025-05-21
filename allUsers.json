@@ -1,20 +1,9 @@
 [
   {
-    "username": "shayan",
-    "password": "shayan24S$",
-    "securityQuestion": "wdfg",
-    "securityAnswer": "edrftgyhujk"
-  },
-  {
-    "username": "shayan1",
-    "password": "shayan24S$",
-    "securityQuestion": "asdrtyui",
-    "securityAnswer": "azsdf"
-  },
-  {
     "username": "shayan24soley",
     "password": "shayan24S$",
-    "securityQuestion": "whats your best friend\u0027s name?",
-    "securityAnswer": "gholamreza"
+    "securityQuestion": "whats your favorite color?",
+    "securityAnswer": "blue",
+    "avatarPath": "avatars/vibrent_2.png"
   }
 ]

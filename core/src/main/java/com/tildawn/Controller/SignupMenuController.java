@@ -1,5 +1,6 @@
 package com.tildawn.Controller;
 
+import com.tildawn.Enums.Avatar;
 import com.tildawn.Main;
 import com.tildawn.Model.GameAssetManager;
 import com.tildawn.Model.User;
@@ -37,9 +38,10 @@ public class SignupMenuController {
     public Boolean userIsValid(String username) {
         return !Main.getMain().getApp().getAllUsers().containsKey(username);
     }
-    public void signup(String username, String password,String securityQuestion, String securityAnswer) {
-        User user=new User(username,password,securityQuestion,securityAnswer);
+    public void signup(String username, String password,String securityQuestion, String securityAnswer,Avatar avatar) {
+        User user=new User(username,password,securityQuestion,securityAnswer, avatar.getPath());
         Main.getMain().getApp().getAllUsers().put(user.getUsername(), user);
+        Main.getMain().getApp().setCurrentUser(user);
         Main.getMain().getApp().getSaving().saveUserToJson(user);
     }
     public void handleSignupMenuButtonClicked() {
@@ -67,17 +69,18 @@ public class SignupMenuController {
                     return;
 
                 }else {
-                    signup(username,password,securityQuestion,answer);
+                    Avatar avatar=Avatar.getRandomAvatar();
+                    signup(username,password,securityQuestion,answer,avatar);
                     Main.getMain().getScreen().dispose();
-                    //todo random avatar for user
-                    //Main.getMain().setScreen(new PreGameMenuView(new PreGameMenuController(), GameAssetManager.getGameAssetManager().getSkin()));
+                    Main.getMain().setScreen(new MainMenuView(new MainMenuController(), GameAssetManager.getGameAssetManager().getSkin()));
                 }
                 return;
             } else if (view.getLoginButton().isChecked()) {
                 Main.getMain().setScreen(new LoginMenuView(new LoginMenuController(), GameAssetManager.getGameAssetManager().getSkin()));
             } else if (view.getPlayAsGuessButton().isChecked()) {
-                //todo user beshe guest
-                //todo random avatar for user
+                Avatar avatar=Avatar.getRandomAvatar();
+                User user=new User("GUEST",null,null,null, avatar.getPath());
+                Main.getMain().getApp().setCurrentUser(user);
                 Main.getMain().setScreen(new MainMenuView(new MainMenuController(), GameAssetManager.getGameAssetManager().getSkin()));
             }
         }

@@ -10,6 +10,7 @@ import com.badlogic.gdx.utils.ScreenUtils;
 import com.badlogic.gdx.utils.Timer;
 import com.badlogic.gdx.utils.viewport.ScreenViewport;
 import com.tildawn.Controller.SignupMenuController;
+import com.tildawn.Enums.Avatar;
 import com.tildawn.Main;
 
 public class SignupMenuView implements Screen {
@@ -64,6 +65,7 @@ public class SignupMenuView implements Screen {
     @Override
     public void show() {
         stage = new Stage(new ScreenViewport());
+
         Texture backgroundTexture = new Texture(Gdx.files.internal("backgrounds/25.png"));
         Image backgroundImage = new Image(backgroundTexture);
 

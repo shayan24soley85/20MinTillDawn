@@ -5,11 +5,13 @@ public class User {
       private String password;
       private String securityQuestion;
       private String securityAnswer;
-      public User(String username, String password, String securityQuestion, String securityAnswer) {
+      private String avatarPath;
+      public User(String username, String password, String securityQuestion, String securityAnswer,String avatarPath) {
           this.username = username;
           this.password = password;
           this.securityQuestion = securityQuestion;
           this.securityAnswer = securityAnswer;
+          this.avatarPath = avatarPath;
       }
 
     public String getUsername() {
@@ -42,5 +44,13 @@ public class User {
 
     public void setSecurityAnswer(String securityAnswer) {
         this.securityAnswer = securityAnswer;
+    }
+
+    public String getAvatarPath() {
+        return avatarPath;
+    }
+
+    public void setAvatarPath(String avatarPath) {
+        this.avatarPath = avatarPath;
     }
 }

@@ -2,6 +2,7 @@ package com.tildawn.View;
 
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.Screen;
+import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.scenes.scene2d.Stage;
 import com.badlogic.gdx.scenes.scene2d.ui.*;
 import com.badlogic.gdx.utils.ScreenUtils;
@@ -29,8 +30,28 @@ public class MainMenuView implements Screen {
     public void show() {
         stage = new Stage(new ScreenViewport());
         Gdx.input.setInputProcessor(stage);
+        Texture backgroundTexture = new Texture(Gdx.files.internal("backgrounds/36.png"));
+        Image backgroundImage = new Image(backgroundTexture);
 
+        backgroundImage.setFillParent(true);
+
+        stage.addActor(backgroundImage);
+        stage.addActor(table);
         table.setFillParent(true);
+
+
+        Texture avatarTexture = new Texture(Gdx.files.internal(Main.getMain().getApp().getCurrentUser().getAvatarPath()));
+        Image avatarImage = new Image(avatarTexture);
+
+
+        avatarImage.setSize(64, 64);
+
+
+        avatarImage.setPosition(10, Gdx.graphics.getHeight() - avatarImage.getHeight() - 10);
+
+
+        stage.addActor(avatarImage);
+
         table.center();
         table.add(gameTitle);
         table.row().pad(10, 0 , 10 , 0);
