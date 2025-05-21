@@ -6,6 +6,7 @@ public class User {
       private String securityQuestion;
       private String securityAnswer;
       private String avatarPath;
+      private int score;
       public User(String username, String password, String securityQuestion, String securityAnswer,String avatarPath) {
           this.username = username;
           this.password = password;
@@ -48,6 +49,14 @@ public class User {
 
     public String getAvatarPath() {
         return avatarPath;
+    }
+
+    public int getScore() {
+        return score;
+    }
+
+    public void setScore(int score) {
+        this.score = score;
     }
 
     public void setAvatarPath(String avatarPath) {
