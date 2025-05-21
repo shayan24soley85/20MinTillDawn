@@ -4,6 +4,7 @@ import com.tildawn.Main;
 import com.tildawn.Model.GameAssetManager;
 import com.tildawn.View.LoginMenuView;
 import com.tildawn.View.MainMenuView;
+import com.tildawn.View.ProfileMenuView;
 import com.tildawn.View.SettingMenuView;
 
 public class MainMenuController {
@@ -24,6 +25,14 @@ public class MainMenuController {
                view.getLogoutButton().setChecked(false);
                Main.getMain().setScreen(new SettingMenuView
                    (new SettingMenuController(), GameAssetManager.getGameAssetManager().getSkin()));
+           } else if (view.getProfileButton().isChecked()) {
+               view.getLogoutButton().setChecked(false);
+               if (Main.getMain().getApp().getCurrentUser().getUsername().equals("GUEST")) {
+                   view.setErrorMessage("you have to login first");
+                   return;
+               }
+               Main.getMain().setScreen(new ProfileMenuView
+                   (new ProfileMenuController(), GameAssetManager.getGameAssetManager().getSkin()));
            }
         }
     }

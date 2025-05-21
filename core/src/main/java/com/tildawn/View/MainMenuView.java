@@ -2,13 +2,16 @@ package com.tildawn.View;
 
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.Screen;
+import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.TextureRegion;
 import com.badlogic.gdx.scenes.scene2d.Stage;
+import com.badlogic.gdx.scenes.scene2d.actions.Actions;
 import com.badlogic.gdx.scenes.scene2d.ui.*;
 import com.badlogic.gdx.scenes.scene2d.utils.TextureRegionDrawable;
 import com.badlogic.gdx.utils.Scaling;
 import com.badlogic.gdx.utils.ScreenUtils;
+import com.badlogic.gdx.utils.Timer;
 import com.badlogic.gdx.utils.viewport.ScreenViewport;
 import com.tildawn.Controller.MainMenuController;
 import com.tildawn.Main;
@@ -26,6 +29,8 @@ public class MainMenuView implements Screen {
     private TextButton scoreboardButton ;
     private TextButton talentButton ;
     private TextButton logoutButton ;
+    private final Label errorLabel;
+    private Timer.Task clearErrorTask;
 
     private Label nameLabel ;
     private Label scoreLabel ;
@@ -44,6 +49,10 @@ public class MainMenuView implements Screen {
          scoreboardButton = new TextButton("Scoreboard", skin);
          talentButton = new TextButton("Hint Menu", skin);
          logoutButton = new TextButton("Logout", skin);
+
+        errorLabel = new Label("", skin);
+        errorLabel.setColor(Color.RED);
+        errorLabel.setWrap(true);
     }
 
     @Override
@@ -90,10 +99,16 @@ public class MainMenuView implements Screen {
         menuTable.add(scoreboardButton).row();
         menuTable.add(talentButton).row();
         menuTable.add(logoutButton).row();
+       menuTable.add(errorLabel).row();
+       //todo  error bad 2 saaniye nmire
 
         rootTable.top().padTop(30);
         rootTable.add(topTable).expandX().left().padLeft(20).row();
         rootTable.add(menuTable).expand().center();
+        table.row().pad(10, 370, 0, 0);
+        table.row().pad(10, 370, 0, 0);
+        //table.add(errorLabel).colspan(2).left().width(600);
+        stage.addActor(table);
     }
 
     @Override
@@ -105,7 +120,21 @@ public class MainMenuView implements Screen {
         stage.draw();
         controller.handleMainMenuButtons();
     }
+    public void setErrorMessage(String error) {
+        errorLabel.setText(error);
 
+        errorLabel.clearActions();
+
+        if (!error.isEmpty()) {
+            errorLabel.addAction(Actions.sequence(
+                Actions.delay(2),
+                Actions.run(() -> {
+                    errorLabel.setText("");
+                    System.out.println("ERROR CLEARED via Action!");
+                })
+            ));
+        }
+    }
     @Override
     public void resize(int i, int i1) {
 
@@ -129,6 +158,7 @@ public class MainMenuView implements Screen {
     @Override
     public void dispose() {
         stage.dispose();
+        if (clearErrorTask != null) clearErrorTask.cancel();
     }
 
     public Stage getStage() {
@@ -226,5 +256,16 @@ public class MainMenuView implements Screen {
 
     public void setScoreLabel(Label scoreLabel) {
         this.scoreLabel = scoreLabel;
+    }
+
+    public Label getErrorLabel() {
+        return errorLabel;
+    }
+    public Timer.Task getClearErrorTask() {
+        return clearErrorTask;
+    }
+
+    public void setClearErrorTask(Timer.Task clearErrorTask) {
+        this.clearErrorTask = clearErrorTask;
     }
 }
