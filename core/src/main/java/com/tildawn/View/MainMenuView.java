@@ -41,16 +41,16 @@ public class MainMenuView implements Screen {
         this.table = new Table();
         this.controller.setView(this);
 
-         nameLabel = new Label("Username: " +user.getUsername(), skin);
-        scoreLabel = new Label("Score: " + user.getScore(), skin);
+         nameLabel = new Label(com.tildawn.Enums.Label.USERNAME +user.getUsername(), skin);
+        scoreLabel = new Label(com.tildawn.Enums.Label.SCORE.getText() + user.getScore(), skin);
 
-         continueButton = new TextButton("Continue Game", skin);
-         settingsButton = new TextButton("Settings", skin);
-         profileButton = new TextButton("Profile", skin);
-         preGameButton = new TextButton("Pre-Game Menu", skin);
-         scoreboardButton = new TextButton("Scoreboard", skin);
-         talentButton = new TextButton("Hint Menu", skin);
-         logoutButton = new TextButton("Logout/Login menu", skin);
+         continueButton = new TextButton(com.tildawn.Enums.Label.CONTINUE_GAME.getText(), skin);
+         settingsButton = new TextButton(com.tildawn.Enums.Label.SETTINGS.getText(), skin);
+         profileButton = new TextButton(com.tildawn.Enums.Label.PROFILE.getText(), skin);
+         preGameButton = new TextButton(com.tildawn.Enums.Label.PRE_GAME_MENU.getText(), skin);
+         scoreboardButton = new TextButton(com.tildawn.Enums.Label.SCOREBOARD.getText(), skin);
+         talentButton = new TextButton(com.tildawn.Enums.Label.HINT_MENU.getText(), skin);
+         logoutButton = new TextButton(com.tildawn.Enums.Label.LOGOUT_LOGIN_MENU.getText(), skin);
 
         errorLabel = new Label("", skin);
         errorLabel.setColor(Color.RED);

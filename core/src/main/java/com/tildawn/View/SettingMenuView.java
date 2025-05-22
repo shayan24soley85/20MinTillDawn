@@ -47,33 +47,33 @@ public class SettingMenuView implements Screen {
         controller.setView(this);
         this.skin = skin;
         errorLabel = new Label("", skin);
-        languageLabel = new Label("Game language:", skin);
+        languageLabel = new Label(com.tildawn.Enums.Label.GAME_LANGUAGE.getText(), skin);
         errorLabel.setColor(Color.RED);
         errorLabel.setWrap(true);
-        musicLabel = new Label("Background Music:", skin);
+        musicLabel = new Label(com.tildawn.Enums.Label.BACKGROUND_MUSIC.getText(), skin);
          musicSelect = new SelectBox<>(skin);
         musicSelect.setItems("Calm", "Happy", "Intense");
         this.table = new Table();
-         volumeLabel = new Label("Music Volume:", skin);
+         volumeLabel = new Label(com.tildawn.Enums.Label.MUSIC_VOLUME.getText(), skin);
        volumeSlider = new Slider(0f, 1f, 0.01f, false, skin);
        language = new SelectBox<>(skin);
        language.setItems("ENGLISH","FRENCH");
         language.setSelected(Main.getMain().getApp().getCurrentLanguage().
             getCurrentLanguage().equals(Language.English)?"ENGLISH":"FRENCH");
 
-        this.confirmButton = new TextButton("Confirm", skin);
-        this.backButton = new TextButton("Back", skin);
-         sfxToggle = new CheckBox(" Enable SFX", skin);
+        this.confirmButton = new TextButton(com.tildawn.Enums.Label.CONFIRM.getText(), skin);
+        this.backButton = new TextButton(com.tildawn.Enums.Label.BACK.getText(), skin);
+         sfxToggle = new CheckBox(com.tildawn.Enums.Label.ENABLE_SFX.getText(), skin);
 
          sfxToggle.setChecked(true);
-         controlLabel = new Label("Change Controls:", skin);
-         setButtons = new TextButton("Keyboard setting", skin);
+         controlLabel = new Label(com.tildawn.Enums.Label.CHANGE_CONTROLS.getText(), skin);
+         setButtons = new TextButton(com.tildawn.Enums.Label.KEYBOARD_SETTING.getText(), skin);
 
 
-         autoReload = new CheckBox(" Auto Reload", skin);
+         autoReload = new CheckBox(com.tildawn.Enums.Label.AUTO_RELOAD.getText(), skin);
 
 
-         grayscaleToggle = new CheckBox(" Grayscale Mode", skin);
+         grayscaleToggle = new CheckBox(com.tildawn.Enums.Label.GRAYSCALE_MODE.getText(), skin);
     }
 
     @Override

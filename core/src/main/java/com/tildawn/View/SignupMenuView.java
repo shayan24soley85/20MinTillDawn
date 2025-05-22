@@ -36,10 +36,10 @@ public class SignupMenuView implements Screen {
         controller.setView(this);
         this.skin = skin;
 
-        this.signupButton = new TextButton("SignUp", skin);
-        this.playAsGuessButton = new TextButton("Guest", skin);
-        this.loginButton = new TextButton("Login", skin);
-        this.gameTitle = new Label("SIGNUP MENU", skin);
+        this.signupButton = new TextButton(com.tildawn.Enums.Label.SIGN_UP.getText(), skin);
+        this.playAsGuessButton = new TextButton(com.tildawn.Enums.Label.GUEST.getText(), skin);
+        this.loginButton = new TextButton(com.tildawn.Enums.Label.LOGIN.getText(), skin);
+        this.gameTitle = new Label(com.tildawn.Enums.Label.SIGNUP_MENU.getText(), skin);
         this.gameTitle.setColor(Color.GOLD);
         this.username = new TextField("", skin);
         this.password = new TextField("", skin);
@@ -81,23 +81,23 @@ public class SignupMenuView implements Screen {
         table.add(gameTitle).colspan(2).pad(10, 200 , 10 , 0);
         table.row().pad(10, 0 , 10 , 0);
 
-        table.add(new Label("Username:", skin)).left();
+        table.add(new Label(com.tildawn.Enums.Label.USERNAME.getText(), skin)).left();
         table.add(username).width(600);
         table.row().pad(10, 0 , 10 , 0);
 
-        table.add(new Label("Password:", skin)).left();
+        table.add(new Label(com.tildawn.Enums.Label.PASSWORD.getText(), skin)).left();
         table.add(password).width(600);
         table.row().pad(10, 0 , 10 , 0);
 
-        table.add(new Label("Confirm Password:", skin)).left();
+        table.add(new Label(com.tildawn.Enums.Label.CONFIRM_PASSWORD.getText(), skin)).left();
         table.add(confirmPassword).width(600);
         table.row().pad(10, 0 , 10 , 0);
 
-        table.add(new Label("Security Question:", skin)).left();
+        table.add(new Label(com.tildawn.Enums.Label.SECURITY_QUESTION.getText(), skin)).left();
         table.add(securityQuestion).width(600);
         table.row().pad(10, 0 , 10 , 0);
 
-        table.add(new Label("Security Answer:", skin)).left();
+        table.add(new Label(com.tildawn.Enums.Label.SECURITY_ANSWER.getText(), skin)).left();
         table.add(securityAnswer).width(600);
         table.row().pad(20, 0, 0, 0);
 

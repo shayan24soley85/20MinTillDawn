@@ -4,6 +4,8 @@ public class Game {
     private Boolean grayscaleToggle=false;
     private Boolean autoReload=false;
     private Boolean sfxToggle=true;
+    private int gameTime;
+    private Character character;
     public Boolean getGrayscaleToggle() {
         return grayscaleToggle;
     }
@@ -26,5 +28,21 @@ public class Game {
 
     public void setSfxToggle(Boolean sfxToggle) {
         this.sfxToggle = sfxToggle;
+    }
+
+    public int getGameTime() {
+        return gameTime;
+    }
+
+    public void setGameTime(int gameTime) {
+        this.gameTime = gameTime;
+    }
+
+    public Character getCharacter() {
+        return character;
+    }
+
+    public void setCharacter(Character character) {
+        this.character = character;
     }
 }

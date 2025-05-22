@@ -38,18 +38,18 @@ public class ProfileMenuView implements Screen {
         this.controller = controller;
         this.table = new Table();
         this.controller.setView(this);
-        changeUsernameButton = new TextButton("Change Username", skin);
-        changePasswordButton = new TextButton("Change Password", skin);
-        deleteAccountButton = new TextButton("Delete Account", skin);
-        changeProfileButton = new TextButton("Change Avatar", skin);
-        backButton = new TextButton("Back", skin);
+        changeUsernameButton = new TextButton(com.tildawn.Enums.Label.CHANGE_USERNAME.getText(), skin);
+        changePasswordButton = new TextButton(com.tildawn.Enums.Label.CHANGE_PASSWORD.getText(), skin);
+        deleteAccountButton = new TextButton(com.tildawn.Enums.Label.DELETE_ACCOUNT.getText(), skin);
+        changeProfileButton = new TextButton(com.tildawn.Enums.Label.CHANGE_AVATAR.getText(), skin);
+        backButton = new TextButton(com.tildawn.Enums.Label.BACK.getText(), skin);
         username = new TextField(Main.getMain().getApp().getCurrentUser().getUsername(), skin);
         password = new TextField(Main.getMain().getApp().getCurrentUser().getPassword(), skin);
         password.setPasswordCharacter('*');
         password.setPasswordMode(true);
-        nameLabel = new Label("Username: " +Main.getMain().getApp().getCurrentUser().getUsername(), skin);
+        nameLabel = new Label(com.tildawn.Enums.Label.USERNAME +Main.getMain().getApp().getCurrentUser().getUsername(), skin);
         nameLabel.setColor(Color.CYAN);
-        scoreLabel = new Label("Score: " + Main.getMain().getApp().getCurrentUser().getScore(), skin);
+        scoreLabel = new Label(com.tildawn.Enums.Label.SCORE.getText() + Main.getMain().getApp().getCurrentUser().getScore(), skin);
         scoreLabel.setColor(Color.CYAN);
 
         SuccessMessageLabel = new Label("", skin);

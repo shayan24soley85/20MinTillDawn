@@ -5,7 +5,8 @@
     "securityQuestion": "whats your father\u0027s name?",
     "securityAnswer": "Davood",
     "avatarPath": "avatars/vibrent_11.png",
-    "score": 0
+    "score": 0,
+    "totalEliminations": 0
   },
   {
     "username": "shayan",
@@ -13,14 +14,16 @@
     "securityQuestion": "whats your favorite food?",
     "securityAnswer": "pizza",
     "avatarPath": "C:\\Users\\USER\\Pictures\\Saved Pictures\\ax-pic-min.png",
-    "score": 0
+    "score": 0,
+    "totalEliminations": 0
   },
   {
     "username": "shayan24soley",
     "password": "shayan24S@",
     "securityQuestion": "whats your favorite color?",
     "securityAnswer": "blue",
-    "avatarPath": "avatars/vibrent_20.png",
-    "score": 0
+    "avatarPath": "C:\\Users\\USER\\Pictures\\Saved Pictures\\product2-min-100x100.png",
+    "score": 0,
+    "totalEliminations": 0
   }
 ]

@@ -7,6 +7,7 @@ public class User {
       private String securityAnswer;
       private String avatarPath;
       private int score;
+      private int totalEliminations;
       public User(String username, String password, String securityQuestion, String securityAnswer,String avatarPath) {
           this.username = username;
           this.password = password;
@@ -61,5 +62,13 @@ public class User {
 
     public void setAvatarPath(String avatarPath) {
         this.avatarPath = avatarPath;
+    }
+
+    public int getTotalEliminations() {
+        return totalEliminations;
+    }
+
+    public void setTotalEliminations(int totalEliminations) {
+        this.totalEliminations = totalEliminations;
     }
 }
