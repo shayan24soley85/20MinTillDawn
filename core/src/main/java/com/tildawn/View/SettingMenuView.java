@@ -2,6 +2,7 @@ package com.tildawn.View;
 
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.Screen;
+import com.badlogic.gdx.audio.Music;
 import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.scenes.scene2d.*;
@@ -10,6 +11,7 @@ import com.badlogic.gdx.utils.ScreenUtils;
 import com.badlogic.gdx.utils.Timer;
 import com.badlogic.gdx.utils.viewport.ScreenViewport;
 import com.tildawn.Controller.SettingMenuController;
+import com.tildawn.Enums.music;
 import com.tildawn.Main;
 import com.tildawn.Model.Language.Language;
 
@@ -20,7 +22,7 @@ public class SettingMenuView implements Screen {
     private final Skin skin;
     private Label musicLabel ;
     private Label languageLabel ;
-    private SelectBox<String> musicSelect;
+    private SelectBox<music> musicSelect;
 
     private Label volumeLabel ;
     private Slider volumeSlider ;
@@ -52,10 +54,12 @@ public class SettingMenuView implements Screen {
         errorLabel.setWrap(true);
         musicLabel = new Label(com.tildawn.Enums.Label.BACKGROUND_MUSIC.getText(), skin);
          musicSelect = new SelectBox<>(skin);
-        musicSelect.setItems("Calm", "Happy", "Intense");
+        musicSelect.setItems(music.values());
+        musicSelect.setSelected(Main.getMain().getApp().getCurrentMusicPath()==null?music.TURN_OFF:music.fromPath(Main.getMain().getApp().getCurrentMusicPath()));
         this.table = new Table();
          volumeLabel = new Label(com.tildawn.Enums.Label.MUSIC_VOLUME.getText(), skin);
        volumeSlider = new Slider(0f, 1f, 0.01f, false, skin);
+       volumeSlider.setValue(Main.getMain().getApp().getCurrentMusic()==null?1f:Main.getMain().getApp().getCurrentMusic().getVolume());
        language = new SelectBox<>(skin);
        language.setItems("ENGLISH","FRENCH");
         language.setSelected(Main.getMain().getApp().getCurrentLanguage().
@@ -65,7 +69,8 @@ public class SettingMenuView implements Screen {
         this.backButton = new TextButton(com.tildawn.Enums.Label.BACK.getText(), skin);
          sfxToggle = new CheckBox(com.tildawn.Enums.Label.ENABLE_SFX.getText(), skin);
 
-         sfxToggle.setChecked(true);
+         sfxToggle.setChecked(Main.getMain().getApp().getCurrentGame().getSfxToggle());
+
          controlLabel = new Label(com.tildawn.Enums.Label.CHANGE_CONTROLS.getText(), skin);
          setButtons = new TextButton(com.tildawn.Enums.Label.KEYBOARD_SETTING.getText(), skin);
 
@@ -74,6 +79,8 @@ public class SettingMenuView implements Screen {
 
 
          grayscaleToggle = new CheckBox(com.tildawn.Enums.Label.GRAYSCALE_MODE.getText(), skin);
+        autoReload.setChecked(Main.getMain().getApp().getCurrentGame().getAutoReload());
+        grayscaleToggle.setChecked(Main.getMain().getApp().getCurrentGame().getGrayscaleToggle());
     }
 
     @Override
@@ -219,11 +226,11 @@ public class SettingMenuView implements Screen {
         this.musicLabel = musicLabel;
     }
 
-    public SelectBox<String> getMusicSelect() {
+    public SelectBox<music> getMusicSelect() {
         return musicSelect;
     }
 
-    public void setMusicSelect(SelectBox<String> musicSelect) {
+    public void setMusicSelect(SelectBox<music> musicSelect) {
         this.musicSelect = musicSelect;
     }
 

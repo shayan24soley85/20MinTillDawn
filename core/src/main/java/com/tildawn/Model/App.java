@@ -1,5 +1,7 @@
 package com.tildawn.Model;
 
+import com.badlogic.gdx.audio.Music;
+import com.sun.org.apache.bcel.internal.generic.PUSH;
 import com.tildawn.Model.Language.LanguageSetting;
 
 import java.util.HashMap;
@@ -15,6 +17,8 @@ public class App {
     public  HashMap<String, User> getAllUsers() {
         return allUsers;
     }
+    private Music currentMusic;
+    private String currentMusicPath=null;
 
     public Saving getSaving() {
         return saving;
@@ -42,5 +46,21 @@ public class App {
 
     public void setCurrentGame(Game currentGame) {
         this.currentGame = currentGame;
+    }
+
+    public Music getCurrentMusic() {
+        return currentMusic;
+    }
+
+    public void setCurrentMusic(Music currentMusic) {
+        this.currentMusic = currentMusic;
+    }
+
+    public String getCurrentMusicPath() {
+        return currentMusicPath;
+    }
+
+    public void setCurrentMusicPath(String currentMusicPath) {
+        this.currentMusicPath = currentMusicPath;
     }
 }

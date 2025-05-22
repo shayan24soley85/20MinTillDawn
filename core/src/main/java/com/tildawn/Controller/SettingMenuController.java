@@ -1,5 +1,7 @@
 package com.tildawn.Controller;
 
+import com.badlogic.gdx.Gdx;
+import com.badlogic.gdx.audio.Music;
 import com.tildawn.Main;
 import com.tildawn.Model.Game;
 import com.tildawn.Model.GameAssetManager;
@@ -30,7 +32,43 @@ public class SettingMenuController {
                 game.setSfxToggle(view.getSfxToggle().isChecked());
                 game.setGrayscaleToggle(view.getGrayscaleToggle().isChecked());
                 Main.getMain().getApp().getCurrentLanguage().setCurrentLanguage(view.getLanguage().getSelected().equals("ENGLISH")? Language.English:Language.French);
-                //todo music changes !!
+                Music music = Main.getMain().getApp().getCurrentMusic();
+                String selectedPath = view.getMusicSelect().getSelected().getPath();
+
+                if (selectedPath.equals("Stop the music")) {
+                    if (music != null) {
+                        music.stop();
+                        music.dispose();
+                        Main.getMain().getApp().setCurrentMusic(null);
+                        Main.getMain().getApp().setCurrentMusicPath(null);
+                    }
+                } else {
+                    String currentMusicPath = Main.getMain().getApp().getCurrentMusicPath();
+
+
+                    if (music == null || currentMusicPath == null ||
+                        currentMusicPath.equals("Stop the music") ||
+                        !currentMusicPath.equals(selectedPath)) {
+
+
+                        if (music != null) {
+                            music.stop();
+                            music.dispose();
+                        }
+
+
+                        music = Gdx.audio.newMusic(Gdx.files.internal(selectedPath));
+                        music.setLooping(true);
+                        music.setVolume(view.getVolumeSlider().getValue());
+
+                        Main.getMain().getApp().setCurrentMusic(music);
+                        Main.getMain().getApp().setCurrentMusicPath(selectedPath);
+
+                        music.play();
+                    } else {
+                        music.setVolume(view.getVolumeSlider().getValue());
+                    }
+                }
             } else if (view.getSetButtons().isChecked()) {
                 view.getSetButtons().setChecked(false);
                 //todo go to change button menu
