@@ -49,12 +49,12 @@ public class ChangeAvatarMenuView implements Screen {
         controller.setView(this);
         this.skin = skin;
         this.controller = controller;
-        backBtn = new TextButton("back", skin);
-        confirmBtn = new TextButton("confirm", skin);
-         selectFileBtn = new TextButton("custom avatar", skin);
+        backBtn = new TextButton(com.tildawn.Enums.Label.BACK.toString(), skin);
+        confirmBtn = new TextButton(com.tildawn.Enums.Label.CONFIRM.toString(), skin);
+         selectFileBtn = new TextButton(com.tildawn.Enums.Label.CUSTOM_AVATAR.toString(), skin);
         this.table = new Table();
-        nameLabel = new Label("Username: " +user.getUsername(), skin);
-        scoreLabel = new Label("Score: " + user.getScore(), skin);
+        nameLabel = new Label(com.tildawn.Enums.Label.USERNAME +user.getUsername(), skin);
+        scoreLabel = new Label(com.tildawn.Enums.Label.SCORE.toString() + user.getScore(), skin);
         avatarPath=user.getAvatarPath();
         SuccessMessageLabel = new Label("", skin);
         SuccessMessageLabel.setColor(Color.GREEN);
@@ -87,7 +87,7 @@ public class ChangeAvatarMenuView implements Screen {
         root.setFillParent(true);
         root.top();
 
-        Label title = new Label("Select Your Avatar", skin);
+        Label title = new Label(com.tildawn.Enums.Label.SELECT_YOUR_AVATAR.toString(), skin);
         root.add(title).padTop(120).padBottom(30).row();
 
         Table avatarTable = new Table();
@@ -119,7 +119,7 @@ public class ChangeAvatarMenuView implements Screen {
         avatarPreview.setScaling(Scaling.fit);
         avatarPreview.setSize(60, 60);
 
-        root.add(new Label("Preview:", skin)).padBottom(10).row();
+        root.add(new Label(com.tildawn.Enums.Label.PREVIEW.getText(), skin)).padBottom(10).row();
         root.add(avatarPreview).size(60, 60).padBottom(20).row();
 
         root.add(selectFileBtn).padBottom(20).row();

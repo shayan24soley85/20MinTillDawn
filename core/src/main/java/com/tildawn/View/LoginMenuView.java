@@ -32,12 +32,12 @@ public class LoginMenuView implements Screen {
         controller.setView(this);
         this.skin = skin;
 
-        this.signupButton = new TextButton("SignUp", skin);
-        this.RecoveryPassword = new TextButton("Recovery password", skin);
+        this.signupButton = new TextButton(com.tildawn.Enums.Label.SIGN_UP.getText(), skin);
+        this.RecoveryPassword = new TextButton(com.tildawn.Enums.Label.RECOVERY_PASSWORD.getText(), skin);
         this.RecoveryPassword.getLabel().setFontScale(0.4f);
         this.RecoveryPassword.getLabel().setWrap(true);
-        this.loginButton = new TextButton("Login", skin);
-        this.gameTitle = new Label("LOGIN MENU", skin);
+        this.loginButton = new TextButton(com.tildawn.Enums.Label.LOGIN.getText(), skin);
+        this.gameTitle = new Label(com.tildawn.Enums.Label.LOGIN_MENU.getText(), skin);
         this.gameTitle.setColor(Color.GOLD);
         this.username = new TextField("", skin);
         this.password = new TextField("", skin);
@@ -70,11 +70,11 @@ public class LoginMenuView implements Screen {
         table.add(gameTitle).colspan(2).pad(10, 200 , 10 , 0);
         table.row().pad(10, 0 , 10 , 0);
 
-        table.add(new Label("Username:", skin)).left();
+        table.add(new Label(com.tildawn.Enums.Label.USERNAME.getText(), skin)).left();
         table.add(username).width(600);
         table.row().pad(10, 0 , 10 , 0);
 
-        table.add(new Label("Password:", skin)).left();
+        table.add(new Label(com.tildawn.Enums.Label.PASSWORD.getText(), skin)).left();
         table.add(password).width(600);
         table.row().pad(10, 0 , 10 , 0);
 

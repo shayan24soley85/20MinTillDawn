@@ -34,9 +34,9 @@ public class RecoveryPasswordMenu implements Screen {
         controller.setView(this);
         this.skin = skin;
 
-        this.BackButton = new TextButton("Back", skin);
-        this.submitButton = new TextButton("Submit", skin);
-        this.gameTitle = new Label("Recovery password", skin);
+        this.BackButton = new TextButton(com.tildawn.Enums.Label.BACK.getText(), skin);
+        this.submitButton = new TextButton(com.tildawn.Enums.Label.SUBMIT.getText(), skin);
+        this.gameTitle = new Label(com.tildawn.Enums.Label.RECOVERY_PASSWORD.getText(), skin);
         this.question = new Label(user.getSecurityQuestion(), skin);
         this.question.setColor(Color.BLACK);
         this.gameTitle.setColor(Color.GOLD);
@@ -78,16 +78,16 @@ public class RecoveryPasswordMenu implements Screen {
         table.add(question).colspan(2).pad(10, 200 , 10 , 0);
         table.row().pad(10, 0 , 10 , 0);
         table.row();
-        table.add(new Label("New Password:", skin)).left();
+        table.add(new Label(com.tildawn.Enums.Label.NEW_PASSWORD.getText(), skin)).left();
         table.add(password).width(600);
         table.row().pad(10, 0 , 10 , 0);
 
-        table.add(new Label("Confirm Password:", skin)).left();
+        table.add(new Label(com.tildawn.Enums.Label.CONFIRM_PASSWORD.getText(), skin)).left();
         table.add(confirmPassword).width(600);
         table.row().pad(10, 0 , 10 , 0);
 
 
-        table.add(new Label("Security Answer:", skin)).left();
+        table.add(new Label(com.tildawn.Enums.Label.SECURITY_ANSWER.getText(), skin)).left();
         table.add(securityAnswer).width(600);
         table.row().pad(20, 0, 0, 0);
 

@@ -17,9 +17,9 @@ public class PreGameMenuView implements Screen {
     private PreGameMenuController controller;
 
     public PreGameMenuView(PreGameMenuController controller, Skin skin) {
-        this.gameTitle = new Label("Pregame Menu", skin);
+        this.gameTitle = new Label(com.tildawn.Enums.Label.PRE_GAME_MENU.getText(), skin);
         this.selectHero = new SelectBox<>(skin);
-        this.playButton = new TextButton("Play", skin);
+        this.playButton = new TextButton(com.tildawn.Enums.Label.PLAY.getText(), skin);
         this.table = new Table();
         this.controller = controller;
         controller.setView(this);
