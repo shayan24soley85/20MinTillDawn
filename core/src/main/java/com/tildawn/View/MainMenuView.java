@@ -31,6 +31,8 @@ public class MainMenuView implements Screen {
     private TextButton logoutButton ;
     private final Label errorLabel;
     private Timer.Task clearErrorTask;
+    private final Label SuccessMessageLabel;
+    private Timer.Task clearErrorTask2;
 
     private Label nameLabel ;
     private Label scoreLabel ;
@@ -48,11 +50,14 @@ public class MainMenuView implements Screen {
          preGameButton = new TextButton("Pre-Game Menu", skin);
          scoreboardButton = new TextButton("Scoreboard", skin);
          talentButton = new TextButton("Hint Menu", skin);
-         logoutButton = new TextButton("Logout", skin);
+         logoutButton = new TextButton("Logout/Login menu", skin);
 
         errorLabel = new Label("", skin);
         errorLabel.setColor(Color.RED);
         errorLabel.setWrap(true);
+        SuccessMessageLabel = new Label("", skin);
+        SuccessMessageLabel.setColor(Color.GREEN);
+        SuccessMessageLabel.setWrap(true);
     }
 
     @Override
@@ -91,7 +96,7 @@ public class MainMenuView implements Screen {
         topTable.top().left();
 
         Table menuTable = new Table();
-        menuTable.defaults().width(500).height(100).pad(10);
+        menuTable.defaults().width(500).height(90).pad(10);
         menuTable.add(continueButton).row();
         menuTable.add(settingsButton).row();
         menuTable.add(profileButton).row();
@@ -100,9 +105,10 @@ public class MainMenuView implements Screen {
         menuTable.add(talentButton).row();
         menuTable.add(logoutButton).row();
        menuTable.add(errorLabel).row();
+       menuTable.add(SuccessMessageLabel).row();
        //todo  error bad 2 saaniye nmire
 
-        rootTable.top().padTop(30);
+        rootTable.top().padTop(0);
         rootTable.add(topTable).expandX().left().padLeft(20).row();
         rootTable.add(menuTable).expand().center();
         table.row().pad(10, 370, 0, 0);
@@ -135,6 +141,20 @@ public class MainMenuView implements Screen {
             ));
         }
     }
+    public void setSuccessMessage(String message) {
+        SuccessMessageLabel.setText(message);
+        if (clearErrorTask2 != null) {
+            clearErrorTask2.cancel();
+        }
+        clearErrorTask2 = new Timer.Task() {
+            @Override
+            public void run() {
+                SuccessMessageLabel.setText("");
+            }
+        };
+        Timer.schedule(clearErrorTask2, 5);
+    }
+
     @Override
     public void resize(int i, int i1) {
 
@@ -267,5 +287,17 @@ public class MainMenuView implements Screen {
 
     public void setClearErrorTask(Timer.Task clearErrorTask) {
         this.clearErrorTask = clearErrorTask;
+    }
+
+    public Label getSuccessMessageLabel() {
+        return SuccessMessageLabel;
+    }
+
+    public Timer.Task getClearErrorTask2() {
+        return clearErrorTask2;
+    }
+
+    public void setClearErrorTask2(Timer.Task clearErrorTask2) {
+        this.clearErrorTask2 = clearErrorTask2;
     }
 }

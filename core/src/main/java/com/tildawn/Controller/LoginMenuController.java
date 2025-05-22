@@ -1,5 +1,6 @@
 package com.tildawn.Controller;
 
+import com.tildawn.Enums.Message;
 import com.tildawn.Main;
 import com.tildawn.Model.GameAssetManager;
 import com.tildawn.Model.User;
@@ -31,16 +32,16 @@ public class LoginMenuController {
             if(view.getLoginButton().isChecked()){
                 view.getLoginButton().setChecked(false);
                 if (username.isEmpty() || password.isEmpty()) {
-                    view.setErrorMessage("Please fill all the fields");
+                    view.setErrorMessage(Message.PLEASE_FILL_ALL_FIELDS.toString());
                     return;
                 } else if (!Main.getMain().getApp().getAllUsers().containsKey(username)) {
-                    view.setErrorMessage("User not found");
+                    view.setErrorMessage(Message.USER_NOT_FOUND.toString());
                     return;
                 }
                 User user = findUserByUsername(username);
                 assert user != null;
                 if (!user.getPassword().equals(password)) {
-                    view.setErrorMessage("Wrong password");
+                    view.setErrorMessage(Message.WRONG_PASSWORD.toString());
                     return;
                 }
                 Main.getMain().getApp().setCurrentUser(user);
@@ -51,7 +52,7 @@ public class LoginMenuController {
             } else if (view.getRecoveryPasswordButton().isChecked()) {
                 view.getRecoveryPasswordButton().setChecked(false);
                 if (!Main.getMain().getApp().getAllUsers().containsKey(username)) {
-                    view.setErrorMessage("User not found");
+                    view.setErrorMessage(Message.USER_NOT_FOUND.toString());
                     return;
                 }
                 Main.getMain().setScreen(new RecoveryPasswordMenu(new RecoveryPasswordMenuController(), GameAssetManager.getGameAssetManager().getSkin(),findUserByUsername(username)));
