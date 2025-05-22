@@ -12,16 +12,18 @@ public class Character {
     private Weapon weapon;
     private int hp;
     private Boolean isInvincible;
-    private Map<String,Ability> abilities=new HashMap<String,Ability>();
+    private Map<String,Ability> abilities;
+    private int eliminations;
 
 
-    public Character(CharacterType type, Weapon weapon, Map<String, Ability> abilities) {
+    public Character(CharacterType type, Weapon weapon) {
         this.type = type;
         this.weapon = weapon;
-        this.abilities = abilities;
+        abilities = new HashMap<>();
         hp=type.getMaxHp();
         level=1;
         xp=0;
+        eliminations=0;
     }
 
     public CharacterType getType() {
@@ -78,5 +80,13 @@ public class Character {
 
     public void setAbilities(Map<String, Ability> abilities) {
         this.abilities = abilities;
+    }
+
+    public int getEliminations() {
+        return eliminations;
+    }
+
+    public void setEliminations(int eliminations) {
+        this.eliminations = eliminations;
     }
 }

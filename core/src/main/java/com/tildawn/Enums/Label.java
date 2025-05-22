@@ -42,7 +42,10 @@ public enum Label {
     CHANGE_CONTROLS("Change Controls:", "Changer les commandes :"),
     GUEST("Guest", "Invité"),
     SIGNUP_MENU("SIGNUP MENU", "MENU D'INSCRIPTION"),
-    SECURITY_QUESTION("Security Question", "Question de sécurité");
+    SECURITY_QUESTION("Security Question", "Question de sécurité"),
+    SELECT_HERO("Select Hero", "Sélectionner un héros"),
+    SELECT_WEAPON("Select Weapon", "Sélectionner une arme"),
+    SELECT_TIME("Select Time", "Sélectionner la durée");
 
     private final String english;
     private final String french;
