@@ -11,6 +11,7 @@ import com.badlogic.gdx.utils.Timer;
 import com.badlogic.gdx.utils.viewport.ScreenViewport;
 import com.tildawn.Controller.SettingMenuController;
 import com.tildawn.Main;
+import com.tildawn.Model.Language.Language;
 
 public class SettingMenuView implements Screen {
     private Stage stage;
@@ -18,6 +19,7 @@ public class SettingMenuView implements Screen {
     public Table table;
     private final Skin skin;
     private Label musicLabel ;
+    private Label languageLabel ;
     private SelectBox<String> musicSelect;
 
     private Label volumeLabel ;
@@ -31,7 +33,7 @@ public class SettingMenuView implements Screen {
    private TextButton setButtons ;
    private TextButton backButton ;
    private TextButton confirmButton ;
-
+   private final SelectBox<String> language;
 
     private CheckBox autoReload ;
 
@@ -45,6 +47,7 @@ public class SettingMenuView implements Screen {
         controller.setView(this);
         this.skin = skin;
         errorLabel = new Label("", skin);
+        languageLabel = new Label("Game language:", skin);
         errorLabel.setColor(Color.RED);
         errorLabel.setWrap(true);
         musicLabel = new Label("Background Music:", skin);
@@ -53,12 +56,16 @@ public class SettingMenuView implements Screen {
         this.table = new Table();
          volumeLabel = new Label("Music Volume:", skin);
        volumeSlider = new Slider(0f, 1f, 0.01f, false, skin);
+       language = new SelectBox<>(skin);
+       language.setItems("ENGLISH","FRENCH");
+        language.setSelected(Main.getMain().getApp().getCurrentLanguage().
+            getCurrentLanguage().equals(Language.English)?"ENGLISH":"FRENCH");
 
         this.confirmButton = new TextButton("Confirm", skin);
         this.backButton = new TextButton("Back", skin);
          sfxToggle = new CheckBox(" Enable SFX", skin);
 
-
+         sfxToggle.setChecked(true);
          controlLabel = new Label("Change Controls:", skin);
          setButtons = new TextButton("Keyboard setting", skin);
 
@@ -111,11 +118,16 @@ public class SettingMenuView implements Screen {
 
         table.add(grayscaleToggle).padBottom(30).left();
         table.row();
+        table.add(languageLabel).padBottom(20).left();
+        table.row();
+        table.add(language).padBottom(20).width(400);
+        table.row();
         Table buttonRow = new Table();
         buttonRow.add(backButton).padRight(20);
         buttonRow.add(confirmButton);
 
         table.add(buttonRow).padBottom(30);
+
         stage.addActor(table);
     }
 
@@ -293,5 +305,9 @@ public class SettingMenuView implements Screen {
 
     public void setConfirmButton(TextButton confirmButton) {
         this.confirmButton = confirmButton;
+    }
+
+    public SelectBox<String> getLanguage() {
+        return language;
     }
 }

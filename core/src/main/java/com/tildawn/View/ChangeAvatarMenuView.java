@@ -178,48 +178,6 @@ public class ChangeAvatarMenuView implements Screen {
         Timer.schedule(clearErrorTask2, 5);
     }
 
-
-
-    private void confirmAvatarChange() {
-        if (selectedFile != null) {
-            System.out.println("آواتار با فایل خارجی تغییر یافت: " + selectedFile.getAbsolutePath());
-            // در اینجا متد کنترلر برای ذخیره تغییر نهایی را فراخوانی کنید:
-           // controller.confirmAvatar(selectedFile);
-        } else {
-            System.out.println("آواتار از بین آواتارهای داخلی انتخاب شده است");
-            //controller.confirmAvatar(null); // یا شناسه آواتار انتخابی
-        }
-    }
-
-    private void cancelAvatarChange() {
-        // بازگشت به آواتار قبلی (اگر فایل خارجی بود، پیش‌نمایش آواتارهای داخلی یا قبلی)
-        if (selectedTexture != null) {
-            selectedTexture.dispose();
-            selectedTexture = null;
-        }
-        selectedFile = null;
-
-        // بازگردانی پیش‌نمایش به یک آواتار پیش‌فرض (مثلاً AVATAR_1)
-        Texture tex = new Texture(Gdx.files.internal(Avatar.AVATAR_1.getPath()));
-        avatarPreview.setDrawable(new TextureRegionDrawable(new TextureRegion(tex)));
-
-        // پنهان کردن دکمه‌های تایید و لغو
-        for (Actor actor : stage.getActors()) {
-            if (actor instanceof Table) {
-                Table root = (Table) actor;
-                Table buttonsTable = (Table) root.getChildren().get(root.getChildren().size - 1);
-                for (Actor btn : buttonsTable.getChildren()) {
-                    if (btn instanceof TextButton) {
-                        TextButton tb = (TextButton) btn;
-                        if (tb.getText().toString().equals("تایید") || tb.getText().toString().equals("لغو")) {
-                            tb.setVisible(false);
-                        }
-                    }
-                }
-            }
-        }
-    }
-
     @Override
     public void render(float delta) {
         ScreenUtils.clear(0, 0, 0, 1);

@@ -1,5 +1,6 @@
 package com.tildawn.Controller;
 
+import com.tildawn.Enums.Message;
 import com.tildawn.Main;
 import com.tildawn.Model.GameAssetManager;
 import com.tildawn.Model.User;
@@ -28,19 +29,19 @@ public class RecoveryPasswordMenuController {
             } else if (view.getSubmitButton().isChecked()) {
                 view.getSubmitButton().setChecked(false);
                 if(password.isEmpty() || confirmPassword.isEmpty() || securityAnswer.isEmpty()) {
-                    view.setErrorMessage("please fill all the fields");
+                    view.setErrorMessage(Message.PLEASE_FILL_ALL_FIELDS.toString());
                     return;
                 }
                 if(!user.getSecurityAnswer().equals(securityAnswer)) {
-                    view.setErrorMessage("security answer doesn't match");
+                    view.setErrorMessage(Message.SECURITY_ANSWER_WRONG.toString());
                     return;
                 }
                 if(!password.equals(confirmPassword)) {
-                    view.setErrorMessage("Passwords do not match");
+                    view.setErrorMessage(Message.PASSWORDS_DO_NOT_MATCH.toString());
                     return;
                 }
                 if(!SignupMenuController.isStrongPassword(password)) {
-                    view.setErrorMessage("please enter a strong password");
+                    view.setErrorMessage(Message.WEAK_PASSWORD.toString());
                     return;
                 }
                 user.setPassword(password);

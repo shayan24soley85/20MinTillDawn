@@ -7,6 +7,7 @@ import com.badlogic.gdx.scenes.scene2d.Actor;
 import com.badlogic.gdx.scenes.scene2d.ui.Table;
 import com.badlogic.gdx.scenes.scene2d.ui.TextButton;
 import com.badlogic.gdx.scenes.scene2d.utils.TextureRegionDrawable;
+import com.tildawn.Enums.Message;
 import com.tildawn.Main;
 import com.tildawn.Model.GameAssetManager;
 import com.tildawn.View.ChangeAvatarMenuView;
@@ -44,14 +45,12 @@ public class ChangeAvatarMenuController {
         });
     }
 
-    // فعال کردن Drag and Drop روی پنجره LibGDX
     private void enableDragAndDrop() {
         SwingUtilities.invokeLater(() -> {
             java.awt.Window[] windows = java.awt.Window.getWindows();
             for (java.awt.Window window : windows) {
                 if (window.isVisible() && window instanceof java.awt.Frame) {
                     try {
-                        // اعمال DropTarget به پنجره بازی
                         window.setDropTarget(new DropTarget() {
                             @Override
                             public synchronized void drop(DropTargetDropEvent dtde) {
@@ -83,7 +82,6 @@ public class ChangeAvatarMenuController {
         });
     }
 
-    // بارگذاری عکس آواتار از فایل
     public void loadAvatarFromFile(File file) {
         try {
             if (view.getSelectedTexture() != null) view.getSelectedTexture().dispose();
@@ -114,7 +112,6 @@ public class ChangeAvatarMenuController {
         }
     }
 
-    // مدیریت رویدادهای مختلف در منوی تغییر آواتار
     public void handleChangeAvatarMenu() {
         if (view != null) {
             if (view.getBackBtn().isChecked()) {
@@ -127,10 +124,10 @@ public class ChangeAvatarMenuController {
             } else if (view.getConfirmBtn().isChecked()) {
                 view.getConfirmBtn().setChecked(false);
                 if (view.getAvatarPath().equals(view.getUser().getAvatarPath())) {
-                    view.setErrorMessage("you have not choose an avatar yet");
+                    view.setErrorMessage(Message.AVATAR_NOT_CHOSEN.toString());
                     return;
                 }
-                view.setSuccessMessage("you have successfully changed your avatar");
+                view.setSuccessMessage(Message.AVATAR_CHANGED.toString());
                 view.getUser().setAvatarPath(view.getAvatarPath());
                 Main.getMain().getApp().getSaving().saveUserToJson(view.getUser());
             } else if (view.getSelectFileBtn().isChecked()) {

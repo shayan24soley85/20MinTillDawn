@@ -1,5 +1,7 @@
 package com.tildawn.Controller;
 
+import com.badlogic.gdx.utils.Timer;
+import com.tildawn.Enums.Message;
 import com.tildawn.Main;
 import com.tildawn.Model.GameAssetManager;
 import com.tildawn.View.LoginMenuView;
@@ -19,8 +21,13 @@ public class MainMenuController {
            if(view.getLogoutButton().isChecked()){
                Main.getMain().getApp().setCurrentUser(null);
                view.getLogoutButton().setChecked(false);
-               Main.getMain().setScreen(new LoginMenuView
-                   (new LoginMenuController(), GameAssetManager.getGameAssetManager().getSkin()));
+               view.setSuccessMessage(Message.LOGOUT_SUCCESS.toString());
+               Timer.schedule(new Timer.Task() {
+                   @Override
+                   public void run() {
+                       Main.getMain().setScreen(new LoginMenuView(new LoginMenuController(), GameAssetManager.getGameAssetManager().getSkin()));
+                   }
+               }, 5);
            } else if (view.getSettingsButton().isChecked()) {
                view.getLogoutButton().setChecked(false);
                Main.getMain().setScreen(new SettingMenuView
@@ -28,7 +35,7 @@ public class MainMenuController {
            } else if (view.getProfileButton().isChecked()) {
                view.getLogoutButton().setChecked(false);
                if (Main.getMain().getApp().getCurrentUser().getUsername().equals("GUEST")) {
-                   view.setErrorMessage("you have to login first");
+                   view.setErrorMessage(Message.LOGIN_FIRST.toString());
                    return;
                }
                Main.getMain().setScreen(new ProfileMenuView

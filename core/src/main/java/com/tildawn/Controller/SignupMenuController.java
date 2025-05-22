@@ -1,6 +1,7 @@
 package com.tildawn.Controller;
 
 import com.tildawn.Enums.Avatar;
+import com.tildawn.Enums.Message;
 import com.tildawn.Main;
 import com.tildawn.Model.GameAssetManager;
 import com.tildawn.Model.User;
@@ -55,17 +56,17 @@ public class SignupMenuController {
                 view.getSignupButton().setChecked(false);
                 if(password.isEmpty() ||username.isEmpty()||confirmPassword.isEmpty()
                     ||answer.isEmpty()) {
-                    view.setErrorMessage("Please fill all the fields");
+                    view.setErrorMessage(Message.PLEASE_FILL_ALL_FIELDS.toString());
                     return;
                 }
                 else if (!password.equals(confirmPassword)) {
-                    view.setErrorMessage("Passwords do not match!");
+                    view.setErrorMessage(Message.PASSWORDS_DO_NOT_MATCH.toString());
                     return;
                 } else if (!isStrongPassword(password)) {
-                    view.setErrorMessage("you must enter a strong password!");
+                    view.setErrorMessage(Message.WRONG_PASSWORD.toString());
                     return;
                 } if (!userIsValid(username)) {
-                    view.setErrorMessage("this username is already in use!");
+                    view.setErrorMessage(Message.USERNAME_ALREADY_IN_USE.toString());
                     return;
 
                 }else {
