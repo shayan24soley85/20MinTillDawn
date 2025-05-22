@@ -9,10 +9,7 @@ import com.badlogic.gdx.scenes.scene2d.ui.*;
 import com.badlogic.gdx.utils.ScreenUtils;
 import com.badlogic.gdx.utils.Timer;
 import com.badlogic.gdx.utils.viewport.ScreenViewport;
-import com.tildawn.Controller.LoginMenuController;
 import com.tildawn.Controller.RecoveryPasswordMenuController;
-import com.tildawn.Controller.SignupMenuController;
-import com.tildawn.Enums.Avatar;
 import com.tildawn.Main;
 import com.tildawn.Model.User;
 

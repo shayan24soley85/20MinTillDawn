@@ -10,7 +10,6 @@ import com.badlogic.gdx.utils.ScreenUtils;
 import com.badlogic.gdx.utils.Timer;
 import com.badlogic.gdx.utils.viewport.ScreenViewport;
 import com.tildawn.Controller.LoginMenuController;
-import com.tildawn.Controller.SignupMenuController;
 import com.tildawn.Main;
 
 public class LoginMenuView implements Screen {

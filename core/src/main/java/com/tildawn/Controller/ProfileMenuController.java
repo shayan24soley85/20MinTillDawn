@@ -65,7 +65,7 @@ public class ProfileMenuController {
                 }, 5);
             } else if (view.getChangeProfileButton().isChecked()) {
                 view.getChangeProfileButton().setChecked(false);
-                Main.getMain().setScreen(new ChangeAvatarMenuView(new changeAvatarMenuController(), GameAssetManager.getGameAssetManager().getSkin()));
+                Main.getMain().setScreen(new ChangeAvatarMenuView(new ChangeAvatarMenuController(), GameAssetManager.getGameAssetManager().getSkin()));
 
             }
         }
