@@ -1,5 +1,8 @@
 package com.tildawn.Model;
 
+import com.badlogic.gdx.Gdx;
+import com.badlogic.gdx.graphics.Texture;
+import com.badlogic.gdx.graphics.g2d.Sprite;
 import com.tildawn.Enums.CharacterType;
 
 import java.util.HashMap;
@@ -14,8 +17,14 @@ public class Character {
     private Boolean isInvincible;
     private Map<String,Ability> abilities;
     private int eliminations;
-
-
+    private float posX;
+    private float posY;
+    private Texture playerTexture = new Texture(GameAssetManager.getGameAssetManager().getCharacter1_idle0());
+    private Sprite playerSprite = new Sprite(playerTexture);
+    private boolean isPlayerIdle = true;
+    private boolean isPlayerRunning = false;
+    private float time = 0;
+    private CollisionRect rect ;
     public Character(CharacterType type, Weapon weapon) {
         this.type = type;
         this.weapon = weapon;
@@ -24,6 +33,41 @@ public class Character {
         level=1;
         xp=0;
         eliminations=0;
+        playerSprite.setPosition((float) Gdx.graphics.getWidth() / 2, (float) Gdx.graphics.getHeight() / 2);
+        playerSprite.setSize(playerTexture.getWidth() * 3, playerTexture.getHeight() * 3);
+        rect = new CollisionRect((float) Gdx.graphics.getWidth() / 2, (float) Gdx.graphics.getHeight(), playerTexture.getWidth() * 3, playerTexture.getHeight() * 3);
+    }
+
+    public CollisionRect getRect() {
+        return rect;
+    }
+
+    public void setRect(CollisionRect rect) {
+        this.rect = rect;
+    }
+
+    public boolean isPlayerIdle() {
+        return isPlayerIdle;
+    }
+
+    public void setPlayerIdle(boolean playerIdle) {
+        isPlayerIdle = playerIdle;
+    }
+
+    public boolean isPlayerRunning() {
+        return isPlayerRunning;
+    }
+
+    public void setPlayerRunning(boolean playerRunning) {
+        isPlayerRunning = playerRunning;
+    }
+
+    public float getTime() {
+        return time;
+    }
+
+    public void setTime(float time) {
+        this.time = time;
     }
 
     public CharacterType getType() {
@@ -88,5 +132,37 @@ public class Character {
 
     public void setEliminations(int eliminations) {
         this.eliminations = eliminations;
+    }
+
+    public float getPosX() {
+        return posX;
+    }
+
+    public void setPosX(float posX) {
+        this.posX = posX;
+    }
+
+    public float getPosY() {
+        return posY;
+    }
+
+    public void setPosY(float posY) {
+        this.posY = posY;
+    }
+
+    public Texture getPlayerTexture() {
+        return playerTexture;
+    }
+
+    public void setPlayerTexture(Texture playerTexture) {
+        this.playerTexture = playerTexture;
+    }
+
+    public Sprite getPlayerSprite() {
+        return playerSprite;
+    }
+
+    public void setPlayerSprite(Sprite playerSprite) {
+        this.playerSprite = playerSprite;
     }
 }

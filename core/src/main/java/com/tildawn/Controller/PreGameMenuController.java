@@ -4,6 +4,7 @@ import com.tildawn.Main;
 import com.tildawn.Model.Character;
 import com.tildawn.Model.GameAssetManager;
 import com.tildawn.Model.Weapon;
+import com.tildawn.View.GameView;
 import com.tildawn.View.MainMenuView;
 import com.tildawn.View.PreGameMenuView;
 
@@ -13,13 +14,6 @@ public class PreGameMenuController {
 
     public void setView(PreGameMenuView view) {
         this.view = view;
-    }
-
-    public void handlePreGameMenuButtons() {
-        if (view != null) {
-            Main.getMain().getScreen().dispose();
-            //Main.getMain().setScreen(new GameView(new GameController(), GameAssetManager.getGameAssetManager().getSkin()));
-        }
     }
 
     public PreGameMenuView getView() {
@@ -37,6 +31,7 @@ public class PreGameMenuController {
                 Main.getMain().getApp().getCurrentGame().setGameTime(view.getTimeSelect().getSelected());
                 Main.getMain().getApp().getCurrentGame().setCharacter(character);
                 //todo  create map  & start game
+                Main.getMain().setScreen(new GameView(new GameController(), GameAssetManager.getGameAssetManager().getSkin()));
             }
         }
     }

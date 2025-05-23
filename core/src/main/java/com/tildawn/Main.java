@@ -1,21 +1,18 @@
 package com.tildawn;
 
-import com.badlogic.gdx.ApplicationAdapter;
 import com.badlogic.gdx.Game;
 import com.badlogic.gdx.Gdx;
-import com.badlogic.gdx.Input;
-import com.badlogic.gdx.graphics.GL20;
+import com.badlogic.gdx.graphics.Cursor;
+import com.badlogic.gdx.graphics.Pixmap;
 import com.badlogic.gdx.graphics.Texture;
+import com.badlogic.gdx.graphics.g2d.BitmapFont;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
-import com.badlogic.gdx.utils.ScreenUtils;
-import com.tildawn.Controller.MainMenuController;
-import com.tildawn.Controller.PreGameMenuController;
+
+import com.badlogic.gdx.graphics.g2d.freetype.FreeTypeFontGenerator;
 import com.tildawn.Controller.SignupMenuController;
 import com.tildawn.Model.App;
 import com.tildawn.Model.GameAssetManager;
 import com.tildawn.Model.Language.LanguageSetting;
-import com.tildawn.View.MainMenuView;
-import com.tildawn.View.PreGameMenuView;
 import com.tildawn.View.SignupMenuView;
 
 /** {@link com.badlogic.gdx.ApplicationListener} implementation shared by all platforms. */
@@ -32,6 +29,11 @@ public class Main extends Game {
         app = new App();
         app.setCurrentLanguage(new LanguageSetting());
         app.run();
+        Pixmap pixmap = new Pixmap(Gdx.files.internal("corsur.png"));
+        Cursor customCursor = Gdx.graphics.newCursor(pixmap, 0, 0);
+        Gdx.graphics.setCursor(customCursor);
+        pixmap.dispose();
+
         Main.getMain().setScreen(new SignupMenuView(new SignupMenuController(), GameAssetManager.getGameAssetManager().getSkin()));
     }
 
