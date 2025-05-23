@@ -37,7 +37,33 @@ public class Character {
         playerSprite.setSize(playerTexture.getWidth() * 3, playerTexture.getHeight() * 3);
         rect = new CollisionRect((float) Gdx.graphics.getWidth() / 2, (float) Gdx.graphics.getHeight(), playerTexture.getWidth() * 3, playerTexture.getHeight() * 3);
     }
-
+    public int xpToNextLevel() {
+        return level*20;
+    }
+    public int maxLevelXp(){
+        if(level==1){
+            return 0;
+        } else if (level==2) {
+            return 20;
+        }else if (level==3) {
+            return 60;
+        }else if (level==4) {
+           return  120;
+        } else if (level==5) {
+            return 200;
+        }else if (level==6) {
+            return 300;
+        }else if (level==7) {
+            return 420;
+        }else if (level==8) {
+            return 560;
+        }else if (level==9) {
+            return 720;
+        }else if (level==10) {
+            return 900;
+        }
+        return level*100;
+    }
     public CollisionRect getRect() {
         return rect;
     }

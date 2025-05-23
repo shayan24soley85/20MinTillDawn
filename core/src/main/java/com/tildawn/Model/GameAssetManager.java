@@ -25,8 +25,7 @@ public class GameAssetManager {
     private final Texture character1_idle5_tex = new Texture(character1_idle5);
     private final Animation<Texture> character1_idle_frames = new Animation<>(0.1f, character1_idle0_tex, character1_idle1_tex, character1_idle2_tex, character1_idle3_tex, character1_idle4_tex, character1_idle5_tex);
 
-    private final String smg = "smg/SMGStill.png";
-    private final Texture smgTexture = new Texture(smg);
+
 
     private final String bullet = "bullet.png";
 
@@ -88,13 +87,7 @@ public class GameAssetManager {
         return character1_idle0;
     }
 
-    public Texture getSmgTexture(){
-        return smgTexture;
-    }
 
-    public String getSmg(){
-        return smg;
-    }
 
     public String getBullet(){
         return bullet;

@@ -15,7 +15,6 @@ public class User {
           this.securityAnswer = securityAnswer;
           this.avatarPath = avatarPath;
       }
-
     public String getUsername() {
         return username;
     }
