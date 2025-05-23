@@ -5,11 +5,10 @@ import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.graphics.Cursor;
 import com.badlogic.gdx.graphics.Pixmap;
 import com.badlogic.gdx.graphics.Texture;
-import com.badlogic.gdx.graphics.g2d.BitmapFont;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 
-import com.badlogic.gdx.graphics.g2d.freetype.FreeTypeFontGenerator;
 import com.tildawn.Controller.SignupMenuController;
+import com.tildawn.Enums.SFX;
 import com.tildawn.Model.App;
 import com.tildawn.Model.GameAssetManager;
 import com.tildawn.Model.Language.LanguageSetting;
@@ -33,7 +32,9 @@ public class Main extends Game {
         Cursor customCursor = Gdx.graphics.newCursor(pixmap, 0, 0);
         Gdx.graphics.setCursor(customCursor);
         pixmap.dispose();
-
+        for(SFX sfx:SFX.values()) {
+            sfx.load();
+        }
         Main.getMain().setScreen(new SignupMenuView(new SignupMenuController(), GameAssetManager.getGameAssetManager().getSkin()));
     }
 

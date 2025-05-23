@@ -4,6 +4,7 @@ import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.graphics.g2d.Sprite;
 import com.badlogic.gdx.math.MathUtils;
 import com.badlogic.gdx.math.Vector2;
+import com.tildawn.Enums.SFX;
 import com.tildawn.Main;
 import com.tildawn.Model.Bullet;
 import com.tildawn.Model.Weapon;
@@ -36,6 +37,7 @@ public class WeaponController {
 
     public void handleWeaponShoot(int x, int y){
         bullets.add(new Bullet(x, y));
+        SFX.SHOOT.play();
         weapon.setAmmo(weapon.getAmmo() - 1);
     }
 
