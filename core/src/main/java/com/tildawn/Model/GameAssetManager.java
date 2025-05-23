@@ -37,31 +37,31 @@ public class GameAssetManager {
         parameter.size = 28;
         BitmapFont font = generator.generateFont(parameter);
         skin.add("default", font);
-        // Label
+
         Label.LabelStyle labelStyle = new Label.LabelStyle();
         labelStyle.font = font;
         skin.add("default", labelStyle);
 
-// TextButton
+
         TextButton.TextButtonStyle textButtonStyle = skin.get(TextButton.TextButtonStyle.class);
         textButtonStyle.font = font;
         skin.add("default", textButtonStyle);
 
-// TextField
+
         TextField.TextFieldStyle textFieldStyle = skin.get(TextField.TextFieldStyle.class);
         textFieldStyle.font = font;
         skin.add("default", textFieldStyle);
 
-// ScrollPane
-        ScrollPane.ScrollPaneStyle scrollPaneStyle = skin.get(ScrollPane.ScrollPaneStyle.class);
-// ScrollPane خودش فونت نداره ولی داخلش معمولاً از Label یا TextField استفاده میشه
 
-// List (مثلاً لیست‌ها که فونت دارن)
+        ScrollPane.ScrollPaneStyle scrollPaneStyle = skin.get(ScrollPane.ScrollPaneStyle.class);
+
+
+
         List.ListStyle listStyle = skin.get(List.ListStyle.class);
         listStyle.font = font;
         skin.add("default", listStyle);
 
-// SelectBox
+
         SelectBox.SelectBoxStyle selectBoxStyle = skin.get(SelectBox.SelectBoxStyle.class);
         selectBoxStyle.font = font;
         skin.add("default", selectBoxStyle);
