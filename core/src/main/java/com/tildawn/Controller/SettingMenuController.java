@@ -2,6 +2,7 @@ package com.tildawn.Controller;
 
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.audio.Music;
+import com.tildawn.Enums.SFX;
 import com.tildawn.Main;
 import com.tildawn.Model.Game;
 import com.tildawn.Model.GameAssetManager;
@@ -30,6 +31,20 @@ public class SettingMenuController {
                 Game game=Main.getMain().getApp().getCurrentGame();
                 game.setAutoReload(view.getAutoReload().isChecked());
                 game.setSfxToggle(view.getSfxToggle().isChecked());
+                if(view.getSfxToggle().isChecked()){
+                    for(SFX sfx:SFX.values()){
+                        sfx.load();
+                    }
+                }else {
+                    for(SFX sfx:SFX.values()){
+                        sfx.dispose();
+                    }
+                }
+                game.setGrayscaleToggle(view.getGrayscaleToggle().isChecked());
+
+                Main.getBatch().setShader(view.getGrayscaleToggle().isChecked()
+                    ? Main.getMain().getGrayscaleShader()
+                    : null);
                 game.setGrayscaleToggle(view.getGrayscaleToggle().isChecked());
                 Main.getMain().getApp().getCurrentLanguage().setCurrentLanguage(view.getLanguage().getSelected().equals("ENGLISH")? Language.English:Language.French);
                 Music music = Main.getMain().getApp().getCurrentMusic();
