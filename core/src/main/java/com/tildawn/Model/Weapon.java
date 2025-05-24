@@ -9,6 +9,7 @@ public class Weapon {
     private Sprite sprite;
     private int ammo ;
     private WeaponType type;
+    private boolean isReloading = false;
 
     public Weapon(WeaponType type){
         this.type = type;
@@ -43,5 +44,13 @@ public class Weapon {
 
     public void setType(WeaponType type) {
         this.type = type;
+    }
+
+    public boolean isReloading() {
+        return isReloading;
+    }
+
+    public void setReloading(boolean reloading) {
+        isReloading = reloading;
     }
 }

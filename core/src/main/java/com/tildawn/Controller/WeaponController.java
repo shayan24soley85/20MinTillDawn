@@ -1,9 +1,11 @@
 package com.tildawn.Controller;
 
 import com.badlogic.gdx.Gdx;
+import com.badlogic.gdx.Input;
 import com.badlogic.gdx.graphics.g2d.Sprite;
 import com.badlogic.gdx.math.MathUtils;
 import com.badlogic.gdx.math.Vector2;
+import com.tildawn.Enums.Message;
 import com.tildawn.Enums.SFX;
 import com.tildawn.Main;
 import com.tildawn.Model.Bullet;
@@ -12,15 +14,34 @@ import com.tildawn.Model.Weapon;
 import java.util.ArrayList;
 
 public class WeaponController {
+    private long reloadStartTime = 0;
+    private boolean isReloadingScheduled = false;
+
     private Weapon weapon;
     private ArrayList<Bullet> bullets = new ArrayList<>();
 
     public WeaponController(Weapon weapon){
         this.weapon = weapon;
     }
-
+    public void handlePlayerInput(){
+        if (Gdx.input.isKeyPressed(Input.Keys.R) && !weapon.isReloading() && !isReloadingScheduled) {
+            Main.getMain().getApp().getCurrentGame().getGameView().setErrorMessage(Message.RELOADING.getText());
+            SFX.RELOAD.play();
+            weapon.setReloading(true);
+            isReloadingScheduled = true;
+            reloadStartTime = System.currentTimeMillis();
+        }
+    }
     public void update(){
+        if (isReloadingScheduled) {
+            if (System.currentTimeMillis() - reloadStartTime >= 2000) {
+                weapon.setAmmo(weapon.getType().getMaxAmmo());
+                weapon.setReloading(false);
+                isReloadingScheduled = false;
+            }
+        }
         weapon.getSprite().draw(Main.getBatch());
+        handlePlayerInput();
         updateBullets();
     }
 
@@ -36,10 +57,31 @@ public class WeaponController {
     }
 
     public void handleWeaponShoot(int x, int y){
+        if (weapon.isReloading() || isReloadingScheduled) {
+            SFX.NEED_AMMO.play();
+            Main.getMain().getApp().getCurrentGame().getGameView().setErrorMessage(Message.CANT_SHOOT_WHILE_RELOADING.getText());
+            return;
+        }
+
+        if (weapon.getAmmo() <= 0) {
+            if (Main.getMain().getApp().getCurrentGame().getAutoReload()) {
+                weapon.setReloading(true);
+                isReloadingScheduled = true;
+                reloadStartTime = System.currentTimeMillis();
+                Main.getMain().getApp().getCurrentGame().getGameView().setErrorMessage(Message.RELOADING.getText());
+                SFX.RELOAD.play();
+            } else {
+                SFX.NEED_AMMO.play();
+                Main.getMain().getApp().getCurrentGame().getGameView().setErrorMessage(Message.NO_AMMO.getText());
+            }
+            return;
+        }
+
         bullets.add(new Bullet(x, y));
         SFX.SHOOT.play();
         weapon.setAmmo(weapon.getAmmo() - 1);
     }
+
 
     public void updateBullets() {
         for(Bullet b : bullets) {

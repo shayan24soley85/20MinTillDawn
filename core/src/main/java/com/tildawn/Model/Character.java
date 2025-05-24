@@ -4,6 +4,7 @@ import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.Sprite;
 import com.tildawn.Enums.CharacterType;
+import com.tildawn.Enums.SFX;
 
 import java.util.HashMap;
 import java.util.Map;
@@ -37,9 +38,20 @@ public class Character {
         playerSprite.setSize(playerTexture.getWidth() * 3, playerTexture.getHeight() * 3);
         rect = new CollisionRect((float) Gdx.graphics.getWidth() / 2, (float) Gdx.graphics.getHeight(), playerTexture.getWidth() * 3, playerTexture.getHeight() * 3);
     }
-    public int xpToNextLevel() {
+    public int xpToNextLevel(int level) {
         return level*20;
     }
+
+   public boolean increaseXp(int amount) {
+        xp+=amount;
+        if(xp>=maxLevelXp()+xpToNextLevel(level)){
+            level++;
+            SFX.LEVEL.play();
+            return true;
+        }
+        return false;
+   }
+
     public int maxLevelXp(){
         if(level==1){
             return 0;
@@ -61,8 +73,16 @@ public class Character {
             return 720;
         }else if (level==10) {
             return 900;
+        } else if (level==11) {
+            return 1100;
+        } else if (level==12) {
+            return 1320;
+        } else if (level==13) {
+            return 1560;
+        } else if (level==14) {
+            return 1820;
         }
-        return level*100;
+        return 2000;
     }
     public CollisionRect getRect() {
         return rect;

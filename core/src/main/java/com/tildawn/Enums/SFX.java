@@ -4,8 +4,12 @@ import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.audio.Sound;
 
 public enum SFX {
-    SHOOT("sfx/single_shot.wav");
-//    RELOAD("sfx/reload.wav"),
+    SHOOT("sfx/single_shot.wav"),
+    RELOAD("sfx/Weapon_Shotgun_Reload.wav"),
+    FOOT_STEP("sfx/Footsteps_Casual_Grass_02.wav"),
+    CLICK_BUTTON("sfx/UI Click 36.wav"),
+    NEED_AMMO("sfx/empty-gun-shot-6209 (1).mp3"),
+    LEVEL("sfx/game-level-complete-143022.mp3");
 //    EXPLOSION("sfx/explosion.wav"),
 //    BUTTON_CLICK("sfx/button_click.wav");
 
@@ -17,7 +21,6 @@ public enum SFX {
     }
 
     public void load() {
-        if (sound == null)
             sound = Gdx.audio.newSound(Gdx.files.internal(path));
     }
 

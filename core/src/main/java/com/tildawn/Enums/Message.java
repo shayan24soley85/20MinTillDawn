@@ -20,7 +20,10 @@ public enum Message {
     PASSWORD_CHANGED("You successfully changed password", "Vous avez changé votre mot de passe avec succès"),
     SECURITY_ANSWER_WRONG("Security answer doesn't match", "La réponse de sécurité ne correspond pas"),
     AVATAR_NOT_CHOSEN("You have not choose an avatar yet", "Vous n'avez pas encore choisi d'avatar"),
-    AVATAR_CHANGED("You have successfully changed your avatar", "Vous avez changé votre avatar avec succès");
+    AVATAR_CHANGED("You have successfully changed your avatar", "Vous avez changé votre avatar avec succès"),
+    CANT_SHOOT_WHILE_RELOADING("You can't shoot while reloading!", "Vous ne pouvez pas tirer pendant le rechargement!"),
+    RELOADING("Reloading!", "Rechargement!"),
+    NO_AMMO("You don't have enough ammo", "Vous n'avez pas assez de munitions");
 
     private final String english;
     private final String french;
