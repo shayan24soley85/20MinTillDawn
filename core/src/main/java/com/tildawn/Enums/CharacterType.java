@@ -26,4 +26,10 @@ public enum CharacterType {
     public String getName() {
         return name;
     }
+
+
+    public String print() {
+        return "\nmaxHp=" + maxHp +
+            "\nspeed=" + speed ;
+    }
 }

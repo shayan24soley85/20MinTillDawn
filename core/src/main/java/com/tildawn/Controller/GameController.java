@@ -6,6 +6,7 @@ import com.badlogic.gdx.Input;
 import com.tildawn.Controller.MapController;
 import com.tildawn.Controller.PlayerController;
 import com.tildawn.Controller.WeaponController;
+import com.tildawn.Enums.Message;
 import com.tildawn.Main;
 import com.tildawn.Model.Character;
 import com.tildawn.Model.GameAssetManager;
@@ -39,14 +40,19 @@ public class GameController {
                 boolean levelIncreased=character.increaseXp
                     (character.xpToNextLevel(character.getLevel())+character.maxLevelXp()-character.getXp());
                 if (levelIncreased){
-
+//todo ability menu
                 }
             }
             else if (Gdx.input.isKeyJustPressed(Input.Keys.C)) {
-
+                // cheat code  delkhaah khodm
+                playerController.getPlayer().getWeapon().setAmmo(10000);
             }
             else if (Gdx.input.isKeyJustPressed(Input.Keys.V)) {
-
+                 if(playerController.getPlayer().getHp()>=playerController.getPlayer().getType().getMaxHp()){
+                     Main.getMain().getApp().getCurrentGame().getGameView().setErrorMessage(Message.YOUR_HP_IS_MAX.getText());
+                     return;
+                 }
+                 playerController.getPlayer().setHp(playerController.getPlayer().getType().getMaxHp());
             }
             else if (Gdx.input.isKeyJustPressed(Input.Keys.B)) {
 

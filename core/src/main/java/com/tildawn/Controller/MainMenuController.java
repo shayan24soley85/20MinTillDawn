@@ -46,6 +46,11 @@ public class MainMenuController {
                view.getPreGameButton().setChecked(false);
                Main.getMain().setScreen(new PreGameMenuView
                    (new PreGameMenuController(), GameAssetManager.getGameAssetManager().getSkin()));
+           } else if (view.getTalentButton().isChecked()) {
+               SFX.CLICK_BUTTON.play();
+               view.getTalentButton().setChecked(false);
+               Main.getMain().setScreen(new TalentMenuView
+                   (new TalentMenuController(), GameAssetManager.getGameAssetManager().getSkin()));
            }
         }
     }

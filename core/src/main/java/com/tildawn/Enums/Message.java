@@ -23,7 +23,8 @@ public enum Message {
     AVATAR_CHANGED("You have successfully changed your avatar", "Vous avez changé votre avatar avec succès"),
     CANT_SHOOT_WHILE_RELOADING("You can't shoot while reloading!", "Vous ne pouvez pas tirer pendant le rechargement!"),
     RELOADING("Reloading!", "Rechargement!"),
-    NO_AMMO("You don't have enough ammo", "Vous n'avez pas assez de munitions");
+    NO_AMMO("You don't have enough ammo", "Vous n'avez pas assez de munitions"),
+    YOUR_HP_IS_MAX("Your HP is in the max limit", "Votre santé est au maximum");
 
     private final String english;
     private final String french;
