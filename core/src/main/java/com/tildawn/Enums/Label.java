@@ -73,7 +73,9 @@ public enum Label {
     ABILITY_4("Increase weapon projectile count by 1", "Augmente le nombre de projectiles de l’arme de 1"),
     ABILITY_5("Increase maximum ammo by 5", "Augmente les munitions max de 5"),
     MAXHP("MAXHP", "PV MAX"),
-    SPEED("SPEED", "VITESSE");
+    SPEED("SPEED", "VITESSE"),
+    REACHED_LEVEL("YOU REACHED LEVEL: ", "VOUS AVEZ ATTEINT LE NIVEAU : "),
+    CHOOSE_ABILITY("CHOOSE ONE OF THE ABILITIES", "CHOISISSEZ UNE DES CAPACITÉS");
 
     private final String english;
     private final String french;

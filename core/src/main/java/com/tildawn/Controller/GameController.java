@@ -12,6 +12,7 @@ import com.tildawn.Model.Character;
 import com.tildawn.Model.GameAssetManager;
 import com.tildawn.Model.Weapon;
 import com.tildawn.View.ChangeAvatarMenuView;
+import com.tildawn.View.ChooseAbilityView;
 import com.tildawn.View.GameView;
 import com.tildawn.View.PauseMenuView;
 
@@ -40,7 +41,7 @@ public class GameController {
                 boolean levelIncreased=character.increaseXp
                     (character.xpToNextLevel(character.getLevel())+character.maxLevelXp()-character.getXp());
                 if (levelIncreased){
-//todo ability menu
+                    Main.getMain().setScreen(new ChooseAbilityView(new ChooseAbilityController(), GameAssetManager.getGameAssetManager().getSkin()));
                 }
             }
             else if (Gdx.input.isKeyJustPressed(Input.Keys.C)) {

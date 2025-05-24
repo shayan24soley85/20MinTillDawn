@@ -1,6 +1,10 @@
 package com.tildawn.Enums;
 
 import com.badlogic.gdx.graphics.Texture;
+import com.tildawn.Main;
+import com.tildawn.Model.Character;
+
+import java.util.HashMap;
 
 public enum WeaponType {
     shotgun(2,10,1,4,new Texture("Texture2D/T/T_DualShotgun_Gun.png")),
@@ -24,11 +28,20 @@ public enum WeaponType {
     }
 
     public int getMaxAmmo() {
-        return maxAmmo;
+        Character character= Main.getMain().getApp().getCurrentGame().getCharacter();
+        if (character==null){
+            return maxAmmo;
+        }
+        return character.getAbilities().containsKey(AbilityType.AMOCREASE)&&character.getAbilities().get(AbilityType.AMOCREASE).isEnabled()?maxAmmo+5:maxAmmo;
     }
 
     public int getDamage() {
-        return damage;
+
+        Character character= Main.getMain().getApp().getCurrentGame().getCharacter();
+        if (character==null){
+            return damage;
+        }
+        return character.getAbilities().containsKey(AbilityType.DAMAGER)&&character.getAbilities().get(AbilityType.DAMAGER).isEnabled()?(int)(damage*1.25):damage;
     }
 
     public int getReloadTime() {
@@ -36,6 +49,11 @@ public enum WeaponType {
     }
 
     public int getProjectTile() {
-        return projectTile;
+
+        Character character= Main.getMain().getApp().getCurrentGame().getCharacter();
+        if (character==null){
+            return projectTile;
+        }
+        return character.getAbilities().containsKey(AbilityType.PROCREASE)&&character.getAbilities().get(AbilityType.PROCREASE).isEnabled()?projectTile+1:projectTile;
     }
 }
