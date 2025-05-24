@@ -1,6 +1,7 @@
 package com.tildawn.Controller;
 
 import com.tildawn.Enums.Message;
+import com.tildawn.Enums.SFX;
 import com.tildawn.Main;
 import com.tildawn.Model.GameAssetManager;
 import com.tildawn.Model.User;
@@ -23,10 +24,12 @@ public class RecoveryPasswordMenuController {
             String confirmPassword=view.getConfirmPassword().getText();
             String securityAnswer=view.getSecurityAnswer();
             if(view.getBackButton().isChecked()){
+                SFX.CLICK_BUTTON.play();
                 view.getBackButton().setChecked(false);
                 Main.getMain().setScreen(new LoginMenuView(new LoginMenuController()
                     , GameAssetManager.getGameAssetManager().getSkin()));
             } else if (view.getSubmitButton().isChecked()) {
+                SFX.CLICK_BUTTON.play();
                 view.getSubmitButton().setChecked(false);
                 if(password.isEmpty() || confirmPassword.isEmpty() || securityAnswer.isEmpty()) {
                     view.setErrorMessage(Message.PLEASE_FILL_ALL_FIELDS.toString());

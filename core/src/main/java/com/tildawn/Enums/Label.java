@@ -45,7 +45,12 @@ public enum Label {
     SECURITY_QUESTION("Security Question", "Question de sécurité"),
     SELECT_HERO("Select Hero", "Sélectionner un héros"),
     SELECT_WEAPON("Select Weapon", "Sélectionner une arme"),
-    SELECT_TIME("Select Time", "Sélectionner la durée");
+    SELECT_TIME("Select Time", "Sélectionner la durée"),
+    AMMO("Ammo:", "Munitions:"),
+    KILLS("Kills:", "Tues:"),
+    HP("HP:", "PV:"),
+    LEVEL("Level:", "Niveau:"),
+    TIME("Time:", "Temps:");
 
     private final String english;
     private final String french;

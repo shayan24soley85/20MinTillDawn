@@ -2,6 +2,7 @@ package com.tildawn.Controller;
 
 import com.badlogic.gdx.utils.Timer;
 import com.tildawn.Enums.Message;
+import com.tildawn.Enums.SFX;
 import com.tildawn.Main;
 import com.tildawn.Model.GameAssetManager;
 import com.tildawn.View.*;
@@ -16,6 +17,7 @@ public class MainMenuController {
     public void handleMainMenuButtons() {
         if (view != null) {
            if(view.getLogoutButton().isChecked()){
+               SFX.CLICK_BUTTON.play();
                Main.getMain().getApp().setCurrentUser(null);
                view.getLogoutButton().setChecked(false);
                view.setSuccessMessage(Message.LOGOUT_SUCCESS.toString());
@@ -26,11 +28,13 @@ public class MainMenuController {
                    }
                }, 5);
            } else if (view.getSettingsButton().isChecked()) {
-               view.getLogoutButton().setChecked(false);
+               SFX.CLICK_BUTTON.play();
+               view.getSettingsButton().setChecked(false);
                Main.getMain().setScreen(new SettingMenuView
                    (new SettingMenuController(), GameAssetManager.getGameAssetManager().getSkin()));
            } else if (view.getProfileButton().isChecked()) {
-               view.getLogoutButton().setChecked(false);
+               SFX.CLICK_BUTTON.play();
+               view.getProfileButton().setChecked(false);
                if (Main.getMain().getApp().getCurrentUser().getUsername().equals("GUEST")) {
                    view.setErrorMessage(Message.LOGIN_FIRST.toString());
                    return;
@@ -38,7 +42,8 @@ public class MainMenuController {
                Main.getMain().setScreen(new ProfileMenuView
                    (new ProfileMenuController(), GameAssetManager.getGameAssetManager().getSkin()));
            } else if (view.getPreGameButton().isChecked()) {
-               view.getLogoutButton().setChecked(false);
+               SFX.CLICK_BUTTON.play();
+               view.getPreGameButton().setChecked(false);
                Main.getMain().setScreen(new PreGameMenuView
                    (new PreGameMenuController(), GameAssetManager.getGameAssetManager().getSkin()));
            }

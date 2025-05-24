@@ -2,6 +2,7 @@ package com.tildawn.Controller;
 
 import com.badlogic.gdx.utils.Timer;
 import com.tildawn.Enums.Message;
+import com.tildawn.Enums.SFX;
 import com.tildawn.Main;
 import com.tildawn.Model.GameAssetManager;
 import com.tildawn.Model.User;
@@ -23,10 +24,12 @@ public class ProfileMenuController {
             String username = view.getUsername().getText();
             String password = view.getPassword().getText();
             if(view.getBackButton().isChecked()){
+                SFX.CLICK_BUTTON.play();
                 view.getBackButton().setChecked(false);
                 Main.getMain().setScreen(new MainMenuView
                     (new MainMenuController(), GameAssetManager.getGameAssetManager().getSkin()));
             } else if (view.getChangePasswordButton().isChecked()) {
+                SFX.CLICK_BUTTON.play();
                 view.getChangePasswordButton().setChecked(false);
                 if (password.isEmpty()) {
                     return;
@@ -39,6 +42,7 @@ public class ProfileMenuController {
                user.setPassword(password);
                 Main.getMain().getApp().getSaving().saveUserToJson(user);
             } else if (view.getChangeUsernameButton().isChecked()) {
+                SFX.CLICK_BUTTON.play();
                 view.getChangeUsernameButton().setChecked(false);
                 if(username.isEmpty()) {
                     return;
@@ -54,6 +58,7 @@ public class ProfileMenuController {
                 user.setUsername(username);
                 Main.getMain().getApp().getSaving().saveUserToJson(newUser);
             } else if (view.getDeleteAccountButton().isChecked()) {
+                SFX.CLICK_BUTTON.play();
                 view.setSuccessMessage(Message.ACCOUNT_DELETED.toString());
 
                 Main.getMain().getApp().getSaving().removeUserFromJSON(user.getUsername());
@@ -64,6 +69,7 @@ public class ProfileMenuController {
                     }
                 }, 5);
             } else if (view.getChangeProfileButton().isChecked()) {
+                SFX.CLICK_BUTTON.play();
                 view.getChangeProfileButton().setChecked(false);
                 Main.getMain().setScreen(new ChangeAvatarMenuView(new ChangeAvatarMenuController(), GameAssetManager.getGameAssetManager().getSkin()));
 

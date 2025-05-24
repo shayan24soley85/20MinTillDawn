@@ -23,10 +23,12 @@ public class SettingMenuController {
     public void handleButtonClick() {
         if(view!=null){
             if(view.getBackButton().isChecked()){
+                SFX.CLICK_BUTTON.play();
                 view.getBackButton().setChecked(false);
                 Main.getMain().setScreen(new MainMenuView
                     (new MainMenuController(), GameAssetManager.getGameAssetManager().getSkin()));
             } else if (view.getConfirmButton().isChecked()) {
+                SFX.CLICK_BUTTON.play();
                 view.getConfirmButton().setChecked(false);
                 Game game=Main.getMain().getApp().getCurrentGame();
                 game.setAutoReload(view.getAutoReload().isChecked());
@@ -85,6 +87,7 @@ public class SettingMenuController {
                     }
                 }
             } else if (view.getSetButtons().isChecked()) {
+                SFX.CLICK_BUTTON.play();
                 view.getSetButtons().setChecked(false);
                 //todo go to change button menu
             }

@@ -1,6 +1,7 @@
 package com.tildawn.Controller;
 
 import com.tildawn.Enums.Message;
+import com.tildawn.Enums.SFX;
 import com.tildawn.Main;
 import com.tildawn.Model.GameAssetManager;
 import com.tildawn.Model.User;
@@ -30,6 +31,7 @@ public class LoginMenuController {
             String username=view.getUsername().getText();
             String password=view.getPassword().getText();
             if(view.getLoginButton().isChecked()){
+                SFX.CLICK_BUTTON.play();
                 view.getLoginButton().setChecked(false);
                 if (username.isEmpty() || password.isEmpty()) {
                     view.setErrorMessage(Message.PLEASE_FILL_ALL_FIELDS.toString());
@@ -47,9 +49,11 @@ public class LoginMenuController {
                 Main.getMain().getApp().setCurrentUser(user);
                 Main.getMain().setScreen(new MainMenuView(new MainMenuController(), GameAssetManager.getGameAssetManager().getSkin()));
             } else if (view.getSignupButton().isChecked()) {
+                SFX.CLICK_BUTTON.play();
                 view.getSignupButton().setChecked(false);
                 Main.getMain().setScreen(new SignupMenuView(new SignupMenuController(), GameAssetManager.getGameAssetManager().getSkin()));
             } else if (view.getRecoveryPasswordButton().isChecked()) {
+                SFX.CLICK_BUTTON.play();
                 view.getRecoveryPasswordButton().setChecked(false);
                 if (!Main.getMain().getApp().getAllUsers().containsKey(username)) {
                     view.setErrorMessage(Message.USER_NOT_FOUND.toString());

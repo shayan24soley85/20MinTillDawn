@@ -8,6 +8,7 @@ import com.badlogic.gdx.scenes.scene2d.ui.Table;
 import com.badlogic.gdx.scenes.scene2d.ui.TextButton;
 import com.badlogic.gdx.scenes.scene2d.utils.TextureRegionDrawable;
 import com.tildawn.Enums.Message;
+import com.tildawn.Enums.SFX;
 import com.tildawn.Main;
 import com.tildawn.Model.GameAssetManager;
 import com.tildawn.View.ChangeAvatarMenuView;
@@ -115,6 +116,7 @@ public class ChangeAvatarMenuController {
     public void handleChangeAvatarMenu() {
         if (view != null) {
             if (view.getBackBtn().isChecked()) {
+                SFX.CLICK_BUTTON.play();
                 view.getBackBtn().setChecked(false);
                 Main.getMain().setScreen(new ProfileMenuView(
                     new ProfileMenuController(),
@@ -122,6 +124,7 @@ public class ChangeAvatarMenuController {
                 ));
                 return;
             } else if (view.getConfirmBtn().isChecked()) {
+                SFX.CLICK_BUTTON.play();
                 view.getConfirmBtn().setChecked(false);
                 if (view.getAvatarPath().equals(view.getUser().getAvatarPath())) {
                     view.setErrorMessage(Message.AVATAR_NOT_CHOSEN.toString());
@@ -131,6 +134,7 @@ public class ChangeAvatarMenuController {
                 view.getUser().setAvatarPath(view.getAvatarPath());
                 Main.getMain().getApp().getSaving().saveUserToJson(view.getUser());
             } else if (view.getSelectFileBtn().isChecked()) {
+                SFX.CLICK_BUTTON.play();
                 view.getSelectFileBtn().setChecked(false);
                 openFileChooser();
             }

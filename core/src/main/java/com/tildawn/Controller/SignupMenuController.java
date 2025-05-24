@@ -2,6 +2,7 @@ package com.tildawn.Controller;
 
 import com.tildawn.Enums.Avatar;
 import com.tildawn.Enums.Message;
+import com.tildawn.Enums.SFX;
 import com.tildawn.Main;
 import com.tildawn.Model.GameAssetManager;
 import com.tildawn.Model.User;
@@ -53,6 +54,7 @@ public class SignupMenuController {
             String securityQuestion=view.getSecurityQuestion().getSelected();
             String answer=view.getSecurityAnswer();
             if (view.getSignupButton().isChecked()) {
+                SFX.CLICK_BUTTON.play();
                 view.getSignupButton().setChecked(false);
                 if(password.isEmpty() ||username.isEmpty()||confirmPassword.isEmpty()
                     ||answer.isEmpty()) {
@@ -77,9 +79,11 @@ public class SignupMenuController {
                 }
                 return;
             } else if (view.getLoginButton().isChecked()) {
+                SFX.CLICK_BUTTON.play();
                 view.getLoginButton().setChecked(false);
                 Main.getMain().setScreen(new LoginMenuView(new LoginMenuController(), GameAssetManager.getGameAssetManager().getSkin()));
             } else if (view.getPlayAsGuessButton().isChecked()) {
+                SFX.CLICK_BUTTON.play();
                 view.getPlayAsGuessButton().setChecked(false);
                 Avatar avatar=Avatar.getRandomAvatar();
                 User user=new User("GUEST",null,null,null, avatar.getPath());

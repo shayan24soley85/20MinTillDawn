@@ -1,11 +1,14 @@
 package com.tildawn.Model;
 
+import com.tildawn.View.GameView;
+
 public class Game {
     private Boolean grayscaleToggle=false;
     private Boolean autoReload=false;
     private Boolean sfxToggle=true;
     private int gameTime;
     private Character character;
+    private GameView gameView;
     public Boolean getGrayscaleToggle() {
         return grayscaleToggle;
     }
@@ -44,5 +47,13 @@ public class Game {
 
     public void setCharacter(Character character) {
         this.character = character;
+    }
+
+    public GameView getGameView() {
+        return gameView;
+    }
+
+    public void setGameView(GameView gameView) {
+        this.gameView = gameView;
     }
 }
