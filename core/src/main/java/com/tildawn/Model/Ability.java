@@ -19,7 +19,7 @@ public class Ability {
     public void update(float deltaTime) {
         if (Main.getMain().getApp().getCurrentGame().isInPause() || !enabled) return;
 
-        elapsedTime += deltaTime;
+        elapsedTime += 1000*deltaTime;
         if (elapsedTime >= duration) {
             enabled = false;
         }
@@ -36,5 +36,10 @@ public class Ability {
     public void reset() {
         elapsedTime = 0;
         enabled = true;
+    }
+
+    @Override
+    public String toString() {
+        return "name:"+abilityType.getName()+"\ndescription:"+abilityType.getDescription();
     }
 }

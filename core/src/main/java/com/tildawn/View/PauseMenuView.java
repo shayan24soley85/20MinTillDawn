@@ -16,11 +16,13 @@ import com.badlogic.gdx.utils.viewport.ScreenViewport;
 import com.tildawn.Controller.MainMenuController;
 import com.tildawn.Controller.PauseMenuController;
 import com.tildawn.Main;
+import com.tildawn.Model.Ability;
 import com.tildawn.Model.User;
 
 public class PauseMenuView implements Screen {
     private Stage stage;
     public Table table;
+    private final Skin skin;
     private final PauseMenuController controller;
     private final User user=Main.getMain().getApp().getCurrentUser();
     private TextButton ResumeButton ;
@@ -33,14 +35,15 @@ public class PauseMenuView implements Screen {
     private Timer.Task clearErrorTask;
     private final Label SuccessMessageLabel;
     private Timer.Task clearErrorTask2;
-
+    private Label abilitiesLabel;
     private Label nameLabel ;
+    private Label showAbilitiesLabel ;
     private Label scoreLabel ;
     public PauseMenuView(PauseMenuController controller, Skin skin) {
         this.controller = controller;
         this.table = new Table();
         this.controller.setView(this);
-
+        this.skin = skin;
         nameLabel = new Label(com.tildawn.Enums.Label.USERNAME +user.getUsername(), skin);
         scoreLabel = new Label(com.tildawn.Enums.Label.SCORE.getText() + user.getScore(), skin);
 
@@ -57,21 +60,19 @@ public class PauseMenuView implements Screen {
         SuccessMessageLabel = new Label("", skin);
         SuccessMessageLabel.setColor(Color.GREEN);
         SuccessMessageLabel.setWrap(true);
+        abilitiesLabel=new Label("Available Abilities:",skin);
+        abilitiesLabel.setColor(Color.CYAN);
+        showAbilitiesLabel=new Label("",skin);
     }
-
-    @Override
     public void show() {
         stage = new Stage(new ScreenViewport());
         Gdx.input.setInputProcessor(stage);
+
+
         Texture backgroundTexture = new Texture(Gdx.files.internal("backgrounds/19.png"));
         Image backgroundImage = new Image(backgroundTexture);
-
         backgroundImage.setFillParent(true);
-
         stage.addActor(backgroundImage);
-        stage.addActor(table);
-        table.setFillParent(true);
-
 
 
         Table rootTable = new Table();
@@ -84,35 +85,43 @@ public class PauseMenuView implements Screen {
         avatarImage.setSize(64, 64);
         avatarImage.setScaling(Scaling.fit);
 
-
-
-
-
         Table topTable = new Table();
         topTable.add(avatarImage).size(64).padRight(10);
         topTable.add(nameLabel).left().padRight(20);
         topTable.add(scoreLabel).left();
         topTable.top().left();
 
+
         Table menuTable = new Table();
-        menuTable.defaults().width(500).height(90).pad(10);
+        menuTable.defaults().width(500).height(90).pad(14);
         menuTable.add(ResumeButton).row();
         menuTable.add(settingsButton).row();
-        menuTable.add(currentAbilities).row();
         menuTable.add(giveUpButton).row();
         menuTable.add(hintMenuButton).row();
         menuTable.add(saveAndExit).row();
         menuTable.add(errorLabel).row();
         menuTable.add(SuccessMessageLabel).row();
-        //todo  error bad 2 saaniye nmire
 
-        rootTable.top().padTop(0);
+
+        Table abilitiesTable = new Table();
+        abilitiesTable.top().bottom();
+        abilitiesTable.add(abilitiesLabel).padBottom(10).row();
+        for (Ability ability : Main.getMain().getApp().getCurrentGame().getCharacter().getAbilities().values()) {
+            if (ability.isEnabled()){
+                abilitiesTable.add(new Label(ability.toString(), skin)).left().row();
+            }
+
+        }
+
+
+        Table centerTable = new Table();
+        centerTable.add(menuTable).top().left().padRight(50);
+        centerTable.add(abilitiesTable).top().right();
+
+
+        rootTable.top().padTop(20);
         rootTable.add(topTable).expandX().left().padLeft(20).row();
-        rootTable.add(menuTable).expand().center();
-        table.row().pad(10, 370, 0, 0);
-        table.row().pad(10, 370, 0, 0);
-        //table.add(errorLabel).colspan(2).left().width(600);
-        stage.addActor(table);
+        rootTable.add(centerTable).expand().center().row();
     }
 
     @Override

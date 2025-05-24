@@ -5,9 +5,9 @@ import com.badlogic.gdx.Input;
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.Animation;
 import com.tildawn.Main;
+import com.tildawn.Model.Ability;
 import com.tildawn.Model.Character;
 import com.tildawn.Model.GameAssetManager;
-import com.tildawn.Model.Character;
 
 public class PlayerController {
     private Character player;
@@ -17,6 +17,10 @@ public class PlayerController {
     }
 
     public void update(){
+        for(Ability ability:player.getAbilities().values()){
+            ability.update( Gdx.graphics.getDeltaTime());
+
+        }
         player.getPlayerSprite().draw(Main.getBatch());
 
         if(player.isPlayerIdle()){

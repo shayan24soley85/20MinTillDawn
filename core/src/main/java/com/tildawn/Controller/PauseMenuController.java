@@ -21,6 +21,7 @@ public class PauseMenuController {
            if (view.getResumeButton().isChecked()){
                SFX.CLICK_BUTTON.play();
                view.getResumeButton().setChecked(false);
+               Main.getMain().getApp().getCurrentGame().setInPause(false);
                Main.getMain().setScreen(Main.getMain().getApp().getCurrentGame().getGameView());
            } else if (view.getSettingsButton().isChecked()) {
                SFX.CLICK_BUTTON.play();
