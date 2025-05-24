@@ -29,7 +29,7 @@ public enum CharacterType {
 
 
     public String print() {
-        return "\nmaxHp=" + maxHp +
-            "\nspeed=" + speed ;
+        return "\n"+Label.MAXHP+"=" + maxHp +
+            "\n"+Label.SPEED+"=" + speed ;
     }
 }

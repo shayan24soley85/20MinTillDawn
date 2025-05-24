@@ -43,7 +43,7 @@ public TalentMenuView(TalentMenuController controller,Skin skin) {
         Table scrollContent = new Table();
         scrollContent.top().bottom().pad(10);
 
-        Label titleLabel = new Label("CHARACTERS:", skin);
+        Label titleLabel = new Label(com.tildawn.Enums.Label.CHARACTERS.getText(), skin);
         titleLabel.setColor(Color.BLACK);
         Container<Label> titleContainer = new Container<>(titleLabel);
         titleContainer.left().padLeft(-60);
@@ -56,34 +56,34 @@ public TalentMenuView(TalentMenuController controller,Skin skin) {
             scrollContent.add(new Label(type.print(), skin)).bottom().padBottom(40).row();
         }
 
-        Label controlLabel = new Label("CONTROLS:", skin);
+        Label controlLabel = new Label(com.tildawn.Enums.Label.CONTROLS.getText(), skin);
         controlLabel.setColor(Color.BLACK);
         Container<Label> controlContainer = new Container<>(controlLabel);
         controlContainer.left().padLeft(-60);
         scrollContent.add(controlContainer).left().padBottom(20).row();
 
-        Label moveLabel = new Label("MOVEMENT:", skin);
+        Label moveLabel = new Label(com.tildawn.Enums.Label.MOVEMENT.getText(), skin);
         moveLabel.setColor(Color.RED);
         scrollContent.add(moveLabel).padBottom(20).left().row();
-        scrollContent.add(new Label("W : UP       S : DOWN     A : LEFT     D : RIGHT", skin)).left().row();
-        Label defaultLabel = new Label("SIMPLE KEYS:", skin);
+        scrollContent.add(new Label(com.tildawn.Enums.Label.KEYS_LINE1.getText(), skin)).left().row();
+        Label defaultLabel = new Label(com.tildawn.Enums.Label.SIMPLE_KEYS.getText(), skin);
         defaultLabel.setColor(Color.RED);
         scrollContent.add(defaultLabel).padBottom(20).left().row();
-        scrollContent.add(new Label("R:RELOAD       MOUSE LEFT CLICK:SHOOT     P:PAUSE THE GAME", skin)).left().row();
+        scrollContent.add(new Label(com.tildawn.Enums.Label.KEYS_LINE2.getText(), skin)).left().row();
 
 
-        Label cheatLabel = new Label("CHEATS:", skin);
+        Label cheatLabel = new Label(com.tildawn.Enums.Label.CHEATS.getText(), skin);
         cheatLabel.setColor(Color.BLACK);
         Container<Label> cheat = new Container<>(cheatLabel);
         cheat.left().padLeft(-60);
         scrollContent.add(cheat).left().padBottom(20).row();
-        scrollContent.add(new Label("CTRL+Z :    Reduce remaining game time by 1 minute", skin)).left().row();
-        scrollContent.add(new Label("CTRL+X :   Level up character with full animation and ability selection", skin)).left().row();
-        scrollContent.add(new Label("CTRL+C :    Restore health when empty (only works with low health)", skin)).left().row();
-        scrollContent.add(new Label("CTRL+V :    Add 10000 Ammo to Player's Weapon", skin)).left().row();
-        scrollContent.add(new Label("CTRL+B :    Start bus fight", skin)).left().row();
+        scrollContent.add(new Label(com.tildawn.Enums.Label.CHEAT_Z.getText(), skin)).left().row();
+        scrollContent.add(new Label(com.tildawn.Enums.Label.CHEAT_X.getText(), skin)).left().row();
+        scrollContent.add(new Label(com.tildawn.Enums.Label.CHEAT_C.getText(), skin)).left().row();
+        scrollContent.add(new Label(com.tildawn.Enums.Label.CHEAT_V.getText(), skin)).left().row();
+        scrollContent.add(new Label(com.tildawn.Enums.Label.CHEAT_B.getText(), skin)).left().row();
 
-        Label abilities = new Label("ABILITIES:", skin);
+        Label abilities = new Label(com.tildawn.Enums.Label.ABILITIES.getText(), skin);
         abilities.setColor(Color.BLACK);
         Container<Label> Ability = new Container<>(abilities);
         Ability.left().padLeft(-60);
@@ -91,29 +91,29 @@ public TalentMenuView(TalentMenuController controller,Skin skin) {
         Label label = new Label("VITALITY:", skin);
         label.setColor(Color.FIREBRICK);
         scrollContent.add(label).left().padBottom(20).row();
-        scrollContent.add(new Label("Increase maximum HP by 1 unit", skin)).left().row();
+        scrollContent.add(new Label(com.tildawn.Enums.Label.ABILITY_1.getText(), skin)).left().row();
         Label label2 = new Label("DAMAGER:", skin);
         label2.setColor(Color.FIREBRICK);
         scrollContent.add(label2).left().padBottom(20).row();
-        scrollContent.add(new Label("Increase weapon damage by 25% for 10 seconds", skin)).left().row();
+        scrollContent.add(new Label(com.tildawn.Enums.Label.ABILITY_2.getText(), skin)).left().row();
         Label label3 = new Label("SPEEDY:", skin);
         label3.setColor(Color.FIREBRICK);
         scrollContent.add(label3).left().padBottom(20).row();
-        scrollContent.add(new Label("Double movement speed for 10 seconds", skin)).left().row();
+        scrollContent.add(new Label(com.tildawn.Enums.Label.ABILITY_3.getText(), skin)).left().row();
         Label label4 = new Label("PROCREASE:", skin);
         label4.setColor(Color.FIREBRICK);
         scrollContent.add(label4).left().padBottom(20).row();
-        scrollContent.add(new Label("Increase weapon projectile count by 1", skin)).left().row();
+        scrollContent.add(new Label(com.tildawn.Enums.Label.ABILITY_4.getText(), skin)).left().row();
         Label label5 = new Label("AMOCREASE:", skin);
         label5.setColor(Color.FIREBRICK);
         scrollContent.add(label5).left().padBottom(20).row();
-        scrollContent.add(new Label("Increase maximum ammo by 5", skin)).left().row();
+        scrollContent.add(new Label(com.tildawn.Enums.Label.ABILITY_5.getText(), skin)).left().row();
 
         ScrollPane scrollPane = new ScrollPane(scrollContent, skin);
         scrollPane.setFadeScrollBars(false);
         scrollPane.setScrollingDisabled(true, false);
 
-        backButton= new TextButton("Back", skin);
+        backButton= new TextButton(com.tildawn.Enums.Label.BACK.getText(), skin);
         rootTable.top().pad(10);
         rootTable.add(scrollPane).expand().fill().row();
         rootTable.add(backButton).padTop(10);
