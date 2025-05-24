@@ -8,6 +8,7 @@ import com.tildawn.Model.Game;
 import com.tildawn.Model.GameAssetManager;
 import com.tildawn.Model.Language.Language;
 import com.tildawn.View.MainMenuView;
+import com.tildawn.View.PauseMenuView;
 import com.tildawn.View.SettingMenuView;
 
 public class SettingMenuController {
@@ -25,6 +26,11 @@ public class SettingMenuController {
             if(view.getBackButton().isChecked()){
                 SFX.CLICK_BUTTON.play();
                 view.getBackButton().setChecked(false);
+                if (Main.getMain().getApp().getCurrentGame().isInPause()) {
+                    Main.getMain().setScreen(new PauseMenuView
+                        (new PauseMenuController(), GameAssetManager.getGameAssetManager().getSkin()));
+                    return;
+                }
                 Main.getMain().setScreen(new MainMenuView
                     (new MainMenuController(), GameAssetManager.getGameAssetManager().getSkin()));
             } else if (view.getConfirmButton().isChecked()) {

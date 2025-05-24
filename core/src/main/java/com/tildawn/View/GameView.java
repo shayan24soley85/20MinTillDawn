@@ -117,8 +117,6 @@ public class GameView implements Screen, InputProcessor {
 
     @Override
     public void render(float delta) {
-        System.out.println(player.getPosX());
-        System.out.println(player.getPosY());
         ScreenUtils.clear(0, 0, 0, 1);
         lightSprite.setCenter(player.getPosX(), player.getPosY());
         ammoLabel.setText(com.tildawn.Enums.Label.AMMO.getText() + player.getWeapon().getAmmo());

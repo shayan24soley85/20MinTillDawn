@@ -8,8 +8,11 @@ import com.tildawn.Controller.PlayerController;
 import com.tildawn.Controller.WeaponController;
 import com.tildawn.Main;
 import com.tildawn.Model.Character;
+import com.tildawn.Model.GameAssetManager;
 import com.tildawn.Model.Weapon;
+import com.tildawn.View.ChangeAvatarMenuView;
 import com.tildawn.View.GameView;
+import com.tildawn.View.PauseMenuView;
 
 public class GameController {
     private GameView view;
@@ -50,7 +53,8 @@ public class GameController {
             }
         }
         if(Gdx.input.isKeyJustPressed(Input.Keys.P)){
-
+            Main.getMain().getApp().getCurrentGame().setInPause(true);
+            Main.getMain().setScreen(new PauseMenuView(new PauseMenuController(), GameAssetManager.getGameAssetManager().getSkin()));
         }
     }
     public void updateGame() {

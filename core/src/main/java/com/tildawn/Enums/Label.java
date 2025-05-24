@@ -50,7 +50,10 @@ public enum Label {
     KILLS("Kills:", "Tues:"),
     HP("HP:", "PV:"),
     LEVEL("Level:", "Niveau:"),
-    TIME("Time:", "Temps:");
+    TIME("Time:", "Temps:"),RESUME_GAME("Resume the game", "Reprendre le jeu"),
+    AVAILABLE_ABILITIES("Available abilities", "Capacités disponibles"),
+    GIVE_UP("Give up", "Abandonner"),
+    SAVE_AND_EXIT("Save and Exit", "Sauvegarder et quitter");
 
     private final String english;
     private final String french;

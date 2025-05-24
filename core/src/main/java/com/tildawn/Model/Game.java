@@ -9,6 +9,7 @@ public class Game {
     private int gameTime;
     private Character character;
     private GameView gameView;
+    private boolean isInPause=false;
     public Boolean getGrayscaleToggle() {
         return grayscaleToggle;
     }
@@ -55,5 +56,13 @@ public class Game {
 
     public void setGameView(GameView gameView) {
         this.gameView = gameView;
+    }
+
+    public boolean isInPause() {
+        return isInPause;
+    }
+
+    public void setInPause(boolean inPause) {
+        isInPause = inPause;
     }
 }
