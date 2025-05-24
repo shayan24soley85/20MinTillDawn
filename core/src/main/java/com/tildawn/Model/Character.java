@@ -3,6 +3,7 @@ package com.tildawn.Model;
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.Sprite;
+import com.tildawn.Enums.AbilityType;
 import com.tildawn.Enums.CharacterType;
 import com.tildawn.Enums.SFX;
 
@@ -16,7 +17,7 @@ public class Character {
     private Weapon weapon;
     private int hp;
     private Boolean isInvincible;
-    private Map<String,Ability> abilities;
+    private Map<AbilityType,Ability> abilities;
     private int eliminations;
     private float posX;
     private float posY;
@@ -149,7 +150,8 @@ public class Character {
     }
 
     public int getHp() {
-        return hp;
+
+        return abilities.containsKey(AbilityType.VITALITY)&&abilities.get(AbilityType.VITALITY).isEnabled()?(hp+1):hp;
     }
 
     public void setHp(int hp) {
@@ -164,11 +166,11 @@ public class Character {
         isInvincible = invincible;
     }
 
-    public Map<String, Ability> getAbilities() {
+    public Map<AbilityType, Ability> getAbilities() {
         return abilities;
     }
 
-    public void setAbilities(Map<String, Ability> abilities) {
+    public void setAbilities(Map<AbilityType, Ability> abilities) {
         this.abilities = abilities;
     }
 

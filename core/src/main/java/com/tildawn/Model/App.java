@@ -5,12 +5,15 @@ import com.sun.org.apache.bcel.internal.generic.PUSH;
 import com.tildawn.Model.Language.LanguageSetting;
 
 import java.util.HashMap;
+import java.util.Random;
+
 public class App {
     private final HashMap<String,User> allUsers=new HashMap<>();
     private final Saving saving=new Saving();
     private User currentUser=null;
     private  LanguageSetting currentLanguage;
     private Game currentGame=new Game();
+    private Random rand=new Random();
     public  void run(){
         saving.readFile();
     }
@@ -62,5 +65,13 @@ public class App {
 
     public void setCurrentMusicPath(String currentMusicPath) {
         this.currentMusicPath = currentMusicPath;
+    }
+
+    public Random getRand() {
+        return rand;
+    }
+
+    public void setRand(Random rand) {
+        this.rand = rand;
     }
 }
