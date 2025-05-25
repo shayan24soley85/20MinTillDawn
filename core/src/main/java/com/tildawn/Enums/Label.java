@@ -75,7 +75,13 @@ public enum Label {
     MAXHP("MAXHP", "PV MAX"),
     SPEED("SPEED", "VITESSE"),
     REACHED_LEVEL("YOU REACHED LEVEL: ", "VOUS AVEZ ATTEINT LE NIVEAU : "),
-    CHOOSE_ABILITY("CHOOSE ONE OF THESE ABILITIES", "CHOISISSEZ UNE DES CAPACITÉS");
+    CHOOSE_ABILITY("CHOOSE ONE OF THESE ABILITIES", "CHOISISSEZ UNE DES CAPACITÉS"),
+    BACK_TO_MAIN_MENU("Back to MainMenu", "Retour au menu principal"),
+    YOU_LOSE("You lose!", "Vous avez perdu!"),
+    YOU_WIN("You win!", "Vous avez gagné!"),
+    KILL_COUNT("Kill Count: ", "Nombre de tués: "),
+    TIME_SURVIVED("Time Survived: ", "Temps de survie: ");
+
 
     private final String english;
     private final String french;

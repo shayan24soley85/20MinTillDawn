@@ -20,6 +20,7 @@ public class Character {
     private Map<AbilityType,Ability> abilities;
     private int eliminations;
     private float posX;
+    private String username;
     private float posY;
     private Texture playerTexture = new Texture(GameAssetManager.getGameAssetManager().getCharacter1_idle0());
     private Sprite playerSprite = new Sprite(playerTexture);
@@ -43,7 +44,15 @@ public class Character {
         return level*20;
     }
 
-   public boolean increaseXp(int amount) {
+    public String getUsername() {
+        return username;
+    }
+
+    public void setUsername(String username) {
+        this.username = username;
+    }
+
+    public boolean increaseXp(int amount) {
         xp+=amount;
         if(xp>=maxLevelXp()+xpToNextLevel(level)){
             level++;

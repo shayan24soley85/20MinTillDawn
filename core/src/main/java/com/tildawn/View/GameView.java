@@ -19,9 +19,11 @@ import com.badlogic.gdx.scenes.scene2d.ui.ProgressBar;
 import com.badlogic.gdx.scenes.scene2d.ui.Table;
 import com.badlogic.gdx.utils.Timer;
 import com.badlogic.gdx.utils.viewport.ScreenViewport;
+import com.tildawn.Controller.EndGameController;
 import com.tildawn.Controller.GameController;
 import com.tildawn.Main;
 import com.tildawn.Model.Character;
+import com.tildawn.Model.GameAssetManager;
 
 public class GameView implements Screen, InputProcessor {
 
@@ -107,7 +109,10 @@ public class GameView implements Screen, InputProcessor {
         levelLabel.setText("Level: " + player.getLevel());
         xpProgressBar.setValue(player.getXp() - player.maxLevelXp());
 
-        startTimeMillis = System.currentTimeMillis();
+        if (startTimeMillis == 0) {
+            startTimeMillis = System.currentTimeMillis();
+        }
+
 
         InputMultiplexer multiplexer = new InputMultiplexer();
         multiplexer.addProcessor(this);
@@ -161,7 +166,16 @@ public class GameView implements Screen, InputProcessor {
         timeLabel.setText(String.format(com.tildawn.Enums.Label.TIME +" %02d:%02d", minutes, seconds));
 
         if (remainingSeconds == 0) {
-            //controller.endGame();
+            Main.getMain().getApp().getCurrentGame().setLost(false);
+            Main.getMain().setScreen(new EndGameView
+                (new EndGameController(), GameAssetManager.getGameAssetManager().getSkin()
+                    , elapsedSeconds));
+        }
+        if(player.getHp()<=0){
+            Main.getMain().getApp().getCurrentGame().setLost(true);
+            Main.getMain().setScreen(new EndGameView
+                (new EndGameController(), GameAssetManager.getGameAssetManager().getSkin()
+                    , elapsedSeconds));
         }
         stage.act(Math.min(delta, 1 / 30f));
         stage.draw();

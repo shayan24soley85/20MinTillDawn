@@ -36,6 +36,7 @@ public class PreGameMenuController {
                 view.getPlayButton().setChecked(false);
                 Character character=new Character(view.getHeroSelect().getSelected(),new Weapon(view.getWeaponSelect().getSelected()));
                 character.setAbilities(new HashMap<>());
+                character.setUsername(Main.getMain().getApp().getCurrentUser().getUsername());
                 Main.getMain().getApp().getCurrentGame().setGameTime(view.getTimeSelect().getSelected());
                 //Character character=new Character(CharacterType.Diamond,new Weapon(WeaponType.dualSmg));
                 Main.getMain().getApp().getCurrentGame().setCharacter(character);

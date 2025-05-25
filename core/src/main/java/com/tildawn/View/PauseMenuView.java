@@ -60,7 +60,7 @@ public class PauseMenuView implements Screen {
         SuccessMessageLabel = new Label("", skin);
         SuccessMessageLabel.setColor(Color.GREEN);
         SuccessMessageLabel.setWrap(true);
-        abilitiesLabel=new Label("Available Abilities:",skin);
+        abilitiesLabel=new Label(com.tildawn.Enums.Label.AVAILABLE_ABILITIES.getText(),skin);
         abilitiesLabel.setColor(Color.CYAN);
         showAbilitiesLabel=new Label("",skin);
     }

@@ -3,6 +3,7 @@ package com.tildawn.Controller;
 import com.tildawn.Enums.SFX;
 import com.tildawn.Main;
 import com.tildawn.Model.GameAssetManager;
+import com.tildawn.View.EndGameView;
 import com.tildawn.View.PauseMenuView;
 import com.tildawn.View.SettingMenuView;
 import com.tildawn.View.TalentMenuView;
@@ -32,6 +33,13 @@ public class PauseMenuController {
                view.getTalentButton().setChecked(false);
                Main.getMain().setScreen(new TalentMenuView
                    (new TalentMenuController(), GameAssetManager.getGameAssetManager().getSkin()));
+           } else if (view.getGiveUpButton().isChecked()) {
+               SFX.CLICK_BUTTON.play();
+               Main.getMain().getApp().getCurrentGame().setLost(true);
+               view.getGiveUpButton().setChecked(false);
+               Main.getMain().setScreen(new EndGameView
+                   (new EndGameController(), GameAssetManager.getGameAssetManager().getSkin()
+                       , (int)((System.currentTimeMillis() - Main.getMain().getApp().getCurrentGame().getGameView().getStartTimeMillis()) / 1000)));
            }
            //todo save and sxit , resign ...
        }

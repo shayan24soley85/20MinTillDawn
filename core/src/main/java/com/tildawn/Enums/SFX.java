@@ -9,7 +9,9 @@ public enum SFX {
     FOOT_STEP("sfx/Footsteps_Casual_Grass_02.wav"),
     CLICK_BUTTON("sfx/UI Click 36.wav"),
     NEED_AMMO("sfx/empty-gun-shot-6209 (1).mp3"),
-    LEVEL("sfx/game-level-complete-143022.mp3");
+    LEVEL("sfx/game-level-complete-143022.mp3"),
+    WINNING("sfx/You Win (2).wav"),
+    LOSING("sfx/You Lose (4).wav");
 //    EXPLOSION("sfx/explosion.wav"),
 //    BUTTON_CLICK("sfx/button_click.wav");
 
