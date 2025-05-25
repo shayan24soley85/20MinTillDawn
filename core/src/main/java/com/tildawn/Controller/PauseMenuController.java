@@ -2,6 +2,7 @@ package com.tildawn.Controller;
 
 import com.tildawn.Enums.SFX;
 import com.tildawn.Main;
+import com.tildawn.Model.Game;
 import com.tildawn.Model.GameAssetManager;
 import com.tildawn.View.EndGameView;
 import com.tildawn.View.PauseMenuView;
@@ -37,11 +38,13 @@ public class PauseMenuController {
                SFX.CLICK_BUTTON.play();
                Main.getMain().getApp().getCurrentGame().setLost(true);
                view.getGiveUpButton().setChecked(false);
+               Game game = Main.getMain().getApp().getCurrentGame();
+               Main.getMain().getApp().getSaving().saveUsersDetails(game.getCharacter().getEliminations(), game.getCharacter().getEliminations()*game.getGameView().getElapsedSeconds(),game.getGameView().getElapsedSeconds());
                Main.getMain().setScreen(new EndGameView
                    (new EndGameController(), GameAssetManager.getGameAssetManager().getSkin()
                        , (int)((System.currentTimeMillis() - Main.getMain().getApp().getCurrentGame().getGameView().getStartTimeMillis()) / 1000)));
            }
-           //todo save and sxit , resign ...
+
        }
     }
 }

@@ -167,7 +167,9 @@ public class Character {
 
         return abilities.containsKey(AbilityType.VITALITY)&&abilities.get(AbilityType.VITALITY).isEnabled()?(hp+1):hp;
     }
-
+    public void increaseKills(){
+        eliminations++;
+    }
     public void setHp(int hp) {
         this.hp = hp;
     }

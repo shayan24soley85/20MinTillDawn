@@ -8,9 +8,12 @@ import com.tildawn.Controller.PlayerController;
 import com.tildawn.Controller.WeaponController;
 import com.tildawn.Enums.Message;
 import com.tildawn.Main;
+import com.tildawn.Model.Bullet;
 import com.tildawn.Model.Character;
 import com.tildawn.Model.GameAssetManager;
 import com.tildawn.Model.Weapon;
+import com.tildawn.Model.enemy.Enemy;
+import com.tildawn.Model.enemy.EnemyState;
 import com.tildawn.View.ChangeAvatarMenuView;
 import com.tildawn.View.ChooseAbilityView;
 import com.tildawn.View.GameView;
@@ -66,6 +69,31 @@ public class GameController {
             Main.getMain().setScreen(new PauseMenuView(new PauseMenuController(), GameAssetManager.getGameAssetManager().getSkin()));
         }
     }
+
+    public void checkCollisionRects(){
+        for(Enemy enemy:enemyControl.getAllMapEnemies()){
+            for (Bullet bullet: weaponController.getBullets()){
+                if (enemy.getCollisionRect().collidesWith(bullet.getCollisionRect())){
+                    enemy.increaseHp(-weaponController.getWeapon().getType().getDamage());
+                    bullet.setDead(true);
+                    if (enemy.getHp()<=0){
+                        enemy.setState(EnemyState.dying);
+                    }else {
+                        enemy.setState(EnemyState.damaged);
+                    }
+                }
+            }
+        }
+    }
+    public void updateCollisionRects(){
+        for(Enemy enemy:enemyControl.getAllMapEnemies()){
+            enemy.getCollisionRect().updateCollisionRect(enemy.getPosX(),enemy.getPosY());
+        }
+        playerController.getPlayer().getRect().updateCollisionRect(playerController.getPlayer().getPosX(),playerController.getPlayer().getPosY());
+        for (Bullet bullet: weaponController.getBullets()){
+            bullet.getCollisionRect().updateCollisionRect(bullet.getSprite().getX(), bullet.getSprite().getY());
+        }
+    }
     public void updateGame(float delta) {
         if (view != null) {
             handleInput();
@@ -73,6 +101,8 @@ public class GameController {
             playerController.update();
             weaponController.update();
             enemyControl.update(delta);
+            updateCollisionRects();
+            checkCollisionRects();
         }
     }
 

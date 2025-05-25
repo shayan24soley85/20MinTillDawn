@@ -10,6 +10,7 @@ import com.tildawn.Model.enemy.TentacleMonster;
 import com.tildawn.Model.enemy.Tree;
 
 import java.util.ArrayList;
+import java.util.Iterator;
 
 public class enemyController {
     private float spawnCheckElder=0f;
@@ -66,9 +67,16 @@ public class enemyController {
                  }
              }
          }
-         for (Enemy enemy : allMapEnemies) {
-             enemy.update(deltaTime, new Vector2(px, py));
+         Iterator<Enemy> iterator = allMapEnemies.iterator();
+         while (iterator.hasNext()) {
+             Enemy enemy = iterator.next();
+             if (!enemy.isAlive()) {
+                 iterator.remove();
+             } else {
+                 enemy.update(deltaTime, new Vector2(px, py));
+             }
          }
+
          allMapEnemies.removeIf(enemy -> !enemy.isAlive());
      }
 

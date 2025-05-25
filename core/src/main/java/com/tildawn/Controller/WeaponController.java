@@ -13,6 +13,7 @@ import com.tildawn.Model.Bullet;
 import com.tildawn.Model.Weapon;
 
 import java.util.ArrayList;
+import java.util.Iterator;
 
 public class WeaponController {
     private long reloadStartTime = 0;
@@ -94,15 +95,52 @@ public class WeaponController {
 
 
     public void updateBullets() {
-        for(Bullet b : bullets) {
+        Iterator<Bullet> iterator = bullets.iterator();
+        while (iterator.hasNext()) {
+            Bullet b = iterator.next();
+            if (b.isDead()) {
+                iterator.remove();
+                continue;
+            }
             b.getSprite().draw(Main.getBatch());
             Vector2 direction = new Vector2(
-                Gdx.graphics.getWidth()/2f - b.getX(),
-                Gdx.graphics.getHeight()/2f - b.getY()
+                Gdx.graphics.getWidth() / 2f - b.getX(),
+                Gdx.graphics.getHeight() / 2f - b.getY()
             ).nor();
-
             b.getSprite().setX(b.getSprite().getX() - direction.x * 5);
             b.getSprite().setY(b.getSprite().getY() + direction.y * 5);
         }
+    }
+
+    public long getReloadStartTime() {
+        return reloadStartTime;
+    }
+
+    public void setReloadStartTime(long reloadStartTime) {
+        this.reloadStartTime = reloadStartTime;
+    }
+
+    public boolean isReloadingScheduled() {
+        return isReloadingScheduled;
+    }
+
+    public void setReloadingScheduled(boolean reloadingScheduled) {
+        isReloadingScheduled = reloadingScheduled;
+    }
+
+    public Weapon getWeapon() {
+        return weapon;
+    }
+
+    public void setWeapon(Weapon weapon) {
+        this.weapon = weapon;
+    }
+
+    public ArrayList<Bullet> getBullets() {
+        return bullets;
+    }
+
+    public void setBullets(ArrayList<Bullet> bullets) {
+        this.bullets = bullets;
     }
 }

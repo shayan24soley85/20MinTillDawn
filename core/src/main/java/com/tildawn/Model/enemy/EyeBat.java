@@ -29,6 +29,27 @@ public class EyeBat extends Enemy {
             shootTimer = 0f;
             shootAtPlayer(playerPos);
         }
+        animationTimer += deltaTime;
+
+        switch (state) {
+            case damaged:
+                if (animationTimer >= 0.3f) {
+                    state = EnemyState.simple;
+                }
+                break;
+
+            case dying:
+                if (animationTimer >= 1.0f) {
+                    idleAnimation();
+                }
+                break;
+
+            case simple:
+            default:
+
+                break;
+        }
+
     }
     private void shootAtPlayer(Vector2 playerPos) {
 

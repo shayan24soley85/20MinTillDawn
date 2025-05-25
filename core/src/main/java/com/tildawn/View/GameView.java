@@ -179,6 +179,7 @@ public class GameView implements Screen, InputProcessor {
 
         if (remainingSeconds == 0) {
             Main.getMain().getApp().getCurrentGame().setLost(false);
+            Main.getMain().getApp().getSaving().saveUsersDetails(player.getEliminations(), player.getEliminations()*elapsedSeconds,elapsedSeconds);
             Main.getMain().setScreen(new EndGameView(
                 new EndGameController(), GameAssetManager.getGameAssetManager().getSkin(),
                 elapsedSeconds));
@@ -186,6 +187,7 @@ public class GameView implements Screen, InputProcessor {
 
         if (player.getHp() <= 0) {
             Main.getMain().getApp().getCurrentGame().setLost(true);
+            Main.getMain().getApp().getSaving().saveUsersDetails(player.getEliminations(), player.getEliminations()*elapsedSeconds,elapsedSeconds);
             Main.getMain().setScreen(new EndGameView(
                 new EndGameController(), GameAssetManager.getGameAssetManager().getSkin(),
                 elapsedSeconds));
