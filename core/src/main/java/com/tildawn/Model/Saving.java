@@ -98,6 +98,5 @@ public class Saving {
         user.setScore(user.getScore()+score);
         user.setTotalEliminations(user.getTotalEliminations()+kills);
         saveUserToJson(user);
-
     }
 }

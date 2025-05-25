@@ -2,6 +2,7 @@ package com.tildawn.Model;
 
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.graphics.Texture;
+import com.badlogic.gdx.graphics.g2d.Animation;
 import com.badlogic.gdx.graphics.g2d.Sprite;
 import com.tildawn.Enums.AbilityType;
 import com.tildawn.Enums.CharacterType;
@@ -27,8 +28,15 @@ public class Character {
     private Sprite playerSprite ;
     private boolean isPlayerIdle = true;
     private boolean isPlayerRunning = false;
-    private float time = 0;
+    private float time = 0f;
     private CollisionRect rect ;
+    private boolean isDamaged = false;
+    private float invincibleTimeLeft = 0f;
+    protected Texture texture1=new Texture(Gdx.files.internal("Sprite/HeartAnimation/HeartAnimation_0.png"));
+    protected Texture texture2=new Texture(Gdx.files.internal("Sprite/HeartAnimation/HeartAnimation_1.png"));
+    protected Texture texture3=new Texture(Gdx.files.internal("Sprite/HeartAnimation/HeartAnimation_2.png"));
+    protected Texture texture4=new Texture(Gdx.files.internal("Sprite/HeartAnimation/HeartAnimation_3.png"));
+    private final Animation<Texture> animation=new Animation<>(0.1f, texture1, texture2, texture3, texture4);
     public Character(CharacterType type, Weapon weapon) {
         this.type = type;
         this.weapon = weapon;
@@ -99,6 +107,67 @@ public class Character {
         }
         return 2000;
     }
+    public void idleAnimation() {
+//        playerSprite.setRegion(animation.getKeyFrame(time));
+//
+//        time += Gdx.graphics.getDeltaTime();
+//        System.out.println(time);
+//        if (animation.isAnimationFinished(time) || time >= 1f) {
+//
+//            Main.getMain().getApp().getCurrentGame().getCharacter().increaseKills();
+//            isInvincible = false;
+//            isDamaged = false;
+//            time = 0;
+//
+//
+//            playerSprite.setRegion(playerTexture);
+//        }
+    }
+
+    public float getInvincibleTimeLeft() {
+        return invincibleTimeLeft;
+    }
+
+    public void setInvincibleTimeLeft(float invincibleTimeLeft) {
+        this.invincibleTimeLeft = invincibleTimeLeft;
+    }
+
+    public Texture getTexture1() {
+        return texture1;
+    }
+
+    public void setTexture1(Texture texture1) {
+        this.texture1 = texture1;
+    }
+
+    public Texture getTexture2() {
+        return texture2;
+    }
+
+    public void setTexture2(Texture texture2) {
+        this.texture2 = texture2;
+    }
+
+    public Texture getTexture3() {
+        return texture3;
+    }
+
+    public void setTexture3(Texture texture3) {
+        this.texture3 = texture3;
+    }
+
+    public Texture getTexture4() {
+        return texture4;
+    }
+
+    public void setTexture4(Texture texture4) {
+        this.texture4 = texture4;
+    }
+
+    public Animation<Texture> getAnimation() {
+        return animation;
+    }
+
     public CollisionRect getRect() {
         return rect;
     }
@@ -165,7 +234,7 @@ public class Character {
 
     public int getHp() {
 
-        return abilities.containsKey(AbilityType.VITALITY)&&abilities.get(AbilityType.VITALITY).isEnabled()?(hp+1):hp;
+        return abilities.containsKey(AbilityType.VITALITY)&&abilities.get(AbilityType.VITALITY).isEnabled()?(hp)+1:hp;
     }
     public void increaseKills(){
         eliminations++;
@@ -228,5 +297,13 @@ public class Character {
 
     public void setPlayerSprite(Sprite playerSprite) {
         this.playerSprite = playerSprite;
+    }
+
+    public boolean isDamaged() {
+        return isDamaged;
+    }
+
+    public void setDamaged(boolean damaged) {
+        isDamaged = damaged;
     }
 }

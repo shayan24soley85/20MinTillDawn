@@ -106,7 +106,6 @@ public class MainMenuView implements Screen {
         menuTable.add(logoutButton).row();
        menuTable.add(errorLabel).row();
        menuTable.add(SuccessMessageLabel).row();
-       //todo  error bad 2 saaniye nmire
 
         rootTable.top().padTop(0);
         rootTable.add(topTable).expandX().left().padLeft(20).row();
