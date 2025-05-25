@@ -5,6 +5,7 @@ import com.badlogic.gdx.Input;
 import com.badlogic.gdx.graphics.g2d.Sprite;
 import com.badlogic.gdx.math.MathUtils;
 import com.badlogic.gdx.math.Vector2;
+import com.badlogic.gdx.utils.Timer;
 import com.tildawn.Enums.Message;
 import com.tildawn.Enums.SFX;
 import com.tildawn.Main;
@@ -76,9 +77,16 @@ public class WeaponController {
             }
             return;
         }
-
-        bullets.add(new Bullet(x, y));
-        SFX.SHOOT.play();
+        for (int i = 0; i < weapon.getType().getProjectTile(); i++) {
+            float delay = i * 0.1f; // فاصله بین شلیک‌ها مثلاً ۰.۱ ثانیه
+            Timer.schedule(new Timer.Task() {
+                @Override
+                public void run() {
+                    bullets.add(new Bullet(x, y));
+                    SFX.SHOOT.play();
+                }
+            }, delay);
+        }
         weapon.setAmmo(weapon.getAmmo() - 1);
     }
 
