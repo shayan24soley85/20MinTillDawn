@@ -15,9 +15,9 @@ public class MapController {
     }
 
     public void update() {
-        backgroundX = playerController.getPlayer().getPosX();
-        backgroundY = playerController.getPlayer().getPosY();
-        Main.getBatch().draw(backgroundTexture, backgroundX, backgroundY);
+//        backgroundX = playerController.getPlayer().getPosX();
+//        backgroundY = playerController.getPlayer().getPosY();
+//        Main.getBatch().draw(backgroundTexture, backgroundX, backgroundY);
     }
 
     public float getBackgroundY() {

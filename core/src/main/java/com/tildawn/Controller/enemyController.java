@@ -1,7 +1,122 @@
 package com.tildawn.Controller;
 
-public class enemyController {
-     public void update() {
+import com.badlogic.gdx.Gdx;
+import com.badlogic.gdx.math.Vector2;
+import com.tildawn.Main;
+import com.tildawn.Model.Character;
+import com.tildawn.Model.enemy.Enemy;
+import com.tildawn.Model.enemy.EyeBat;
+import com.tildawn.Model.enemy.TentacleMonster;
+import com.tildawn.Model.enemy.Tree;
 
+import java.util.ArrayList;
+
+public class enemyController {
+    private float spawnCheckElder=0f;
+    private float spawnCheckBat=0f;
+    private float spawnCheckSimple=0f;
+    private boolean treeSpawned=false;
+    private float allTime=0f;
+    private ArrayList<Enemy> allMapEnemies=new ArrayList<>();
+    public int randomInt(int min, int max) {
+        return (int)(Math.random() * (max - min) + min);
+    }
+     public void update(float deltaTime) {
+        // in bakhsh baa komk <<arshia arab behjat>> zade shod
+         allTime=Main.getMain().getApp().getCurrentGame().getGameView().getElapsedSeconds();
+
+         int range = 8000;
+         int range2=500;
+         Character player= Main.getMain().getApp().getCurrentGame().getCharacter();
+         int px = (int) player.getPosX();
+         int py = (int) player.getPosY();
+
+          if(!treeSpawned){
+              treeSpawned=true;
+              int numberOfTrees=0;
+              do {
+                  int spawnX = randomInt(px - range, px + range);
+                  int spawnY = randomInt(py - range, py + range);
+                  allMapEnemies.add(new Tree(spawnX, spawnY));
+                  numberOfTrees++;
+              } while (numberOfTrees < 300);
+
+          }
+         spawnCheckSimple += deltaTime;
+         if(spawnCheckSimple>=3){
+             spawnCheckSimple=0;
+             int number=(int)allTime/30;
+             while (number>0){
+                 int spawnX = randomInt(px - (range2+900), px + range2+900);
+                 int spawnY = randomInt(py - (900+range2), py + range2+900);
+                 allMapEnemies.add(new TentacleMonster(spawnX, spawnY));
+                 number--;
+             }
+         }
+         spawnCheckBat += deltaTime;
+         if (allTime > Main.getMain().getApp().getCurrentGame().getGameTime()*15) {
+             if(spawnCheckBat>=10){
+                 spawnCheckBat=0;
+                 int number=(int)((4*allTime-Main.getMain().getApp().getCurrentGame().getGameTime()*60+30)/30);
+                 while (number>0){
+                     int spawnX = randomInt(px - (range2+900), px + range2+900);
+                     int spawnY = randomInt(py - (900+range2), py + range2+900);
+                     allMapEnemies.add(new EyeBat(spawnX, spawnY));
+                     number--;
+                 }
+             }
+         }
+         for (Enemy enemy : allMapEnemies) {
+             enemy.update(deltaTime, new Vector2(px, py));
+         }
+         allMapEnemies.removeIf(enemy -> !enemy.isAlive());
      }
+
+    public float getSpawnCheckElder() {
+        return spawnCheckElder;
+    }
+
+    public void setSpawnCheckElder(float spawnCheckElder) {
+        this.spawnCheckElder = spawnCheckElder;
+    }
+
+    public float getSpawnCheckBat() {
+        return spawnCheckBat;
+    }
+
+    public void setSpawnCheckBat(float spawnCheckBat) {
+        this.spawnCheckBat = spawnCheckBat;
+    }
+
+    public float getSpawnCheckSimple() {
+        return spawnCheckSimple;
+    }
+
+    public void setSpawnCheckSimple(float spawnCheckSimple) {
+        this.spawnCheckSimple = spawnCheckSimple;
+    }
+
+    public boolean isTreeSpawned() {
+        return treeSpawned;
+    }
+
+    public void setTreeSpawned(boolean treeSpawned) {
+        this.treeSpawned = treeSpawned;
+    }
+
+    public ArrayList<Enemy> getAllMapEnemies() {
+        return allMapEnemies;
+    }
+
+    public void setAllMapEnemies(ArrayList<Enemy> allMapEnemies) {
+        this.allMapEnemies = allMapEnemies;
+    }
+
+    public float getAllTime() {
+        return allTime;
+    }
+
+    public void setAllTime(float allTime) {
+        this.allTime = allTime;
+    }
 }

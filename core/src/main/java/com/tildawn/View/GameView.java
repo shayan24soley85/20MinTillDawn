@@ -24,6 +24,7 @@ import com.tildawn.Controller.GameController;
 import com.tildawn.Main;
 import com.tildawn.Model.Character;
 import com.tildawn.Model.GameAssetManager;
+import com.tildawn.Model.enemy.Enemy;
 
 public class GameView implements Screen, InputProcessor {
 
@@ -44,7 +45,7 @@ public class GameView implements Screen, InputProcessor {
     private Texture playerBgTexture;
     private Sprite lightSprite;
     private Timer.Task clearErrorTask;
-    private int elapsedSeconds ;
+    private int elapsedSeconds;
     private long startTimeMillis;
 
     public GameView(GameController controller, Skin skin) {
@@ -54,11 +55,15 @@ public class GameView implements Screen, InputProcessor {
         Main.getMain().getApp().getCurrentGame().setGameView(this);
     }
 
-    @Override
-    public void show() {
-
+    private void setupCamera() {
         camera = new OrthographicCamera();
         camera.setToOrtho(false, Gdx.graphics.getWidth(), Gdx.graphics.getHeight());
+        camera.update();
+    }
+
+    @Override
+    public void show() {
+        setupCamera();
 
         stage = new Stage(new ScreenViewport());
         playerBgTexture = new Texture(Gdx.files.internal("Texture2D/lightmask.png"));
@@ -67,14 +72,14 @@ public class GameView implements Screen, InputProcessor {
         lightSprite = new Sprite(playerBgTexture);
         lightSprite.setSize(30f, 30f);
         lightSprite.setOriginCenter();
+
         BitmapFont font = new BitmapFont();
         healthLabel = new Label("Health: 100", new Label.LabelStyle(font, Color.RED));
         ammoLabel = new Label("Ammo:", new Label.LabelStyle(font, Color.WHITE));
         killsLabel = new Label("Kills:", new Label.LabelStyle(font, Color.WHITE));
         timeLabel = new Label("Time:", new Label.LabelStyle(font, Color.WHITE));
         levelLabel = new Label("Level: 1", new Label.LabelStyle(font, Color.GOLD));
-        messageLabel=new Label("",new Label.LabelStyle(font, Color.GREEN));
-
+        messageLabel = new Label("", new Label.LabelStyle(font, Color.GREEN));
 
         ProgressBar.ProgressBarStyle progressBarStyle = new ProgressBar.ProgressBarStyle();
 
@@ -112,8 +117,6 @@ public class GameView implements Screen, InputProcessor {
         if (startTimeMillis == 0) {
             startTimeMillis = System.currentTimeMillis();
         }
-
-
         InputMultiplexer multiplexer = new InputMultiplexer();
         multiplexer.addProcessor(this);
         multiplexer.addProcessor(stage);
@@ -123,7 +126,9 @@ public class GameView implements Screen, InputProcessor {
     @Override
     public void render(float delta) {
         ScreenUtils.clear(0, 0, 0, 1);
+
         lightSprite.setCenter(player.getPosX(), player.getPosY());
+
         ammoLabel.setText(com.tildawn.Enums.Label.AMMO.getText() + player.getWeapon().getAmmo());
         killsLabel.setText(com.tildawn.Enums.Label.KILLS.getText() + player.getEliminations());
         healthLabel.setText(com.tildawn.Enums.Label.HP.getText() + player.getHp());
@@ -131,9 +136,9 @@ public class GameView implements Screen, InputProcessor {
         xpProgressBar.setRange(0, player.xpToNextLevel(player.getLevel()));
         xpProgressBar.setValue(player.getXp() - player.maxLevelXp());
         camera.update();
-
+        controller.getPlayerController().centerPlayerOnCamera(camera);
         Main.getBatch().setProjectionMatrix(camera.combined);
-      Main.getBatch().begin();
+        Main.getBatch().begin();
 
         float camX = camera.position.x;
         float camY = camera.position.y;
@@ -148,14 +153,21 @@ public class GameView implements Screen, InputProcessor {
             0, 0,
             width / bgTexture.getWidth(), height / bgTexture.getHeight()
         );
+
         lightSprite.draw(Main.getBatch());
 
-        controller.updateGame();
+        controller.updateGame(delta);
+
         lightSprite.setCenter(player.getPosX(), player.getPosY());
         lightSprite.draw(Main.getBatch());
+
+        for (Enemy enemy : controller.getEnemyControl().getAllMapEnemies()) {
+            enemy.getSprite().draw(Main.getBatch());
+        }
+
         Main.getBatch().end();
 
-        elapsedSeconds = (int)((System.currentTimeMillis() - startTimeMillis) / 1000);
+        elapsedSeconds = (int) ((System.currentTimeMillis() - startTimeMillis) / 1000);
         int totalGameTimeInSeconds = Main.getMain().getApp().getCurrentGame().getGameTime() * 60;
 
         int remainingSeconds = Math.max(0, totalGameTimeInSeconds - elapsedSeconds);
@@ -163,23 +175,26 @@ public class GameView implements Screen, InputProcessor {
         int minutes = remainingSeconds / 60;
         int seconds = remainingSeconds % 60;
 
-        timeLabel.setText(String.format(com.tildawn.Enums.Label.TIME +" %02d:%02d", minutes, seconds));
+        timeLabel.setText(String.format(com.tildawn.Enums.Label.TIME + " %02d:%02d", minutes, seconds));
 
         if (remainingSeconds == 0) {
             Main.getMain().getApp().getCurrentGame().setLost(false);
-            Main.getMain().setScreen(new EndGameView
-                (new EndGameController(), GameAssetManager.getGameAssetManager().getSkin()
-                    , elapsedSeconds));
+            Main.getMain().setScreen(new EndGameView(
+                new EndGameController(), GameAssetManager.getGameAssetManager().getSkin(),
+                elapsedSeconds));
         }
-        if(player.getHp()<=0){
+
+        if (player.getHp() <= 0) {
             Main.getMain().getApp().getCurrentGame().setLost(true);
-            Main.getMain().setScreen(new EndGameView
-                (new EndGameController(), GameAssetManager.getGameAssetManager().getSkin()
-                    , elapsedSeconds));
+            Main.getMain().setScreen(new EndGameView(
+                new EndGameController(), GameAssetManager.getGameAssetManager().getSkin(),
+                elapsedSeconds));
         }
+
         stage.act(Math.min(delta, 1 / 30f));
         stage.draw();
     }
+
     public void setErrorMessage(String error) {
         messageLabel.setText(error);
 
@@ -197,17 +212,19 @@ public class GameView implements Screen, InputProcessor {
             Timer.schedule(clearErrorTask, 2);
         }
     }
-    @Override public void resize(int width, int height) {
+
+    @Override
+    public void resize(int width, int height) {
         stage.getViewport().update(width, height, true);
         camera.viewportWidth = width;
         camera.viewportHeight = height;
         camera.update();
     }
+
     public void increaseStartTimeMillis() {
-
-        startTimeMillis-=60000;
-
+        startTimeMillis -= 60000;
     }
+
     @Override public void pause() {}
     @Override public void resume() {}
     @Override public void hide() {}
@@ -230,7 +247,12 @@ public class GameView implements Screen, InputProcessor {
 
     @Override public boolean touchUp(int screenX, int screenY, int pointer, int button) { return false; }
     @Override public boolean touchCancelled(int screenX, int screenY, int pointer, int button) { return false; }
-    @Override public boolean touchDragged(int screenX, int screenY, int pointer) { return false; }
+
+    @Override
+    public boolean touchDragged(int i, int i1, int i2) {
+        return false;
+    }
+
 
     @Override
     public boolean mouseMoved(int screenX, int screenY) {
@@ -372,19 +394,19 @@ public class GameView implements Screen, InputProcessor {
         this.clearErrorTask = clearErrorTask;
     }
 
-    public long getStartTimeMillis() {
-        return startTimeMillis;
-    }
-
-    public void setStartTimeMillis(long startTimeMillis) {
-        this.startTimeMillis = startTimeMillis;
-    }
-
     public int getElapsedSeconds() {
         return elapsedSeconds;
     }
 
     public void setElapsedSeconds(int elapsedSeconds) {
         this.elapsedSeconds = elapsedSeconds;
+    }
+
+    public long getStartTimeMillis() {
+        return startTimeMillis;
+    }
+
+    public void setStartTimeMillis(long startTimeMillis) {
+        this.startTimeMillis = startTimeMillis;
     }
 }

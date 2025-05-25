@@ -66,12 +66,13 @@ public class GameController {
             Main.getMain().setScreen(new PauseMenuView(new PauseMenuController(), GameAssetManager.getGameAssetManager().getSkin()));
         }
     }
-    public void updateGame() {
+    public void updateGame(float delta) {
         if (view != null) {
             handleInput();
             worldController.update();
             playerController.update();
             weaponController.update();
+            enemyControl.update(delta);
         }
     }
 
@@ -110,4 +111,5 @@ public class GameController {
     public void setEnemyControl(enemyController enemyControl) {
         this.enemyControl = enemyControl;
     }
+
 }

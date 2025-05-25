@@ -34,6 +34,8 @@ public class WeaponController {
         }
     }
     public void update(){
+        weapon.getSprite().setPosition(Main.getMain().getApp().getCurrentGame().getCharacter().getPosX(),
+            Main.getMain().getApp().getCurrentGame().getCharacter().getPosY());
         if (isReloadingScheduled) {
             if (System.currentTimeMillis() - reloadStartTime >= 2000) {
                 weapon.setAmmo(weapon.getType().getMaxAmmo());
@@ -78,7 +80,7 @@ public class WeaponController {
             return;
         }
         for (int i = 0; i < weapon.getType().getProjectTile(); i++) {
-            float delay = i * 0.1f; // فاصله بین شلیک‌ها مثلاً ۰.۱ ثانیه
+            float delay = i * 0.1f;
             Timer.schedule(new Timer.Task() {
                 @Override
                 public void run() {
