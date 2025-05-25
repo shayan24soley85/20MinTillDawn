@@ -24,6 +24,7 @@ import com.tildawn.Controller.GameController;
 import com.tildawn.Main;
 import com.tildawn.Model.Character;
 import com.tildawn.Model.GameAssetManager;
+import com.tildawn.Model.enemy.Enemy;
 
 public class GameView implements Screen, InputProcessor {
 
@@ -150,9 +151,12 @@ public class GameView implements Screen, InputProcessor {
         );
         lightSprite.draw(Main.getBatch());
 
-        controller.updateGame();
+        controller.updateGame(delta);
         lightSprite.setCenter(player.getPosX(), player.getPosY());
         lightSprite.draw(Main.getBatch());
+        for (Enemy enemy : controller.getEnemyControl().getAllMapEnemies()) {
+            enemy.getSprite().draw(Main.getBatch());
+        }
         Main.getBatch().end();
 
         elapsedSeconds = (int)((System.currentTimeMillis() - startTimeMillis) / 1000);

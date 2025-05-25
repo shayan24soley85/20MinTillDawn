@@ -5,9 +5,12 @@ import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.Sprite;
 import com.tildawn.Model.CollisionRect;
 
-public class TentacleMonster extends enemy {
-    public TentacleMonster(float x,float y, CollisionRect collisionRect) {
-        super(25, collisionRect,x,y,new Sprite(new Texture(Gdx.files.internal("enemy/T_EyeBat_0.png"))),true,30);
+public class TentacleMonster extends Enemy {
+    public TentacleMonster(float x,float y) {
+        super(25,x,y,true,30);
+        Texture texture=new Texture(Gdx.files.internal("enemy/T_EyeBat_0.png"));
+        collisionRect=new CollisionRect(x,y,texture.getWidth(),texture.getHeight());
+        sprite=new Sprite(texture);
     }
 
     @Override
