@@ -137,10 +137,6 @@ public class GameView implements Screen, InputProcessor {
         xpProgressBar.setValue(player.getXp() - player.maxLevelXp());
         camera.update();
         controller.getPlayerController().centerPlayerOnCamera(camera);
-        System.out.println("ffffffffffffffffffffff");
-        System.out.println(camera.position.x);
-        System.out.println(camera.position.y);
-        System.out.println("ggggggggggggggggggggggggg");
         Main.getBatch().setProjectionMatrix(camera.combined);
         Main.getBatch().begin();
 

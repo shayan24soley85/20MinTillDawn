@@ -1,6 +1,7 @@
 package com.tildawn.Model.enemy;
 
 import com.badlogic.gdx.graphics.g2d.Sprite;
+import com.badlogic.gdx.math.Vector2;
 import com.tildawn.Model.CollisionRect;
 
 public abstract class Enemy {
@@ -14,7 +15,13 @@ public abstract class Enemy {
     protected Sprite sprite;
     protected int speed;
     public abstract int spawnRate(float timeSurvived);
-
+    public abstract void update(float deltaTime, Vector2 playerPos);
+    public  void  positionUpdate(float deltaTime, Vector2 playerPos) {
+        Vector2 dir = new Vector2(playerPos.x - posX, playerPos.y - posY).nor();
+        posX += dir.x * speed * deltaTime;
+        posY += dir.y * speed * deltaTime;
+        sprite.setPosition(posX, posY);
+    }
 
     public Enemy(int hp,  float x, float y, boolean canWalk, int speed) {
         this.hp = hp;

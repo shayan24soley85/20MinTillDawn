@@ -3,6 +3,7 @@ package com.tildawn.Model.enemy;
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.Sprite;
+import com.badlogic.gdx.math.Vector2;
 import com.tildawn.Model.CollisionRect;
 
 public class Elder extends Enemy {
@@ -16,5 +17,10 @@ public class Elder extends Enemy {
     @Override
     public int spawnRate(float timeSurvived) {
         return 0;
+    }
+
+    @Override
+    public void update(float deltaTime, Vector2 playerPos) {
+         super.positionUpdate(deltaTime, playerPos);
     }
 }
