@@ -4,6 +4,7 @@ import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.Sprite;
 import com.tildawn.Enums.WeaponType;
+import com.tildawn.Main;
 
 public class Weapon {
     private Sprite sprite;
@@ -14,8 +15,8 @@ public class Weapon {
     public Weapon(WeaponType type){
         this.type = type;
         sprite=new Sprite(type.getTexture());
-        sprite.setX((float) Gdx.graphics.getWidth() / 2 );
-        sprite.setY((float) Gdx.graphics.getHeight() / 2);
+//        sprite.setX((Main.getMain().getApp().getCurrentGame().getCharacter().getPosX()));
+//        sprite.setY(Main.getMain().getApp().getCurrentGame().getCharacter().getPosY());
         sprite.setSize(50,50);
         ammo=type.getMaxAmmo();
 

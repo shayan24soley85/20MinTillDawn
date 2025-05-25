@@ -2,8 +2,10 @@ package com.tildawn.Controller;
 
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.Input;
+import com.badlogic.gdx.graphics.OrthographicCamera;
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.Animation;
+import com.badlogic.gdx.graphics.g2d.Sprite;
 import com.tildawn.Main;
 import com.tildawn.Model.Ability;
 import com.tildawn.Model.Character;
@@ -15,7 +17,13 @@ public class PlayerController {
     public PlayerController(Character player){
         this.player = player;
     }
-
+    public void centerPlayerOnCamera(OrthographicCamera camera) {
+        camera.position.set(player.getPosX(), player.getPosY(), 0);
+        Sprite sprite = player.getPlayerSprite();
+        float centerX = camera.position.x - sprite.getWidth() / 2f;
+        float centerY = camera.position.y - sprite.getHeight() / 2f;
+        sprite.setPosition(centerX, centerY);
+    }
     public void update(){
         for(Ability ability:player.getAbilities().values()){
             ability.update( Gdx.graphics.getDeltaTime());
@@ -32,16 +40,16 @@ public class PlayerController {
 
     public void handlePlayerInput(){
         if (Gdx.input.isKeyPressed(Input.Keys.W)){
-            player.setPosY(player.getPosY() - player.getType().getSpeed());
-        }
-        if (Gdx.input.isKeyPressed(Input.Keys.D)){
-            player.setPosX(player.getPosX() - player.getType().getSpeed());
-        }
-        if (Gdx.input.isKeyPressed(Input.Keys.S)){
             player.setPosY(player.getPosY() + player.getType().getSpeed());
         }
-        if (Gdx.input.isKeyPressed(Input.Keys.A)){
+        if (Gdx.input.isKeyPressed(Input.Keys.D)){
             player.setPosX(player.getPosX() + player.getType().getSpeed());
+        }
+        if (Gdx.input.isKeyPressed(Input.Keys.S)){
+            player.setPosY(player.getPosY() - player.getType().getSpeed());
+        }
+        if (Gdx.input.isKeyPressed(Input.Keys.A)){
+            player.setPosX(player.getPosX() - player.getType().getSpeed());
             //player.getPlayerSprite().flip(true, false);
         }
     }

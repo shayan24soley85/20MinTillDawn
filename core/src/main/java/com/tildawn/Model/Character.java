@@ -6,6 +6,7 @@ import com.badlogic.gdx.graphics.g2d.Sprite;
 import com.tildawn.Enums.AbilityType;
 import com.tildawn.Enums.CharacterType;
 import com.tildawn.Enums.SFX;
+import com.tildawn.Main;
 
 import java.util.HashMap;
 import java.util.Map;
@@ -31,6 +32,8 @@ public class Character {
     public Character(CharacterType type, Weapon weapon) {
         this.type = type;
         this.weapon = weapon;
+        weapon.getSprite().setPosition(posX,posY);
+
         abilities = new HashMap<>();
         hp=type.getMaxHp();
         level=1;
