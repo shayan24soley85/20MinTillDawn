@@ -24,7 +24,7 @@ public class ChangeAvatarMenuController {
 
     public void setView(ChangeAvatarMenuView view) {
         this.view = view;
-        enableDragAndDrop();
+        //enableDragAndDrop();
     }
 
     public ChangeAvatarMenuView getView() {
@@ -46,42 +46,7 @@ public class ChangeAvatarMenuController {
         });
     }
 
-    private void enableDragAndDrop() {
-        SwingUtilities.invokeLater(() -> {
-            java.awt.Window[] windows = java.awt.Window.getWindows();
-            for (java.awt.Window window : windows) {
-                if (window.isVisible() && window instanceof java.awt.Frame) {
-                    try {
-                        window.setDropTarget(new DropTarget() {
-                            @Override
-                            public synchronized void drop(DropTargetDropEvent dtde) {
-                                try {
-                                    dtde.acceptDrop(DnDConstants.ACTION_COPY);
-                                    java.util.List<File> droppedFiles = (java.util.List<File>)
-                                        dtde.getTransferable().getTransferData(DataFlavor.javaFileListFlavor);
 
-                                    if (!droppedFiles.isEmpty()) {
-                                        File file = droppedFiles.get(0);
-                                        String fileName = file.getName().toLowerCase();
-                                        if (fileName.endsWith(".png") || fileName.endsWith(".jpg") || fileName.endsWith(".jpeg")) {
-                                            Gdx.app.postRunnable(() -> loadAvatarFromFile(file));
-                                        } else {
-                                            JOptionPane.showMessageDialog(null, "Only image files are supported (.png, .jpg, .jpeg)");
-                                        }
-                                    }
-                                } catch (Exception ex) {
-                                    ex.printStackTrace();
-                                }
-                            }
-                        });
-                    } catch (Exception e) {
-                        e.printStackTrace();
-                    }
-                    break;
-                }
-            }
-        });
-    }
 
     public void loadAvatarFromFile(File file) {
         try {
@@ -125,6 +90,7 @@ public class ChangeAvatarMenuController {
                 return;
             } else if (view.getConfirmBtn().isChecked()) {
                 SFX.CLICK_BUTTON.play();
+
                 view.getConfirmBtn().setChecked(false);
                 if (view.getAvatarPath().equals(view.getUser().getAvatarPath())) {
                     view.setErrorMessage(Message.AVATAR_NOT_CHOSEN.toString());
@@ -137,6 +103,16 @@ public class ChangeAvatarMenuController {
                 SFX.CLICK_BUTTON.play();
                 view.getSelectFileBtn().setChecked(false);
                 openFileChooser();
+            } else if (view.getDragedBtn().isChecked()) {
+                SFX.CLICK_BUTTON.play();
+                view.getDragedBtn().setChecked(false);
+                if (view.getAvatarPath().equals(view.getUser().getAvatarPath())) {
+                    view.setErrorMessage(Message.AVATAR_NOT_CHOSEN.toString());
+                    return;
+                }
+                view.setAvatarPath(view.getUser().getAvatarPath());
+                view.setSuccessMessage(Message.AVATAR_CHANGED.toString());
+                Main.getMain().getApp().getSaving().saveUserToJson(view.getUser());
             }
         }
     }

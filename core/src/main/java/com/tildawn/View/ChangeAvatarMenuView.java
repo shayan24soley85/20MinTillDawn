@@ -34,6 +34,7 @@ public class ChangeAvatarMenuView implements Screen {
     public Table table;
     private TextButton backBtn ;
     private TextButton confirmBtn ;
+    private TextButton dragedBtn ;
     private TextButton selectFileBtn ;
     private File selectedFile;
     private Texture selectedTexture;
@@ -51,6 +52,7 @@ public class ChangeAvatarMenuView implements Screen {
         this.controller = controller;
         backBtn = new TextButton(com.tildawn.Enums.Label.BACK.toString(), skin);
         confirmBtn = new TextButton(com.tildawn.Enums.Label.CONFIRM.toString(), skin);
+        dragedBtn=new TextButton(com.tildawn.Enums.Label.iDraged.getText(), skin);
          selectFileBtn = new TextButton(com.tildawn.Enums.Label.CUSTOM_AVATAR.toString(), skin);
         this.table = new Table();
         nameLabel = new Label(com.tildawn.Enums.Label.USERNAME +user.getUsername(), skin);
@@ -128,6 +130,7 @@ public class ChangeAvatarMenuView implements Screen {
 
         buttonsTable.add(backBtn).padRight(20);
         buttonsTable.add(confirmBtn).padRight(20);
+        buttonsTable.add(dragedBtn).padRight(20);
 
         confirmBtn.setVisible(true);
 
@@ -196,6 +199,14 @@ public class ChangeAvatarMenuView implements Screen {
     public void dispose() {
         stage.dispose();
         if (selectedTexture != null) selectedTexture.dispose();
+    }
+
+    public TextButton getDragedBtn() {
+        return dragedBtn;
+    }
+
+    public void setDragedBtn(TextButton dragedBtn) {
+        this.dragedBtn = dragedBtn;
     }
 
     public Stage getStage() {

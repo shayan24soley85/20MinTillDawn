@@ -2,6 +2,7 @@ package com.tildawn.lwjgl3;
 
 import com.badlogic.gdx.backends.lwjgl3.Lwjgl3Application;
 import com.badlogic.gdx.backends.lwjgl3.Lwjgl3ApplicationConfiguration;
+import com.badlogic.gdx.backends.lwjgl3.Lwjgl3WindowAdapter;
 import com.tildawn.Main;
 
 /** Launches the desktop (LWJGL3) application. */
@@ -12,7 +13,21 @@ public class Lwjgl3Launcher {
     }
 
     private static Lwjgl3Application createApplication() {
-        return new Lwjgl3Application(new Main(), getDefaultConfiguration());
+        com.tildawn.Main mainInstance = new com.tildawn.Main();
+        Lwjgl3ApplicationConfiguration config = getDefaultConfiguration();
+
+        config.setWindowListener(new Lwjgl3WindowAdapter() {
+            @Override
+            public void filesDropped(String[] files) {
+                for (String file : files) {
+                    if (file.toLowerCase().endsWith(".png")) {
+                       mainInstance.getApp().getCurrentUser().setAvatarPath(file);
+                    }
+                }
+            }
+        });
+
+        return new Lwjgl3Application(mainInstance, config);
     }
 
     private static Lwjgl3ApplicationConfiguration getDefaultConfiguration() {
