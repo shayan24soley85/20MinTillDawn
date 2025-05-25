@@ -21,6 +21,7 @@ public class GameController {
     private PlayerController playerController;
     private MapController worldController;
     private WeaponController weaponController;
+    private enemyController enemyControl;
 
 
     public void setView(GameView view) {
@@ -28,6 +29,7 @@ public class GameController {
         playerController = new PlayerController(Main.getMain().getApp().getCurrentGame().getCharacter());
         worldController = new MapController(playerController);
         weaponController = new WeaponController(Main.getMain().getApp().getCurrentGame().getCharacter().getWeapon());
+        enemyControl=new enemyController();
     }
     public void handleInput(){
         boolean ctrlPressed = Gdx.input.isKeyPressed(Input.Keys.CONTROL_LEFT) || Gdx.input.isKeyPressed(Input.Keys.CONTROL_RIGHT);
@@ -79,5 +81,33 @@ public class GameController {
 
     public WeaponController getWeaponController() {
         return weaponController;
+    }
+
+    public GameView getView() {
+        return view;
+    }
+
+    public void setPlayerController(PlayerController playerController) {
+        this.playerController = playerController;
+    }
+
+    public MapController getWorldController() {
+        return worldController;
+    }
+
+    public void setWorldController(MapController worldController) {
+        this.worldController = worldController;
+    }
+
+    public void setWeaponController(WeaponController weaponController) {
+        this.weaponController = weaponController;
+    }
+
+    public enemyController getEnemyControl() {
+        return enemyControl;
+    }
+
+    public void setEnemyControl(enemyController enemyControl) {
+        this.enemyControl = enemyControl;
     }
 }

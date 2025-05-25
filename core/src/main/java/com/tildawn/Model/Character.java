@@ -22,8 +22,8 @@ public class Character {
     private float posX;
     private String username;
     private float posY;
-    private Texture playerTexture = new Texture(GameAssetManager.getGameAssetManager().getCharacter1_idle0());
-    private Sprite playerSprite = new Sprite(playerTexture);
+    private Texture playerTexture ;
+    private Sprite playerSprite ;
     private boolean isPlayerIdle = true;
     private boolean isPlayerRunning = false;
     private float time = 0;
@@ -36,6 +36,8 @@ public class Character {
         level=1;
         xp=0;
         eliminations=0;
+        playerTexture=type.getTexture();
+        playerSprite=new Sprite(playerTexture);
         playerSprite.setPosition((float) Gdx.graphics.getWidth() / 2, (float) Gdx.graphics.getHeight() / 2);
         playerSprite.setSize(playerTexture.getWidth() * 3, playerTexture.getHeight() * 3);
         rect = new CollisionRect((float) Gdx.graphics.getWidth() / 2, (float) Gdx.graphics.getHeight(), playerTexture.getWidth() * 3, playerTexture.getHeight() * 3);

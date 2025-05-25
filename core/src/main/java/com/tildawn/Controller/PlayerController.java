@@ -19,12 +19,11 @@ public class PlayerController {
     public void update(){
         for(Ability ability:player.getAbilities().values()){
             ability.update( Gdx.graphics.getDeltaTime());
-
         }
         player.getPlayerSprite().draw(Main.getBatch());
 
         if(player.isPlayerIdle()){
-            idleAnimation();
+           // idleAnimation();
         }
 
         handlePlayerInput();
@@ -43,7 +42,7 @@ public class PlayerController {
         }
         if (Gdx.input.isKeyPressed(Input.Keys.A)){
             player.setPosX(player.getPosX() + player.getType().getSpeed());
-            player.getPlayerSprite().flip(true, false);
+            //player.getPlayerSprite().flip(true, false);
         }
     }
 

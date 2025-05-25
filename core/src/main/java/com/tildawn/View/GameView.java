@@ -44,7 +44,7 @@ public class GameView implements Screen, InputProcessor {
     private Texture playerBgTexture;
     private Sprite lightSprite;
     private Timer.Task clearErrorTask;
-
+    private int elapsedSeconds ;
     private long startTimeMillis;
 
     public GameView(GameController controller, Skin skin) {
@@ -155,9 +155,9 @@ public class GameView implements Screen, InputProcessor {
         lightSprite.draw(Main.getBatch());
         Main.getBatch().end();
 
-
+        elapsedSeconds = (int)((System.currentTimeMillis() - startTimeMillis) / 1000);
         int totalGameTimeInSeconds = Main.getMain().getApp().getCurrentGame().getGameTime() * 60;
-        int elapsedSeconds = (int)((System.currentTimeMillis() - startTimeMillis) / 1000);
+
         int remainingSeconds = Math.max(0, totalGameTimeInSeconds - elapsedSeconds);
 
         int minutes = remainingSeconds / 60;
@@ -378,5 +378,13 @@ public class GameView implements Screen, InputProcessor {
 
     public void setStartTimeMillis(long startTimeMillis) {
         this.startTimeMillis = startTimeMillis;
+    }
+
+    public int getElapsedSeconds() {
+        return elapsedSeconds;
+    }
+
+    public void setElapsedSeconds(int elapsedSeconds) {
+        this.elapsedSeconds = elapsedSeconds;
     }
 }
