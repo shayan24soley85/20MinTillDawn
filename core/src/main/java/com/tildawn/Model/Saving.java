@@ -12,6 +12,8 @@ import java.lang.reflect.Type;
 import java.util.ArrayList;
 import java.util.List;
 
+import static java.lang.Math.max;
+
 public class Saving {
     public  void saveUserToJson(User user) {
         Gson gson = new GsonBuilder().setPrettyPrinting().create();
@@ -86,5 +88,15 @@ public class Saving {
         } catch (Exception e) {
             e.printStackTrace();
         }
+    }
+    public void saveUsersDetails(int kills,int score,float timeSurvived) {
+        User user=Main.getMain().getApp().getCurrentUser();
+        if (user.getUsername().equals("GUEST")){
+            return;
+        }
+        user.setMostTimeAlive(max(user.getMostTimeAlive(),timeSurvived));
+        user.setScore(user.getScore()+score);
+        user.setTotalEliminations(user.getTotalEliminations()+kills);
+        saveUserToJson(user);
     }
 }

@@ -25,6 +25,7 @@ import com.tildawn.Main;
 import com.tildawn.Model.Character;
 import com.tildawn.Model.GameAssetManager;
 import com.tildawn.Model.enemy.Enemy;
+import com.tildawn.Model.enemy.xpDrops;
 
 public class GameView implements Screen, InputProcessor {
 
@@ -157,7 +158,9 @@ public class GameView implements Screen, InputProcessor {
         lightSprite.draw(Main.getBatch());
 
         controller.updateGame(delta);
-
+        for (xpDrops xp:controller.getDrops()) {
+            xp.getSprite().draw(Main.getBatch());
+        }
         lightSprite.setCenter(player.getPosX(), player.getPosY());
         lightSprite.draw(Main.getBatch());
 
@@ -179,6 +182,7 @@ public class GameView implements Screen, InputProcessor {
 
         if (remainingSeconds == 0) {
             Main.getMain().getApp().getCurrentGame().setLost(false);
+            Main.getMain().getApp().getSaving().saveUsersDetails(player.getEliminations(), player.getEliminations()*elapsedSeconds,elapsedSeconds);
             Main.getMain().setScreen(new EndGameView(
                 new EndGameController(), GameAssetManager.getGameAssetManager().getSkin(),
                 elapsedSeconds));
@@ -186,6 +190,7 @@ public class GameView implements Screen, InputProcessor {
 
         if (player.getHp() <= 0) {
             Main.getMain().getApp().getCurrentGame().setLost(true);
+            Main.getMain().getApp().getSaving().saveUsersDetails(player.getEliminations(), player.getEliminations()*elapsedSeconds,elapsedSeconds);
             Main.getMain().setScreen(new EndGameView(
                 new EndGameController(), GameAssetManager.getGameAssetManager().getSkin(),
                 elapsedSeconds));

@@ -4,12 +4,10 @@ import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.math.Vector2;
 import com.tildawn.Main;
 import com.tildawn.Model.Character;
-import com.tildawn.Model.enemy.Enemy;
-import com.tildawn.Model.enemy.EyeBat;
-import com.tildawn.Model.enemy.TentacleMonster;
-import com.tildawn.Model.enemy.Tree;
+import com.tildawn.Model.enemy.*;
 
 import java.util.ArrayList;
+import java.util.Iterator;
 
 public class enemyController {
     private float spawnCheckElder=0f;
@@ -26,7 +24,7 @@ public class enemyController {
          allTime=Main.getMain().getApp().getCurrentGame().getGameView().getElapsedSeconds();
 
          int range = 8000;
-         int range2=500;
+         int range2=600;
          Character player= Main.getMain().getApp().getCurrentGame().getCharacter();
          int px = (int) player.getPosX();
          int py = (int) player.getPosY();
@@ -39,7 +37,7 @@ public class enemyController {
                   int spawnY = randomInt(py - range, py + range);
                   allMapEnemies.add(new Tree(spawnX, spawnY));
                   numberOfTrees++;
-              } while (numberOfTrees < 300);
+              } while (numberOfTrees < 200);
 
           }
          spawnCheckSimple += deltaTime;
@@ -66,8 +64,18 @@ public class enemyController {
                  }
              }
          }
-         for (Enemy enemy : allMapEnemies) {
+         Iterator<Enemy> iterator = allMapEnemies.iterator();
+         while (iterator.hasNext()) {
+
+             Enemy enemy = iterator.next();
              enemy.update(deltaTime, new Vector2(px, py));
+             if (!enemy.isAlive()) {
+                 iterator.remove();
+                 xpDrops drops=new xpDrops(enemy.getPosX(), enemy.getPosY());
+                 Main.getMain().getApp().getCurrentGame().getGameView().getController().getDrops().add(drops);
+                 drops.getSprite().draw(Main.getBatch());
+             }
+
          }
          allMapEnemies.removeIf(enemy -> !enemy.isAlive());
      }

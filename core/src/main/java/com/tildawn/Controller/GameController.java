@@ -3,18 +3,24 @@ package com.tildawn.Controller;
 
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.Input;
+import com.badlogic.gdx.utils.Timer;
 import com.tildawn.Controller.MapController;
 import com.tildawn.Controller.PlayerController;
 import com.tildawn.Controller.WeaponController;
+import com.tildawn.Enums.AbilityType;
 import com.tildawn.Enums.Message;
 import com.tildawn.Main;
+import com.tildawn.Model.Bullet;
 import com.tildawn.Model.Character;
 import com.tildawn.Model.GameAssetManager;
 import com.tildawn.Model.Weapon;
-import com.tildawn.View.ChangeAvatarMenuView;
-import com.tildawn.View.ChooseAbilityView;
-import com.tildawn.View.GameView;
-import com.tildawn.View.PauseMenuView;
+import com.tildawn.Model.enemy.Enemy;
+import com.tildawn.Model.enemy.EnemyState;
+import com.tildawn.Model.enemy.Tree;
+import com.tildawn.Model.enemy.xpDrops;
+import com.tildawn.View.*;
+
+import java.util.ArrayList;
 
 public class GameController {
     private GameView view;
@@ -22,6 +28,7 @@ public class GameController {
     private MapController worldController;
     private WeaponController weaponController;
     private enemyController enemyControl;
+    private ArrayList<xpDrops> drops=new ArrayList<>();
 
 
     public void setView(GameView view) {
@@ -66,13 +73,142 @@ public class GameController {
             Main.getMain().setScreen(new PauseMenuView(new PauseMenuController(), GameAssetManager.getGameAssetManager().getSkin()));
         }
     }
+    public void enemyKnockBack(Enemy enemy, Character player) {
+        float knockBackDistance = 10f;
+
+        float ex = enemy.getPosX();
+        float ey = enemy.getPosY();
+        float px = player.getPosX();
+        float py = player.getPosY();
+
+        if (ex > px && ey == py) {
+            enemy.setPosX(ex + knockBackDistance);
+        }
+        else if (ex < px && ey == py) {
+
+            enemy.setPosX(ex - knockBackDistance);
+        }
+        else if (ey > py && ex == px) {
+
+            enemy.setPosY( ey + knockBackDistance);
+        }
+        else if (ey < py && ex == px) {
+
+            enemy.setPosY( ey - knockBackDistance);
+        }
+        else if (ex > px && ey > py) {
+
+            enemy.setPosY(ey + knockBackDistance);
+            enemy.setPosX(ex + knockBackDistance);
+        }
+        else if (ex > px && ey < py) {
+            enemy.setPosY(ey - knockBackDistance);
+            enemy.setPosX(ex + knockBackDistance);
+        }
+        else if (ex < px && ey > py) {
+            enemy.setPosY(ey + knockBackDistance);
+            enemy.setPosX(ex - knockBackDistance);
+        }
+        else if (ex < px && ey < py) {
+            enemy.setPosY(ey - knockBackDistance);
+            enemy.setPosX(ex - knockBackDistance);
+        }
+        else {
+            enemy.setPosY(ey + knockBackDistance);
+            enemy.setPosX(ex + knockBackDistance);
+        }
+    }
+
+    public void checkCollisionRects(float delta){
+        for(Enemy enemy:enemyControl.getAllMapEnemies()){
+            for (Bullet bullet: weaponController.getBullets()){
+                if (enemy.getCollisionRect().collidesWith(bullet.getCollisionRect())){
+                    enemy.increaseHp(-weaponController.getWeapon().getType().getDamage());
+                    if (!(enemy instanceof Tree)){
+                        enemyKnockBack(enemy,playerController.getPlayer());
+                    }
+
+                    bullet.setDead(true);
+                    if (enemy.getHp()<=0){
+                        enemy.setState(EnemyState.dying);
+                    }else {
+                        enemy.setState(EnemyState.damaged);
+                    }
+                }
+            }
+            if (playerController.getPlayer().getRect().collidesWith(enemy.getCollisionRect())&&!playerController.getPlayer().isDamaged()){
+                if (playerController.getPlayer().getAbilities().containsKey(AbilityType.VITALITY)){
+                    playerController.getPlayer().setHp(playerController.getPlayer().getHp()-2);
+                }else{
+                    playerController.getPlayer().setHp(playerController.getPlayer().getHp()-1);
+                }
+                playerController.getPlayer().setInvincible(true);
+                playerController.getPlayer().setDamaged(true);
+                if(playerController.getPlayer().isDamaged()){
+                    showAnimation(playerController.getPlayer(),delta);
+                    Timer.schedule(new Timer.Task() {
+                        @Override
+                        public void run() {
+                            playerController.getPlayer().getPlayerSprite().setRegion(playerController.getPlayer().getPlayerTexture());
+                        }
+                    }, 2);
+                }
+
+                Timer.schedule(new Timer.Task() {
+                    @Override
+                    public void run() {
+                       playerController.getPlayer().setInvincible(false);
+                       playerController.getPlayer().setDamaged(false);
+                    }
+                }, 2);
+
+            }
+        }
+        for (xpDrops drop: drops){
+            if(drop.getCollisionRect().collidesWith(playerController.getPlayer().getRect())){
+                drop.setCollected(true);
+                boolean levelIncreased=playerController.getPlayer().increaseXp
+                    (3);
+                if (levelIncreased){
+                    Main.getMain().setScreen(new ChooseAbilityView(new ChooseAbilityController(), GameAssetManager.getGameAssetManager().getSkin()));
+                }
+            }
+        }
+    }
+    public void showAnimation(Character player,float delta){
+        player.getPlayerSprite().setRegion(player.getAnimation().getKeyFrame(player.getTime()));
+
+        player.setTime(player.getTime()+delta);
+        System.out.println(player.getTime());
+        if (player.getAnimation().isAnimationFinished(player.getTime()) || player.getTime() >= 1f) {
+
+            Main.getMain().getApp().getCurrentGame().getCharacter().increaseKills();
+
+          player.setTime(0);
+
+
+            player.getPlayerSprite().setRegion(player.getPlayerTexture());
+        }
+    }
+    public void updateCollisionRects(){
+        for(Enemy enemy:enemyControl.getAllMapEnemies()){
+            enemy.getCollisionRect().updateCollisionRect(enemy.getPosX(),enemy.getPosY());
+        }
+        playerController.getPlayer().getRect().updateCollisionRect(playerController.getPlayer().getPosX(),playerController.getPlayer().getPosY());
+        for (Bullet bullet: weaponController.getBullets()){
+            bullet.getCollisionRect().updateCollisionRect(bullet.getSprite().getX(), bullet.getSprite().getY());
+        }
+    }
     public void updateGame(float delta) {
         if (view != null) {
+            drops.removeIf(xpDrops::isCollected);
             handleInput();
             worldController.update();
             playerController.update();
             weaponController.update();
             enemyControl.update(delta);
+            updateCollisionRects();
+            checkCollisionRects(delta);
         }
     }
 
@@ -112,4 +248,11 @@ public class GameController {
         this.enemyControl = enemyControl;
     }
 
+    public ArrayList<xpDrops> getDrops() {
+        return drops;
+    }
+
+    public void setDrops(ArrayList<xpDrops> drops) {
+        this.drops = drops;
+    }
 }

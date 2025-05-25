@@ -6,7 +6,8 @@
     "securityAnswer": "Davood",
     "avatarPath": "avatars/vibrent_11.png",
     "score": 0,
-    "totalEliminations": 0
+    "totalEliminations": 0,
+    "mostTimeAlive": 0.0
   },
   {
     "username": "shayan",
@@ -15,7 +16,8 @@
     "securityAnswer": "pizza",
     "avatarPath": "C:\\Users\\USER\\Pictures\\Saved Pictures\\ax-pic-min.png",
     "score": 0,
-    "totalEliminations": 0
+    "totalEliminations": 0,
+    "mostTimeAlive": 0.0
   },
   {
     "username": "shayan24soley",
@@ -23,7 +25,8 @@
     "securityQuestion": "whats your favorite color?",
     "securityAnswer": "blue",
     "avatarPath": "C:\\Users\\USER\\Desktop\\shayanht.jpg",
-    "score": 0,
-    "totalEliminations": 0
+    "score": 2765,
+    "totalEliminations": 19,
+    "mostTimeAlive": 208.0
   }
 ]

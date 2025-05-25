@@ -1,25 +1,26 @@
-package com.tildawn.Model;
+package com.tildawn.Model.enemy;
 
-import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.Sprite;
 import com.tildawn.Main;
+import com.tildawn.Model.CollisionRect;
+import com.tildawn.Model.GameAssetManager;
 
-public class Bullet {
+public class EyeBatBullet {
     private Texture texture = new Texture(GameAssetManager.getGameAssetManager().getBullet());
     private Sprite sprite = new Sprite(texture);
-    private int damage = 5;
+    private int damage = 1;
     private int x;
     private int y;
     private boolean dead = false;
     private CollisionRect collisionRect;
 
-    public Bullet(int x, int y){
+    public EyeBatBullet(int x, int y,int x2,int y2){
         sprite.setSize(20 , 20);
         this.x = x;
         this.y = y;
-        sprite.setX(Main.getMain().getApp().getCurrentGame().getCharacter().getPosX());
-        sprite.setY(Main.getMain().getApp().getCurrentGame().getCharacter().getPosY());
+        sprite.setX(x2);
+        sprite.setY(y2);
         collisionRect=new CollisionRect(x,y,sprite.getWidth(),sprite.getHeight());
     }
 
@@ -79,3 +80,4 @@ public class Bullet {
         this.dead = dead;
     }
 }
+
