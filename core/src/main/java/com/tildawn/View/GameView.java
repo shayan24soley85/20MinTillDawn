@@ -178,14 +178,17 @@ public class GameView implements Screen, InputProcessor {
         }
 
         Main.getBatch().end();
-        Main.getBatch().setShader(radialShader);
-        Main.getBatch().begin();
-        radialShader.setUniformf("u_lightPos", new Vector2(0.5f, 0.5f));
-        radialShader.setUniformf("u_radius", 0.4f);
-        radialShader.setUniformf("u_color", 1f, 1f, 1f, 1f);
-        Main.getBatch().draw(bgTexture, camX - width / 2f, camY - height / 2f, width, height);
-        Main.getBatch().end();
-        Main.getBatch().setShader(null);
+        if (!Main.getMain().getApp().getCurrentGame().getGrayscaleToggle()){
+            Main.getBatch().setShader(radialShader);
+            Main.getBatch().begin();
+            radialShader.setUniformf("u_lightPos", new Vector2(0.5f, 0.5f));
+            radialShader.setUniformf("u_radius", 0.4f);
+            radialShader.setUniformf("u_color", 1f, 1f, 1f, 1f);
+            Main.getBatch().draw(bgTexture, camX - width / 2f, camY - height / 2f, width, height);
+            Main.getBatch().end();
+            Main.getBatch().setShader(null);
+        }
+
         elapsedSeconds = (int) ((System.currentTimeMillis() - startTimeMillis) / 1000);
         int totalGameTimeInSeconds = Main.getMain().getApp().getCurrentGame().getGameTime() * 60;
 
