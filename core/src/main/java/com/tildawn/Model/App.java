@@ -2,6 +2,7 @@ package com.tildawn.Model;
 
 import com.badlogic.gdx.audio.Music;
 
+import com.tildawn.Enums.SortBy;
 import com.tildawn.Model.Language.LanguageSetting;
 
 import java.util.HashMap;
@@ -9,6 +10,7 @@ import java.util.Random;
 
 public class App {
     private final HashMap<String,User> allUsers=new HashMap<>();
+    private SortBy lastSortBy=SortBy.killCount;
     private final Saving saving=new Saving();
     private User currentUser=null;
     private  LanguageSetting currentLanguage;
@@ -74,5 +76,13 @@ public class App {
 
     public void setRand(Random rand) {
         this.rand = rand;
+    }
+
+    public SortBy getLastSortBy() {
+        return lastSortBy;
+    }
+
+    public void setLastSortBy(SortBy lastSortBy) {
+        this.lastSortBy = lastSortBy;
     }
 }
