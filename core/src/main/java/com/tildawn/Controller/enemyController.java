@@ -2,6 +2,7 @@ package com.tildawn.Controller;
 
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.math.Vector2;
+import com.badlogic.gdx.utils.Timer;
 import com.tildawn.Main;
 import com.tildawn.Model.Character;
 import com.tildawn.Model.enemy.*;
@@ -15,6 +16,9 @@ public class enemyController {
     private float spawnCheckSimple=0f;
     private boolean treeSpawned=false;
     private float allTime=0f;
+    private boolean bossStarted=false;
+    private boolean bossDropped=false;
+    private float bossTime=0f;
     private ArrayList<Enemy> allMapEnemies=new ArrayList<>();
     public int randomInt(int min, int max) {
         return (int)(Math.random() * (max - min) + min);
@@ -64,6 +68,17 @@ public class enemyController {
                  }
              }
          }
+         if (allTime >(Main.getMain().getApp().getCurrentGame().getGameTime()*30)) {
+             System.out.println(allTime);
+             System.out.println(Main.getMain().getApp().getCurrentGame().getGameTime());
+             bossStarted=true;
+         }
+         if (bossStarted&&!bossDropped) {
+             bossDropped=true;
+             int spawnX = randomInt(px - (range2+900), px + range2+900);
+             int spawnY = randomInt(py - (900+range2), py + range2+900);
+             allMapEnemies.add(new Elder(spawnX, spawnY));
+         }
          Iterator<Enemy> iterator = allMapEnemies.iterator();
          while (iterator.hasNext()) {
 
@@ -75,11 +90,27 @@ public class enemyController {
                  Main.getMain().getApp().getCurrentGame().getGameView().getController().getDrops().add(drops);
                  drops.getSprite().draw(Main.getBatch());
              }
+             if (bossDropped&&(enemy instanceof Elder)) {
+                 bossTime+=deltaTime;
+                 if (bossTime>=5f){
+                     bossTime=0;
+                     dashToPlayer(enemy);
+                 }
+             }
 
          }
          allMapEnemies.removeIf(enemy -> !enemy.isAlive());
      }
-
+  public void dashToPlayer(Enemy enemy){
+        int oldSpeed=enemy.getSpeed();
+        enemy.setSpeed(enemy.getSpeed()*10);
+      Timer.schedule(new Timer.Task() {
+          @Override
+          public void run() {
+              enemy.setSpeed(oldSpeed);
+          }
+      }, 3);
+  }
     public float getSpawnCheckElder() {
         return spawnCheckElder;
     }
@@ -126,5 +157,29 @@ public class enemyController {
 
     public void setAllTime(float allTime) {
         this.allTime = allTime;
+    }
+
+    public boolean isBossStarted() {
+        return bossStarted;
+    }
+
+    public void setBossStarted(boolean bossStarted) {
+        this.bossStarted = bossStarted;
+    }
+
+    public boolean isBossDropped() {
+        return bossDropped;
+    }
+
+    public void setBossDropped(boolean bossDropped) {
+        this.bossDropped = bossDropped;
+    }
+
+    public float getBossTime() {
+        return bossTime;
+    }
+
+    public void setBossTime(float bossTime) {
+        this.bossTime = bossTime;
     }
 }

@@ -66,7 +66,7 @@ public class GameController {
                  playerController.getPlayer().setHp(playerController.getPlayer().getType().getMaxHp());
             }
             else if (Gdx.input.isKeyJustPressed(Input.Keys.B)) {
-
+                enemyControl.setBossStarted(true);
             }
         }
         if(Gdx.input.isKeyJustPressed(Input.Keys.P)){

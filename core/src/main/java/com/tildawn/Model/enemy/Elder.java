@@ -22,5 +22,25 @@ public class Elder extends Enemy {
     @Override
     public void update(float deltaTime, Vector2 playerPos) {
          super.positionUpdate(deltaTime, playerPos);
+        animationTimer += deltaTime;
+
+        switch (state) {
+            case damaged:
+                if (animationTimer >= 0.3f) {
+                    state = EnemyState.simple;
+                }
+                break;
+
+            case dying:
+                if (animationTimer >= 1.0f) {
+                    idleAnimation();
+                }
+                break;
+
+            case simple:
+            default:
+
+                break;
+        }
     }
 }
