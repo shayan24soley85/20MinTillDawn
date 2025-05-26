@@ -56,7 +56,6 @@ public abstract class Enemy {
             time=0;
         }
 
-//        deadAnimation.setPlayMode(Animation.PlayMode.LOOP);
     }
     public int getHp() {
         return hp;

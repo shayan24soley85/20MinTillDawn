@@ -31,7 +31,6 @@ public class EyeBat extends Enemy {
         shootTimer += deltaTime;
         if (shootTimer >= 3f) {
             shootTimer = 0f;
-            shootAtPlayer(playerPos);
         }
         animationTimer += deltaTime;
         for (EyeBatBullet bullet : batBullets) {
@@ -63,9 +62,6 @@ public class EyeBat extends Enemy {
                 break;
         }
 
-    }
-    private void shootAtPlayer(Vector2 playerPos) {
-         //batBullets.add(new EyeBatBullet((int)playerPos.x,(int)playerPos.y,(int)posX,(int)posY));
     }
 
     public ArrayList<EyeBatBullet> getBatBullets() {

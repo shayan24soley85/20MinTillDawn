@@ -30,10 +30,6 @@ public class PlayerController {
         }
         player.getPlayerSprite().draw(Main.getBatch());
 
-        if(player.isPlayerIdle()){
-           // idleAnimation();
-        }
-
         handlePlayerInput();
     }
 
@@ -50,7 +46,7 @@ public class PlayerController {
         }
         if (Gdx.input.isKeyPressed(Input.Keys.A)){
             player.setPosX(player.getPosX() - player.getType().getSpeed());
-            //player.getPlayerSprite().flip(true, false);
+
         }
     }
 

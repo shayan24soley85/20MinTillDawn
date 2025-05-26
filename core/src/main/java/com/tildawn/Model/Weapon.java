@@ -15,8 +15,6 @@ public class Weapon {
     public Weapon(WeaponType type){
         this.type = type;
         sprite=new Sprite(type.getTexture());
-//        sprite.setX((Main.getMain().getApp().getCurrentGame().getCharacter().getPosX()));
-//        sprite.setY(Main.getMain().getApp().getCurrentGame().getCharacter().getPosY());
         sprite.setSize(50,50);
         ammo=type.getMaxAmmo();
 

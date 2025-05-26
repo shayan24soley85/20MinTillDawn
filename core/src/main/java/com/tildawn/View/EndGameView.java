@@ -88,7 +88,7 @@ public class EndGameView implements Screen {
 
     @Override
     public void render(float delta) {
-        ScreenUtils.clear(0, 0, 0, 1); // Clear black
+        ScreenUtils.clear(0, 0, 0, 1);
         stage.act(Math.min(delta, 1 / 30f));
         stage.draw();
         controller.handleInput();

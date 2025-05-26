@@ -9,7 +9,6 @@ buildscript {
         maven { url 'https://s01.oss.sonatype.org/content/repositories/snapshots/' }
     }
     dependencies {
-        // اگه پلاگینی خواستی اینجا می‌نویسی (فعلاً خالیه)
     }
 }
 
@@ -31,10 +30,10 @@ configure(subprojects) {
     targetCompatibility = 1.8
 
     dependencies {
-        // برای json (org.json)
+
         implementation 'org.json:json:20240303'
 
-        // برای gson اگه جای دیگه استفاده می‌کنی
+
         implementation 'com.google.code.gson:gson:2.10.1'
     }
 

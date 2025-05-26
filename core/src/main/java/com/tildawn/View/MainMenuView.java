@@ -112,7 +112,6 @@ public class MainMenuView implements Screen {
         rootTable.add(menuTable).expand().center();
         table.row().pad(10, 370, 0, 0);
         table.row().pad(10, 370, 0, 0);
-        //table.add(errorLabel).colspan(2).left().width(600);
         stage.addActor(table);
     }
 

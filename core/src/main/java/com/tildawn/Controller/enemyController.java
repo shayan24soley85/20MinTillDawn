@@ -69,8 +69,6 @@ public class enemyController {
              }
          }
          if (allTime >(Main.getMain().getApp().getCurrentGame().getGameTime()*30)) {
-             System.out.println(allTime);
-             System.out.println(Main.getMain().getApp().getCurrentGame().getGameTime());
              bossStarted=true;
          }
          if (bossStarted&&!bossDropped) {

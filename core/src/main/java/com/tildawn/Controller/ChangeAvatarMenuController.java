@@ -24,7 +24,6 @@ public class ChangeAvatarMenuController {
 
     public void setView(ChangeAvatarMenuView view) {
         this.view = view;
-        //enableDragAndDrop();
     }
 
     public ChangeAvatarMenuView getView() {

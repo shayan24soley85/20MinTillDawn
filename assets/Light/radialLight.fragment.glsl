@@ -2,9 +2,9 @@
 precision mediump float;
 #endif
 
-uniform vec2 u_lightPos;     // مکان نور (بین 0 و 1)
-uniform float u_radius;      // شعاع نور (بین 0 و 1)
-uniform vec4 u_color;        // رنگ نور
+uniform vec2 u_lightPos;
+uniform float u_radius;
+uniform vec4 u_color;
 
 varying vec2 v_texCoord;
 

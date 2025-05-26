@@ -32,9 +32,7 @@ public class Main extends Game {
             Gdx.files.internal("default.vert.txt"),
             Gdx.files.internal("grayscale.frag.txt")
         );
-//        if (!grayscaleShader.isCompiled()) {
-//            Gdx.app.error("Shader", "Shader compilation failed:\n" + grayscaleShader.getLog());
-//        }
+
 
 
         app = new App();

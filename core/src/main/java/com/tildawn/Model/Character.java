@@ -107,22 +107,7 @@ public class Character {
         }
         return 2000;
     }
-    public void idleAnimation() {
-//        playerSprite.setRegion(animation.getKeyFrame(time));
-//
-//        time += Gdx.graphics.getDeltaTime();
-//        System.out.println(time);
-//        if (animation.isAnimationFinished(time) || time >= 1f) {
-//
-//            Main.getMain().getApp().getCurrentGame().getCharacter().increaseKills();
-//            isInvincible = false;
-//            isDamaged = false;
-//            time = 0;
-//
-//
-//            playerSprite.setRegion(playerTexture);
-//        }
-    }
+
 
     public float getInvincibleTimeLeft() {
         return invincibleTimeLeft;

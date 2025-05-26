@@ -38,9 +38,7 @@ public class PreGameMenuController {
                 character.setAbilities(new HashMap<>());
                 character.setUsername(Main.getMain().getApp().getCurrentUser().getUsername());
                 Main.getMain().getApp().getCurrentGame().setGameTime(view.getTimeSelect().getSelected());
-                //Character character=new Character(CharacterType.Diamond,new Weapon(WeaponType.dualSmg));
                 Main.getMain().getApp().getCurrentGame().setCharacter(character);
-               // todo  create map  & start game
                 Main.getMain().setScreen(new GameView(new GameController(), GameAssetManager.getGameAssetManager().getSkin()));
             }
         }

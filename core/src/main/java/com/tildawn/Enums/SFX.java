@@ -15,8 +15,7 @@ public enum SFX {
     collectCoin("sfx/Coins (10).wav"),
     monsterDying("sfx/Monster_2_RecieveAttack_HighIntensity_01.wav/"),
     lowHealth("sfx/sfx_lowhealth_alarmloop1.wav");
-//    EXPLOSION("sfx/explosion.wav"),
-//    BUTTON_CLICK("sfx/button_click.wav");
+
 
     private final String path;
     private Sound sound;

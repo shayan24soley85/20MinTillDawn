@@ -137,7 +137,6 @@ public class GameView implements Screen, InputProcessor {
     public void render(float delta) {
         ScreenUtils.clear(0, 0, 0, 1);
 
-       // lightSprite.setCenter(player.getPosX(), player.getPosY());
 
         ammoLabel.setText(com.tildawn.Enums.Label.AMMO.getText() + player.getWeapon().getAmmo());
         killsLabel.setText(com.tildawn.Enums.Label.KILLS.getText() + player.getEliminations());
@@ -164,14 +163,12 @@ public class GameView implements Screen, InputProcessor {
             width / bgTexture.getWidth(), height / bgTexture.getHeight()
         );
 
-        //lightSprite.draw(Main.getBatch());
+
 
         controller.updateGame(delta);
         for (xpDrops xp:controller.getDrops()) {
             xp.getSprite().draw(Main.getBatch());
         }
-//        lightSprite.setCenter(player.getPosX(), player.getPosY());
-//        lightSprite.draw(Main.getBatch());
 
         for (Enemy enemy : controller.getEnemyControl().getAllMapEnemies()) {
             enemy.getSprite().draw(Main.getBatch());

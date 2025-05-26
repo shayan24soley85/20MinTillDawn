@@ -196,6 +196,6 @@ public TalentMenuView(TalentMenuController controller,Skin skin) {
     @Override
     public void dispose() {
         stage.dispose();
-//        if (clearErrorTask != null) clearErrorTask.cancel();
+
     }
 }

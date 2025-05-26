@@ -183,7 +183,6 @@ public class GameController {
         player.getPlayerSprite().setRegion(player.getAnimation().getKeyFrame(player.getTime()));
 
         player.setTime(player.getTime()+delta);
-        System.out.println(player.getTime());
         if (player.getAnimation().isAnimationFinished(player.getTime()) || player.getTime() >= 1f) {
 
             Main.getMain().getApp().getCurrentGame().getCharacter().increaseKills();
@@ -207,7 +206,6 @@ public class GameController {
         if (view != null) {
             drops.removeIf(xpDrops::isCollected);
             handleInput();
-            worldController.update();
             playerController.update();
             weaponController.update();
             enemyControl.update(delta);
