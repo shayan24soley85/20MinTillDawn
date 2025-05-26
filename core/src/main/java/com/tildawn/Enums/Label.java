@@ -80,7 +80,8 @@ public enum Label {
     YOU_LOSE("You lose!", "Vous avez perdu!"),
     YOU_WIN("You win!", "Vous avez gagné!"),
     KILL_COUNT("Kill Count: ", "Nombre de tués: "),
-    TIME_SURVIVED("Time Survived: ", "Temps de survie: ");
+    TIME_SURVIVED("Time Survived: ", "Temps de survie: "),
+    iDraged("confirm dragged picture","Confirmez l'image glissée");
 
 
     private final String english;

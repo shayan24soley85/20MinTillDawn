@@ -55,7 +55,7 @@ public class PreGameMenuView implements Screen {
     public void show() {
         stage = new Stage(new ScreenViewport());
 
-        Texture backgroundTexture = new Texture(Gdx.files.internal("backgrounds/11.png"));
+        Texture backgroundTexture = new Texture(Gdx.files.internal("backgrounds/6.png"));
         Image backgroundImage = new Image(backgroundTexture);
         backgroundImage.setFillParent(true);
         stage.addActor(backgroundImage);

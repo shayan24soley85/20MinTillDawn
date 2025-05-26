@@ -11,7 +11,10 @@ public enum SFX {
     NEED_AMMO("sfx/empty-gun-shot-6209 (1).mp3"),
     LEVEL("sfx/game-level-complete-143022.mp3"),
     WINNING("sfx/You Win (2).wav"),
-    LOSING("sfx/You Lose (4).wav");
+    LOSING("sfx/You Lose (4).wav"),
+    collectCoin("sfx/Coins (10).wav"),
+    monsterDying("sfx/Monster_2_RecieveAttack_HighIntensity_01.wav/"),
+    lowHealth("sfx/sfx_lowhealth_alarmloop1.wav");
 //    EXPLOSION("sfx/explosion.wav"),
 //    BUTTON_CLICK("sfx/button_click.wav");
 

@@ -24,9 +24,19 @@
     "password": "shayan24S@",
     "securityQuestion": "whats your favorite color?",
     "securityAnswer": "blue",
-    "avatarPath": "C:\\Users\\USER\\Desktop\\shayanht.jpg",
+    "avatarPath": "C:\\Users\\USER\\Pictures\\Saved Pictures\\product3-min-100x100.png",
     "score": 2765,
     "totalEliminations": 19,
     "mostTimeAlive": 208.0
+  },
+  {
+    "username": "shayan24s",
+    "password": "shayan24S@",
+    "securityQuestion": "whats your favorite food?",
+    "securityAnswer": "pizza",
+    "avatarPath": "avatars/vibrent_15.png",
+    "score": 840,
+    "totalEliminations": 7,
+    "mostTimeAlive": 120.0
   }
 ]

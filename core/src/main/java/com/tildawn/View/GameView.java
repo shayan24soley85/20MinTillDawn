@@ -10,6 +10,8 @@ import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.OrthographicCamera;
 import com.badlogic.gdx.graphics.g2d.BitmapFont;
 import com.badlogic.gdx.graphics.g2d.Sprite;
+import com.badlogic.gdx.graphics.glutils.ShaderProgram;
+import com.badlogic.gdx.math.Vector2;
 import com.badlogic.gdx.scenes.scene2d.ui.Skin;
 import com.badlogic.gdx.scenes.scene2d.utils.TextureRegionDrawable;
 import com.badlogic.gdx.utils.ScreenUtils;
@@ -48,6 +50,7 @@ public class GameView implements Screen, InputProcessor {
     private Timer.Task clearErrorTask;
     private int elapsedSeconds;
     private long startTimeMillis;
+    private   ShaderProgram radialShader;
 
     public GameView(GameController controller, Skin skin) {
         this.controller = controller;
@@ -81,7 +84,13 @@ public class GameView implements Screen, InputProcessor {
         timeLabel = new Label("Time:", new Label.LabelStyle(font, Color.WHITE));
         levelLabel = new Label("Level: 1", new Label.LabelStyle(font, Color.GOLD));
         messageLabel = new Label("", new Label.LabelStyle(font, Color.GREEN));
-
+        radialShader = new ShaderProgram(
+            Gdx.files.internal("Light/radialLight.vertex.glsl"),
+            Gdx.files.internal("Light/radialLight.fragment.glsl")
+        );
+        if (!radialShader.isCompiled()) {
+            System.err.println(radialShader.getLog());
+        }
         ProgressBar.ProgressBarStyle progressBarStyle = new ProgressBar.ProgressBarStyle();
 
         Pixmap bgPixmap = new Pixmap(200, 20, Pixmap.Format.RGBA8888);
@@ -128,7 +137,7 @@ public class GameView implements Screen, InputProcessor {
     public void render(float delta) {
         ScreenUtils.clear(0, 0, 0, 1);
 
-        lightSprite.setCenter(player.getPosX(), player.getPosY());
+       // lightSprite.setCenter(player.getPosX(), player.getPosY());
 
         ammoLabel.setText(com.tildawn.Enums.Label.AMMO.getText() + player.getWeapon().getAmmo());
         killsLabel.setText(com.tildawn.Enums.Label.KILLS.getText() + player.getEliminations());
@@ -155,21 +164,28 @@ public class GameView implements Screen, InputProcessor {
             width / bgTexture.getWidth(), height / bgTexture.getHeight()
         );
 
-        lightSprite.draw(Main.getBatch());
+        //lightSprite.draw(Main.getBatch());
 
         controller.updateGame(delta);
         for (xpDrops xp:controller.getDrops()) {
             xp.getSprite().draw(Main.getBatch());
         }
-        lightSprite.setCenter(player.getPosX(), player.getPosY());
-        lightSprite.draw(Main.getBatch());
+//        lightSprite.setCenter(player.getPosX(), player.getPosY());
+//        lightSprite.draw(Main.getBatch());
 
         for (Enemy enemy : controller.getEnemyControl().getAllMapEnemies()) {
             enemy.getSprite().draw(Main.getBatch());
         }
 
         Main.getBatch().end();
-
+        Main.getBatch().setShader(radialShader);
+        Main.getBatch().begin();
+        radialShader.setUniformf("u_lightPos", new Vector2(0.5f, 0.5f));
+        radialShader.setUniformf("u_radius", 0.4f);
+        radialShader.setUniformf("u_color", 1f, 1f, 1f, 1f);
+        Main.getBatch().draw(bgTexture, camX - width / 2f, camY - height / 2f, width, height);
+        Main.getBatch().end();
+        Main.getBatch().setShader(null);
         elapsedSeconds = (int) ((System.currentTimeMillis() - startTimeMillis) / 1000);
         int totalGameTimeInSeconds = Main.getMain().getApp().getCurrentGame().getGameTime() * 60;
 
@@ -238,6 +254,7 @@ public class GameView implements Screen, InputProcessor {
     public void dispose() {
         stage.dispose();
         bgTexture.dispose();
+        radialShader.dispose();
     }
 
     @Override public boolean keyDown(int keycode) { return false; }

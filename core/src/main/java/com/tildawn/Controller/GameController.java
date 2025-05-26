@@ -9,6 +9,7 @@ import com.tildawn.Controller.PlayerController;
 import com.tildawn.Controller.WeaponController;
 import com.tildawn.Enums.AbilityType;
 import com.tildawn.Enums.Message;
+import com.tildawn.Enums.SFX;
 import com.tildawn.Main;
 import com.tildawn.Model.Bullet;
 import com.tildawn.Model.Character;
@@ -130,6 +131,7 @@ public class GameController {
 
                     bullet.setDead(true);
                     if (enemy.getHp()<=0){
+                        SFX.monsterDying.play();
                         enemy.setState(EnemyState.dying);
                     }else {
                         enemy.setState(EnemyState.damaged);
@@ -142,6 +144,7 @@ public class GameController {
                 }else{
                     playerController.getPlayer().setHp(playerController.getPlayer().getHp()-1);
                 }
+                SFX.lowHealth.play();
                 playerController.getPlayer().setInvincible(true);
                 playerController.getPlayer().setDamaged(true);
                 if(playerController.getPlayer().isDamaged()){
@@ -167,6 +170,7 @@ public class GameController {
         for (xpDrops drop: drops){
             if(drop.getCollisionRect().collidesWith(playerController.getPlayer().getRect())){
                 drop.setCollected(true);
+                SFX.collectCoin.play();
                 boolean levelIncreased=playerController.getPlayer().increaseXp
                     (3);
                 if (levelIncreased){

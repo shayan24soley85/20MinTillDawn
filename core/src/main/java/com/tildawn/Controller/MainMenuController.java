@@ -7,6 +7,8 @@ import com.tildawn.Main;
 import com.tildawn.Model.GameAssetManager;
 import com.tildawn.View.*;
 
+import java.util.ArrayList;
+
 public class MainMenuController {
     private MainMenuView view;
 
@@ -51,6 +53,10 @@ public class MainMenuController {
                view.getTalentButton().setChecked(false);
                Main.getMain().setScreen(new TalentMenuView
                    (new TalentMenuController(), GameAssetManager.getGameAssetManager().getSkin()));
+           } else if (view.getScoreboardButton().isChecked()) {
+               SFX.CLICK_BUTTON.play();
+               view.getScoreboardButton().setChecked(false);
+               Main.getMain().setScreen(new ScoreBoardMenuView( GameAssetManager.getGameAssetManager().getSkin(),new ArrayList<>(Main.getMain().getApp().getAllUsers().values()),new ScoreBoardMenuController()));
            }
         }
     }
