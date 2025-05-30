@@ -24,7 +24,8 @@ public enum Message {
     CANT_SHOOT_WHILE_RELOADING("You can't shoot while reloading!", "Vous ne pouvez pas tirer pendant le rechargement!"),
     RELOADING("Reloading!", "Rechargement!"),
     NO_AMMO("You don't have enough ammo", "Vous n'avez pas assez de munitions"),
-    YOUR_HP_IS_MAX("Your HP is in the max limit", "Votre santé est au maximum");
+    YOUR_HP_IS_MAX("Your HP is in the max limit", "Votre santé est au maximum"),
+    noSavedGame("There is no saved game for you","Il n’y a pas de partie sauvegardée pour vous");
 
     private final String english;
     private final String french;

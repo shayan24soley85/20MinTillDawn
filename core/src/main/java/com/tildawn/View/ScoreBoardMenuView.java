@@ -30,8 +30,8 @@ public class ScoreBoardMenuView implements Screen {
         this.users =users;
         this.controller = controller;
         controller.setView(this);
-         confirmButton = new TextButton("Confirm", skin);
-         backButton = new TextButton("Back to Main Menu", skin);
+         confirmButton = new TextButton(com.tildawn.Enums.Label.CONFIRM.getText(), skin);
+         backButton = new TextButton(com.tildawn.Enums.Label.BACK_TO_MAIN_MENU.getText(), skin);
     }
 
     @Override
@@ -60,7 +60,8 @@ public class ScoreBoardMenuView implements Screen {
 
         table.add(topBar).colspan(4).padBottom(20);
         table.row();
-        Label header = new Label("Username        Kills     Score     Time Survived", skin);
+        Label header = new Label(com.tildawn.Enums.Label.USERNAME.getText()+"   "+ com.tildawn.Enums.Label.KILLS
+            +"  "+ com.tildawn.Enums.Label.SCORE +"  "+ com.tildawn.Enums.Label.TIME_SURVIVED, skin);
         table.add(header).left().padBottom(10);
         table.row();
 

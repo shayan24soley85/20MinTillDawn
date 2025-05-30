@@ -15,10 +15,7 @@ import com.tildawn.Model.Bullet;
 import com.tildawn.Model.Character;
 import com.tildawn.Model.GameAssetManager;
 import com.tildawn.Model.Weapon;
-import com.tildawn.Model.enemy.Enemy;
-import com.tildawn.Model.enemy.EnemyState;
-import com.tildawn.Model.enemy.Tree;
-import com.tildawn.Model.enemy.xpDrops;
+import com.tildawn.Model.enemy.*;
 import com.tildawn.View.*;
 
 import java.util.ArrayList;
@@ -133,6 +130,9 @@ public class GameController {
                     if (enemy.getHp()<=0){
                         SFX.monsterDying.play();
                         enemy.setState(EnemyState.dying);
+                        if (enemy instanceof Elder){
+                            enemyControl.getWall().setActive(false);
+                        }
                     }else {
                         enemy.setState(EnemyState.damaged);
                     }

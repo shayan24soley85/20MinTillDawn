@@ -18,6 +18,7 @@ public class enemyController {
     private float allTime=0f;
     private boolean bossStarted=false;
     private boolean bossDropped=false;
+    private ElectricWall wall=new ElectricWall(1);
     private float bossTime=0f;
     private ArrayList<Enemy> allMapEnemies=new ArrayList<>();
     public int randomInt(int min, int max) {
@@ -76,6 +77,7 @@ public class enemyController {
              int spawnX = randomInt(px - (range2+900), px + range2+900);
              int spawnY = randomInt(py - (900+range2), py + range2+900);
              allMapEnemies.add(new Elder(spawnX, spawnY));
+             wall.setActive(true);
          }
          Iterator<Enemy> iterator = allMapEnemies.iterator();
          while (iterator.hasNext()) {
@@ -96,6 +98,9 @@ public class enemyController {
                  }
              }
 
+         }
+         if (wall.isActive()) {
+             wall.update(deltaTime);
          }
          allMapEnemies.removeIf(enemy -> !enemy.isAlive());
      }
@@ -179,5 +184,13 @@ public class enemyController {
 
     public void setBossTime(float bossTime) {
         this.bossTime = bossTime;
+    }
+
+    public ElectricWall getWall() {
+        return wall;
+    }
+
+    public void setWall(ElectricWall wall) {
+        this.wall = wall;
     }
 }

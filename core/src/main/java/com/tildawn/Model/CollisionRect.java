@@ -1,5 +1,7 @@
 package com.tildawn.Model;
 
+import com.badlogic.gdx.math.Rectangle;
+
 public class CollisionRect {
     float x, y;
     float width, height;
@@ -14,7 +16,9 @@ public class CollisionRect {
         this.x = x;
         this.y = y;
     }
-
+    public Rectangle toRectangle() {
+        return new Rectangle(x, y, width, height);
+    }
     public boolean collidesWith(CollisionRect rect){
         return x < rect.x + rect.width && y < rect.y + rect.height && x + width > rect.x && y + height > rect.y;
     }

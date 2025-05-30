@@ -63,7 +63,7 @@ public class MainMenuController {
                SFX.CLICK_BUTTON.play();
                Game savedGame=Main.getMain().getApp().getAllGames().get(Main.getMain().getApp().getSavedGameId());
                if(savedGame==null||savedGame.getEnded()){
-                   view.setErrorMessage("There is no saved game for you!");
+                   view.setErrorMessage(Message.noSavedGame.getText());
                }
                else {
                    Main.getMain().getApp().setCurrentGame(savedGame);
