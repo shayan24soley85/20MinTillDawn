@@ -5,7 +5,9 @@ import com.badlogic.gdx.audio.Music;
 import com.tildawn.Enums.SortBy;
 import com.tildawn.Model.Language.LanguageSetting;
 
+import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.Map;
 import java.util.Random;
 
 public class App {
@@ -16,6 +18,9 @@ public class App {
     private  LanguageSetting currentLanguage;
     private Game currentGame=new Game();
     private Random rand=new Random();
+    private Map<Integer,Game> allGames=new HashMap<>();
+    private int savedGameId;
+    private Game newGame=new Game();
     public  void run(){
         saving.readFile();
         databaseManager.connect();
@@ -25,8 +30,23 @@ public class App {
     }
     private Music currentMusic;
     private String currentMusicPath=null;
-    private Game SavedGame=null;
     private DatabaseManager databaseManager=new DatabaseManager();
+
+    public Game getNewGame() {
+        return newGame;
+    }
+
+    public void setNewGame(Game newGame) {
+        this.newGame = newGame;
+    }
+
+    public int getSavedGameId() {
+        return savedGameId;
+    }
+
+    public void setSavedGameId(int savedGameId) {
+        this.savedGameId = savedGameId;
+    }
 
     public SavingToJson getSaving() {
         return saving;
@@ -88,19 +108,19 @@ public class App {
         this.lastSortBy = lastSortBy;
     }
 
-    public Game getSavedGame() {
-        return SavedGame;
-    }
-
-    public void setSavedGame(Game savedGame) {
-        SavedGame = savedGame;
-    }
-
     public DatabaseManager getDatabaseManager() {
         return databaseManager;
     }
 
     public void setDatabaseManager(DatabaseManager databaseManager) {
         this.databaseManager = databaseManager;
+    }
+
+    public Map<Integer,Game> getAllGames() {
+        return allGames;
+    }
+
+    public void setAllGames(Map<Integer,Game> allGames) {
+        this.allGames = allGames;
     }
 }

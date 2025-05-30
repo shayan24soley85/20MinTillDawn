@@ -4,6 +4,7 @@ import com.badlogic.gdx.utils.Timer;
 import com.tildawn.Enums.Message;
 import com.tildawn.Enums.SFX;
 import com.tildawn.Main;
+import com.tildawn.Model.Game;
 import com.tildawn.Model.GameAssetManager;
 import com.tildawn.View.*;
 
@@ -60,7 +61,14 @@ public class MainMenuController {
            } else if (view.getContinueButton().isChecked()) {
                view.getContinueButton().setChecked(false);
                SFX.CLICK_BUTTON.play();
-               Main.getMain().setScreen(Main.getMain().getApp().getSavedGame().getGameView());
+               Game savedGame=Main.getMain().getApp().getAllGames().get(Main.getMain().getApp().getSavedGameId());
+               if(savedGame==null||savedGame.getEnded()){
+                   view.setErrorMessage("There is no saved game for you!");
+               }
+               else {
+                   Main.getMain().getApp().setCurrentGame(savedGame);
+                   Main.getMain().setScreen(savedGame.getGameView());
+               }
            }
         }
     }

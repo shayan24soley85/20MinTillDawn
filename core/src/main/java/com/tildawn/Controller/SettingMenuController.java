@@ -36,9 +36,6 @@ public class SettingMenuController {
             } else if (view.getConfirmButton().isChecked()) {
                 SFX.CLICK_BUTTON.play();
                 view.getConfirmButton().setChecked(false);
-                Game game=Main.getMain().getApp().getCurrentGame();
-                game.setAutoReload(view.getAutoReload().isChecked());
-                game.setSfxToggle(view.getSfxToggle().isChecked());
                 if(view.getSfxToggle().isChecked()){
                     for(SFX sfx:SFX.values()){
                         sfx.load();
@@ -48,6 +45,14 @@ public class SettingMenuController {
                         sfx.dispose();
                     }
                 }
+                Game game=Main.getMain().getApp().getNewGame();
+                if(Main.getMain().getApp().getCurrentGame().isInPause()){
+                    game=Main.getMain().getApp().getCurrentGame();
+                }
+
+                game.setAutoReload(view.getAutoReload().isChecked());
+                game.setSfxToggle(view.getSfxToggle().isChecked());
+
                 game.setGrayscaleToggle(view.getGrayscaleToggle().isChecked());
 
                 Main.getBatch().setShader(view.getGrayscaleToggle().isChecked()

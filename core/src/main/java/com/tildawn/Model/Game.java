@@ -6,11 +6,13 @@ public class Game {
     private Boolean grayscaleToggle=false;
     private Boolean autoReload=false;
     private Boolean sfxToggle=true;
+    private int id;
     private int gameTime;
     private Character character;
     private GameView gameView;
     private Boolean lost=false;
     private boolean isInPause=false;
+    private Boolean isEnded=false;
     public Boolean getGrayscaleToggle() {
         return grayscaleToggle;
     }
@@ -73,5 +75,36 @@ public class Game {
 
     public void setLost(Boolean lost) {
         this.lost = lost;
+    }
+
+    public int getId() {
+        return id;
+    }
+
+    public void setId(int id) {
+        this.id = id;
+    }
+
+    @Override
+    public String toString() {
+        return "Game{" +
+            "grayscaleToggle=" + grayscaleToggle +
+            ", autoReload=" + autoReload +
+            ", sfxToggle=" + sfxToggle +
+            ", id=" + id +
+            ", gameTime=" + gameTime +
+            ", character=" + character.getType().getName() +
+            ", gameView=" + gameView +
+            ", lost=" + lost +
+            ", isInPause=" + isInPause +
+            '}';
+    }
+
+    public Boolean getEnded() {
+        return isEnded;
+    }
+
+    public void setEnded(Boolean ended) {
+        isEnded = ended;
     }
 }

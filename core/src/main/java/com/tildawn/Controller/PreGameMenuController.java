@@ -5,6 +5,7 @@ import com.tildawn.Enums.SFX;
 import com.tildawn.Enums.WeaponType;
 import com.tildawn.Main;
 import com.tildawn.Model.Character;
+import com.tildawn.Model.Game;
 import com.tildawn.Model.GameAssetManager;
 import com.tildawn.Model.Weapon;
 import com.tildawn.View.GameView;
@@ -37,8 +38,11 @@ public class PreGameMenuController {
                 Character character=new Character(view.getHeroSelect().getSelected(),new Weapon(view.getWeaponSelect().getSelected()));
                 character.setAbilities(new HashMap<>());
                 character.setUsername(Main.getMain().getApp().getCurrentUser().getUsername());
-                Main.getMain().getApp().getCurrentGame().setGameTime(view.getTimeSelect().getSelected());
-                Main.getMain().getApp().getCurrentGame().setCharacter(character);
+                Main.getMain().getApp().getNewGame().setGameTime(view.getTimeSelect().getSelected());
+                Main.getMain().getApp().getNewGame().setCharacter(character);
+                Main.getMain().getApp().getNewGame().setId(Main.getMain().getApp().getAllGames().size());
+                Main.getMain().getApp().setCurrentGame(Main.getMain().getApp().getNewGame());
+                Main.getMain().getApp().getAllGames().put(Main.getMain().getApp().getNewGame().getId(),Main.getMain().getApp().getNewGame());
                 Main.getMain().setScreen(new GameView(new GameController(), GameAssetManager.getGameAssetManager().getSkin()));
             }
         }

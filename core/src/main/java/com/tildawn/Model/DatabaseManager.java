@@ -13,7 +13,6 @@ public class DatabaseManager {
             connection = DriverManager.getConnection("jdbc:sqlite:user_data.db");
             createTableIfNeeded();
         } catch (SQLException e) {
-            System.out.println("kkkkkkkkkkkkkkkkkk");
             e.printStackTrace();
         }
     }

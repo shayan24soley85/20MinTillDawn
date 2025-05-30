@@ -21,6 +21,8 @@ public class EndGameController {
             if (view.getBackButton().isChecked()){
                 SFX.CLICK_BUTTON.play();
                 view.getBackButton().setChecked(false);
+                Main.getMain().getApp().getCurrentGame().setInPause(false);
+                Main.getMain().getApp().getCurrentGame().setEnded(true);
                 Main.getMain().setScreen(new MainMenuView(new MainMenuController(), GameAssetManager.getGameAssetManager().getSkin()));
             }
         }
