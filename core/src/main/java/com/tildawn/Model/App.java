@@ -11,22 +11,24 @@ import java.util.Random;
 public class App {
     private final HashMap<String,User> allUsers=new HashMap<>();
     private SortBy lastSortBy=SortBy.killCount;
-    private final Saving saving=new Saving();
+    private final SavingToJson saving=new SavingToJson();
     private User currentUser=null;
     private  LanguageSetting currentLanguage;
     private Game currentGame=new Game();
     private Random rand=new Random();
     public  void run(){
         saving.readFile();
+        databaseManager.connect();
     }
     public  HashMap<String, User> getAllUsers() {
         return allUsers;
     }
     private Music currentMusic;
     private String currentMusicPath=null;
+    private Game SavedGame=null;
+    private DatabaseManager databaseManager=new DatabaseManager();
 
-
-    public Saving getSaving() {
+    public SavingToJson getSaving() {
         return saving;
     }
 
@@ -84,5 +86,21 @@ public class App {
 
     public void setLastSortBy(SortBy lastSortBy) {
         this.lastSortBy = lastSortBy;
+    }
+
+    public Game getSavedGame() {
+        return SavedGame;
+    }
+
+    public void setSavedGame(Game savedGame) {
+        SavedGame = savedGame;
+    }
+
+    public DatabaseManager getDatabaseManager() {
+        return databaseManager;
+    }
+
+    public void setDatabaseManager(DatabaseManager databaseManager) {
+        this.databaseManager = databaseManager;
     }
 }

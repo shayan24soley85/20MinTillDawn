@@ -41,6 +41,8 @@ public class ProfileMenuController {
                 view.setSuccessMessage(Message.PASSWORD_CHANGED.toString());
                user.setPassword(password);
                 Main.getMain().getApp().getSaving().saveUserToJson(user);
+
+                Main.getMain().getApp().getDatabaseManager().updateUser(user);
             } else if (view.getChangeUsernameButton().isChecked()) {
                 SFX.CLICK_BUTTON.play();
                 view.getChangeUsernameButton().setChecked(false);
@@ -53,15 +55,21 @@ public class ProfileMenuController {
                 }
                 view.setSuccessMessage(Message.USERNAME_CHANGED.toString());
                 Main.getMain().getApp().getSaving().removeUserFromJSON(user.getUsername());
+                Main.getMain().getApp().getDatabaseManager().deleteUser(user.getUsername());
                 Main.getMain().getApp().getAllUsers().remove(user.getUsername());
                 User newUser = Main.getMain().getApp().getCurrentUser();
                 user.setUsername(username);
                 Main.getMain().getApp().getSaving().saveUserToJson(newUser);
+
+                Main.getMain().getApp().getDatabaseManager().insertUser(newUser);
+
             } else if (view.getDeleteAccountButton().isChecked()) {
                 SFX.CLICK_BUTTON.play();
                 view.setSuccessMessage(Message.ACCOUNT_DELETED.toString());
 
                 Main.getMain().getApp().getSaving().removeUserFromJSON(user.getUsername());
+
+                Main.getMain().getApp().getDatabaseManager().deleteUser(username);
                 Timer.schedule(new Timer.Task() {
                     @Override
                     public void run() {

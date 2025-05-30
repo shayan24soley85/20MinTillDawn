@@ -49,6 +49,9 @@ public class RecoveryPasswordMenuController {
                 }
                 user.setPassword(password);
                 Main.getMain().getApp().getSaving().saveUserToJson(user);
+
+                Main.getMain().getApp().getDatabaseManager().updateUser(user);
+
                 Main.getMain().setScreen(new LoginMenuView(new LoginMenuController(), GameAssetManager.getGameAssetManager().getSkin()));
 
             }

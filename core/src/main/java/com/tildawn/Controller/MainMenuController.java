@@ -57,6 +57,10 @@ public class MainMenuController {
                SFX.CLICK_BUTTON.play();
                view.getScoreboardButton().setChecked(false);
                Main.getMain().setScreen(new ScoreBoardMenuView( GameAssetManager.getGameAssetManager().getSkin(),new ArrayList<>(Main.getMain().getApp().getAllUsers().values()),new ScoreBoardMenuController()));
+           } else if (view.getContinueButton().isChecked()) {
+               view.getContinueButton().setChecked(false);
+               SFX.CLICK_BUTTON.play();
+               Main.getMain().setScreen(Main.getMain().getApp().getSavedGame().getGameView());
            }
         }
     }

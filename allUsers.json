@@ -1,62 +1,12 @@
 [
   {
-    "username": "shayan24",
-    "password": "shayan24S$",
-    "securityQuestion": "whats your father\u0027s name?",
-    "securityAnswer": "Davood",
-    "avatarPath": "avatars/vibrent_11.png",
-    "score": 0,
-    "totalEliminations": 0,
-    "mostTimeAlive": 0.0
-  },
-  {
-    "username": "shayan",
-    "password": "shayan24A@",
-    "securityQuestion": "whats your favorite food?",
-    "securityAnswer": "pizza",
-    "avatarPath": "C:\\Users\\USER\\Pictures\\Saved Pictures\\ax-pic-min.png",
-    "score": 0,
-    "totalEliminations": 0,
-    "mostTimeAlive": 0.0
-  },
-  {
-    "username": "shayan24soley",
-    "password": "shayan24S@",
-    "securityQuestion": "whats your favorite color?",
-    "securityAnswer": "blue",
-    "avatarPath": "C:\\Users\\USER\\Pictures\\Saved Pictures\\product3-min-100x100.png",
-    "score": 2765,
-    "totalEliminations": 19,
-    "mostTimeAlive": 208.0
-  },
-  {
-    "username": "shayan24s",
+    "username": "shayan1",
     "password": "shayan24S@",
     "securityQuestion": "whats your favorite food?",
     "securityAnswer": "pizza",
-    "avatarPath": "avatars/vibrent_15.png",
-    "score": 840,
-    "totalEliminations": 7,
-    "mostTimeAlive": 120.0
-  },
-  {
-    "username": "shayanf",
-    "password": "shayan24S@",
-    "securityQuestion": "whats your best friend\u0027s name?",
-    "securityAnswer": "ali",
-    "avatarPath": "avatars/vibrent_14.png",
-    "score": 1080,
-    "totalEliminations": 9,
-    "mostTimeAlive": 120.0
-  },
-  {
-    "username": "shayana",
-    "password": "shayan24S@",
-    "securityQuestion": "whats your father\u0027s name?",
-    "securityAnswer": "davood",
-    "avatarPath": "C:\\Users\\USER\\Pictures\\Saved Pictures\\product8-min-100x100.png",
-    "score": 900,
+    "avatarPath": "avatars/vibrent_18.png",
+    "score": 321,
     "totalEliminations": 3,
-    "mostTimeAlive": 300.0
+    "mostTimeAlive": 107.0
   }
 ]

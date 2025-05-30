@@ -10,8 +10,9 @@ public class Elder extends Enemy {
     public Elder(float x,float y) {
         super(400,x,y,true,30);
         Texture texture=new Texture(Gdx.files.internal("enemy/ElderBrain.png"));
-        collisionRect=new CollisionRect(x,y,texture.getWidth(),texture.getHeight());
+        collisionRect=new CollisionRect(x,y,texture.getWidth()*3,texture.getHeight()*3);
         sprite=new Sprite(texture);
+        sprite.setSize(texture.getWidth()*3,texture.getHeight()*3);
     }
 
     @Override

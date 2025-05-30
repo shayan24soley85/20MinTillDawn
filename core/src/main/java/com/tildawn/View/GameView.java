@@ -163,8 +163,6 @@ public class GameView implements Screen, InputProcessor {
             width / bgTexture.getWidth(), height / bgTexture.getHeight()
         );
 
-
-
         controller.updateGame(delta);
         for (xpDrops xp:controller.getDrops()) {
             xp.getSprite().draw(Main.getBatch());

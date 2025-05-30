@@ -45,6 +45,9 @@ public class SignupMenuController {
         Main.getMain().getApp().getAllUsers().put(user.getUsername(), user);
         Main.getMain().getApp().setCurrentUser(user);
         Main.getMain().getApp().getSaving().saveUserToJson(user);
+
+        Main.getMain().getApp().getDatabaseManager().insertUser(user);
+
     }
     public void handleSignupMenuButtonClicked() {
         if (view != null) {

@@ -14,7 +14,7 @@ import java.util.List;
 
 import static java.lang.Math.max;
 
-public class Saving {
+public class SavingToJson {
     public  void saveUserToJson(User user) {
         Gson gson = new GsonBuilder().setPrettyPrinting().create();
         File file = new File("allUsers.json");
@@ -98,5 +98,6 @@ public class Saving {
         user.setScore(user.getScore()+score);
         user.setTotalEliminations(user.getTotalEliminations()+kills);
         saveUserToJson(user);
+        Main.getMain().getApp().getDatabaseManager().updateUser(user);
     }
 }

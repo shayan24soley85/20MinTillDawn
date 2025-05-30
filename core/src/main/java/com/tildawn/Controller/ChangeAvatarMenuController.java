@@ -98,6 +98,9 @@ public class ChangeAvatarMenuController {
                 view.setSuccessMessage(Message.AVATAR_CHANGED.toString());
                 view.getUser().setAvatarPath(view.getAvatarPath());
                 Main.getMain().getApp().getSaving().saveUserToJson(view.getUser());
+
+                Main.getMain().getApp().getDatabaseManager().updateUser(view.getUser());
+
             } else if (view.getSelectFileBtn().isChecked()) {
                 SFX.CLICK_BUTTON.play();
                 view.getSelectFileBtn().setChecked(false);
@@ -112,6 +115,9 @@ public class ChangeAvatarMenuController {
                 view.setAvatarPath(view.getUser().getAvatarPath());
                 view.setSuccessMessage(Message.AVATAR_CHANGED.toString());
                 Main.getMain().getApp().getSaving().saveUserToJson(view.getUser());
+
+                Main.getMain().getApp().getDatabaseManager().updateUser(view.getUser());
+
             }
         }
     }
