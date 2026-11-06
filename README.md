@@ -1,59 +1,63 @@
-🎮 Survival Shooter with LibGDX
+# 20MinTillDawn 🎮
 
-A survival roguelike shooter inspired by 20 Minutes Till Dawn, built using Java and the LibGDX framework. In this project, you face endless waves of enemies, upgrade your abilities, and try to survive as long as possible!
+This repository contains the source code for a 2D survival roguelike shooter, inspired by the popular game *20 Minutes Till Dawn*. Developed using **Java** and the **LibGDX** framework, this project demonstrates the practical application of Object-Oriented Programming (OOP) principles in game development.
 
-📌 Features
+The core gameplay loop challenges players to survive endless waves of enemies, utilizing a dynamic upgrade system to enhance abilities and devise survival strategies.
 
-Smooth 2D gameplay with LibGDX
+## 🛠️ Tech Stack & Concepts
+*   **Language:** Java (17+)
+*   **Framework:** [LibGDX](https://libgdx.com/)
+*   **Key Concepts:** Object-Oriented Programming (OOP), Game Loop Architecture, Collision Detection, Entity Management, State Management.
 
-Endless waves of enemies
+## 🚀 Key Features
+*   **Dynamic Gameplay:** Smooth 2D rendering and mechanics powered by LibGDX.
+*   **Endless Hordes:** An escalating wave system featuring diverse enemy types with unique AI behaviors.
+*   **Progression System:** Players collect experience orbs to level up, unlocking strategic upgrades (e.g., damage multipliers, fire rate enhancements, health boosts, and movement speed increases).
+*   **Visual Effects:** Implementation of simple particle systems and fluid sprite animations.
+*   **Tracking:** Integrated survival timer and scoring system to monitor player performance.
+*   **User Authentication:** Includes a full pre-game flow with Signup, Login, and Guest modes.
 
-Upgrade system (damage, fire rate, health, movement speed, etc.)
+## 📸 Showcases
 
-Different enemy types with unique behaviors
+<div align="center">
+  <img src="Screenshot 2026-11-06 142016.png" width="45%" alt="Signup Menu">
+  <img src="Screenshot 2026-11-06 142119.png" width="45%" alt="Main Menu">
+</div>
+<br>
+<div align="center">
+  <img src="Screenshot 2026-11-06 142133.png" width="45%" alt="Pre-Game Hero Selection">
+  <img src="Screenshot 2026-11-06 142204.jpg" width="45%" alt="Early Gameplay">
+</div>
+<br>
+<div align="center">
+  <img src="Screenshot 2026-11-06 142306.png" width="45%" alt="Level Up Upgrade Screen">
+  <img src="Screenshot 2026-11-06 142327.jpg" width="45%" alt="Intense Wave Survival">
+</div>
 
-Simple particle effects and animations
+## ⚙️ How to Build and Run
 
-Survival timer and score system
+### Prerequisites
+*   Java Development Kit (JDK) 17 or higher.
+*   Gradle (Alternatively, use the provided Gradle wrapper).
 
-⚙️ How to Run
-Requirements
+### Instructions
+1.  Clone this repository:
+    ```bash
+    git clone [https://github.com/shayan24soley85/20MinTillDawn.git](https://github.com/shayan24soley85/20MinTillDawn.git)
+    cd 20MinTillDawn
+    ```
+2.  **Run the game directly:**
+    ```bash
+    ./gradlew desktop:run
+    ```
+3.  **Build a standalone executable JAR:**
+    ```bash
+    ./gradlew desktop:dist
+    ```
+    *The generated `.jar` file will be located in the `desktop/build/libs/` directory.*
 
-Java 17+
-
-Gradle (or use the included Gradle wrapper)
-
-Run with Gradle
-./gradlew desktop:run
-Build JAR
-./gradlew desktop:dist
-
-The generated JAR file will be located in desktop/build/libs/.
-
-🎮 Controls
-
-Move: WASD
-
-Shoot: Mouse (hold to shoot)
-
-Aim: Mouse cursor
-
-Exit: Esc
-
-🏆 Gameplay
-
-Survive against endless hordes of enemies.
-
-Collect experience orbs to level up.
-
-Choose upgrades and build your strategy.
-
-The longer you survive, the harder it gets!
-
-🤝 Contributing
-
-This is a learning project built with LibGDX, but suggestions and improvements are always welcome. Feel free to open issues or pull requests.
-
-📜 License
-
-This project is released under the MIT License.
+## 🕹️ Controls
+*   **Movement:** `W`, `A`, `S`, `D`
+*   **Aiming:** Mouse Cursor
+*   **Shooting:** Left Mouse Button (Hold for continuous fire)
+*   **Pause/Exit:** `Esc`
