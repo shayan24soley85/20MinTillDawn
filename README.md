@@ -26,12 +26,12 @@ The core gameplay loop challenges players to survive endless waves of enemies, u
 <br>
 <div align="center">
   <img src="Screenshot 2026-11-06 142133.png" width="45%" alt="Pre-Game Hero Selection">
-  <img src="Screenshot 2026-11-06 142204.jpg" width="45%" alt="Early Gameplay">
+  <img src="Screenshot 2026-11-06 142204.png" width="45%" alt="Early Gameplay">
 </div>
 <br>
 <div align="center">
   <img src="Screenshot 2026-11-06 142306.png" width="45%" alt="Level Up Upgrade Screen">
-  <img src="Screenshot 2026-11-06 142327.jpg" width="45%" alt="Intense Wave Survival">
+  <img src="Screenshot 2026-11-06 142327.png" width="45%" alt="Intense Wave Survival">
 </div>
 
 ## ⚙️ How to Build and Run
