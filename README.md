@@ -43,7 +43,7 @@ The core gameplay loop challenges players to survive endless waves of enemies, u
 ### Instructions
 1.  Clone this repository:
     ```bash
-    git clone [https://github.com/shayan24soley85/20MinTillDawn.git](https://github.com/shayan24soley85/20MinTillDawn.git)
+    git clone https://github.com/shayan24soley85/20MinTillDawn.git
     cd 20MinTillDawn
     ```
 2.  **Run the game directly:**
